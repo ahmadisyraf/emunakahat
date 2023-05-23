@@ -1,7 +1,7 @@
 
 ## Run view package
 
-Before run view package, please install all node modules
+Before run view package, please install all node modules. (Do it only after clone repository)
 
 ```bash
   npm install
@@ -14,7 +14,7 @@ After finish install, run view package
 
 ## Run backend server
 
-Install node module first by using this command:
+Install node module first (Do it only after clone repository)
 ```
 npm install
 ```

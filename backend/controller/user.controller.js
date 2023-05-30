@@ -3,46 +3,39 @@ const User = require("../model/user.model");
 const asyncHandler = require("express-async-handler");
 
 const registerUser = asyncHandler(async (req, res) => {
-    const username = req.body.username;
-    const email = req.body.username;
+    const { USER_IC, USER_NAME, USER_GENDER, USER_PHONE_NO, USER_EMAIL } = req.body;
 
-    if (!username || !email) {
+    if (!USER_IC || !USER_NAME, !USER_GENDER || !USER_PHONE_NO || !USER_EMAIL) {
         res.status(400);
         throw new Error("All field are mandatory");
     }
 
-    const userExist = await User.findOne({ email });
+    const userExist = await User.findOne({ USER_IC });
 
     if (userExist) {
         res.status(400);
         throw new Error("User already exist");
     }
     const user = await User.create({
-        username,
-        email
+        USER_IC,
+        USER_NAME,
+        USER_GENDER,
+        USER_PHONE_NO,
+        USER_EMAIL
     });
 
+    const userData = await User.findOne({ USER_IC });
+
     if (user) {
-        res.status(201).json({ user });
+        res.status(200).json({ userData });
     } else {
         res.status(400);
-        throw new Error("User data us not valid");
+        throw new Error("Failed to resgiter user");
     }
 
-    res.json({ message: "Register the user" });
+    res.status(200).json({ userData });
 });
 
-const getAllUser = asyncHandler(async (req, res) => {
-    const user = await User.find();
-    
-    if(!user) {
-        res.status(404);
-        throw new Error("User not found");
-    }
-
-    res.status(201).json({ user });
-});
-
-module.exports = { registerUser, getAllUser };
+module.exports = { registerUser };
 
 

@@ -1,9 +1,12 @@
 const express = require('express');
+var cors = require('cors');
 const router = express.Router();
 const { registerUser, getAllUser } = require("../controller/user.controller");
 
-router.post("/register", registerUser);
+router.post("/insertUser", registerUser);
 
-router.get("/getAllUser", getAllUser)
+router.get('/getAll', (req, res) => {
+    res.send('Get All API')
+})
 
 module.exports = router;

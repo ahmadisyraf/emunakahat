@@ -3,8 +3,13 @@ import {
     TextField,
     Box,
     Typography,
-    Link
+    Link,
+    Alert
 } from "@mui/material";
+import { auth } from "../../components/firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { getUser } from "../../pages/api/user";
+import { useState } from "react";
 
 function Copyright(props) {
     return (
@@ -20,9 +25,37 @@ function Copyright(props) {
 }
 
 const Login = ({ setShowRegister }) => {
+    const [error, setError] = useState();
+    const [info, setInfo] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
 
     const handleShowRegister = () => {
         setShowRegister(true);
+    }
+
+    const handleLogin = () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                // const userEmail = userCredential.user.email;
+
+                if (userCredential.user.emailVerified) {
+                    async function getUserFromDB() {
+                        const user = await getUser({ email });
+                        console.log(user);
+                    }
+
+                    getUserFromDB();
+                } else {
+                    setInfo("Email not verify please check inbox");
+                }
+
+            })
+            .catch((err) => {
+                const errormessage = err.code.replace(/[-/]/g, " ");
+                setError("Error : " + errormessage.substr(errormessage.indexOf(" ") + 1));
+            });
     }
 
     return (
@@ -40,8 +73,11 @@ const Login = ({ setShowRegister }) => {
             <Typography component="h1" variant="h5">
                 Sign in to E-Munakahat
             </Typography>
-            <Box component="form" noValidate autoComplete="off" sx={{ mt: 1 }}>
-            <TextField
+
+            <Box sx={{ mt: 1 }}>
+                {info && <Alert severity="info">{info}</Alert>}
+                {error && <Alert severity="error">{error}</Alert>}
+                <TextField
                     margin="normal"
                     required
                     fullWidth
@@ -50,6 +86,7 @@ const Login = ({ setShowRegister }) => {
                     name="email"
                     autoComplete="email"
                     autoFocus
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextField
                     margin="normal"
@@ -60,6 +97,7 @@ const Login = ({ setShowRegister }) => {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
                     <Button sx={{ textTransform: "none" }}>
@@ -71,6 +109,7 @@ const Login = ({ setShowRegister }) => {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
+                    onClick={handleLogin}
                 >
                     Sign In
                 </Button>

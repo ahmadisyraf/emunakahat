@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, useTheme, Typography } from "@mui/material";
+import { Box, useTheme, Typography, Stack, Button } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -37,8 +37,8 @@ const KursusListing = () => {
 
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
             <Typography variant='h4'>Kursus Pra-Perkahwinan</Typography>
-            <Box sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }}>
-                <Box sx={{ width: "50%" }}>
+            <Stack sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }} direction={"row"} spacing={1}>
+                <Box sx={{ width: "50%"}}>
                     <FormControl fullWidth size='small'>
                         <InputLabel id="demo-simple-select-label">Sila Pilih  Anjuran :</InputLabel>
                         <Select
@@ -54,7 +54,9 @@ const KursusListing = () => {
                         </Select>
                     </FormControl>
                 </Box>
-            </Box>
+                <Button variant='contained'>Cari</Button>
+            </Stack>
+
             <TableContainer sx={{ mt: 5 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>

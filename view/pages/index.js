@@ -1,4 +1,4 @@
-import Login from "../screens/login";
+import Login from "../screens/Login";
 import Register from "../screens/Register";
 import {
   Paper,

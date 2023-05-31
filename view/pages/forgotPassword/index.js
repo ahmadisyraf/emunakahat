@@ -3,10 +3,6 @@ import {
     TextField,
     Box,
     Typography,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
     Link
 } from "@mui/material";
 
@@ -23,7 +19,7 @@ function Copyright(props) {
     );
 }
 
-const Login = ({ setShowRegister }) => {
+const forgotPassword = ({ setShowRegister }) => {
 
     const handleShowRegister = () => {
         setShowRegister(true);
@@ -49,40 +45,21 @@ const Login = ({ setShowRegister }) => {
                     margin="normal"
                     required
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
+                    id="Identification"
+                    label="Identification Card Number"
+                    name="Identification"
+                    autoComplete="Identification"
                     autoFocus
                 />
                 <TextField
                     margin="normal"
                     required
                     fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
                 />
-
-                    <FormControl fullWidth margin='normal'>
-                    <InputLabel id="demo-simple-select-label">Pengguna*</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                    >
-                        <MenuItem value={""}>None</MenuItem>
-                        <MenuItem value={"Male"}>Staff</MenuItem>
-                        <MenuItem value={"Female"}>Applicant</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
-                    <Button sx={{ textTransform: "none" }}>
-                        Forgot password?
-                    </Button>
-                </Box>
 
                 <Button
                     type="submit"
@@ -90,10 +67,7 @@ const Login = ({ setShowRegister }) => {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                    Sign In
-                </Button>
-                <Button sx={{ textTransform: "none", width: "100%" }} onClick={handleShowRegister}>
-                    Don't have an account?  Sign Up
+                    Send password
                 </Button>
                 <Copyright sx={{ mt: 5 }} />
             </Box>
@@ -101,4 +75,4 @@ const Login = ({ setShowRegister }) => {
     );
 }
 
-export default Login;
+export default forgotPassword;

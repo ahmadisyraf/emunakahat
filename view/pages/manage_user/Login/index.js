@@ -10,6 +10,8 @@ import { auth } from "../../../components/firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getUser } from "../../api/user";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 function Copyright(props) {
     return (
@@ -26,6 +28,8 @@ function Copyright(props) {
 
 // This is login class under manage user package
 const Login = ({ setShowRegister, info, setInfo, error, setError }) => {
+
+    const router = useRouter();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -40,14 +44,30 @@ const Login = ({ setShowRegister, info, setInfo, error, setError }) => {
         setInfo("");
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                
+
                 if (userCredential.user.emailVerified) {
                     async function getUserFromDB() {
                         const user = await getUser({ email });
                         console.log(user);
+
+                        const user_data = {
+                            email: user.user.USER_EMAIL,
+                            gender: user.user.USER_GENDER,
+                            ic: user.user.USER_IC,
+                            name: user.user.USER_NAME,
+                            phone: user.user.USER_PHONE_NO,
+                            login: true,
+                        }
+
+                        if (user) {
+                            Cookies.set("user_data", JSON.stringify(user_data));
+                        } else {
+                            console.log("Error to save in cookies");
+                        }
                     }
 
                     getUserFromDB();
+                    router.push("/test");
                 } else {
                     setInfo("Email not verify please check inbox");
                 }
@@ -66,6 +86,7 @@ const Login = ({ setShowRegister, info, setInfo, error, setError }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+
             }}
         >
             {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>

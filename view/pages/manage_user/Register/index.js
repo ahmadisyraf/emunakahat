@@ -19,6 +19,7 @@ import { useState, useRef, useEffect } from "react";
 import { auth } from "../../../components/firebase/firebase";
 import { registerUser } from "../../api/user";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { cookies } from "next/headers";
 
 
 function Copyright(props) {
@@ -43,9 +44,6 @@ const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
     const [password, setPassword] = useState();
     const [repassword, setRepassword] = useState();
     const [gender, setGender] = useState('');
-
-    // const [valid, setValid] = useState();
-    // const [error, setError] = useState();
     const [phoneNo, setPhoneNo] = useState('')
 
     const theme = useTheme();
@@ -73,50 +71,57 @@ const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
     }
 
     const handleRegister = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
+        if (password !== repassword) {
+            setError('Password not same')
+        } else {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log(user);
 
-                sendEmailVerification(user)
-                    .then(() => {
-                        setInfo("Verification link already sent to your email");
-                    });
+                    sendEmailVerification(user)
+                        .then(() => {
+                            setInfo("Verification link already sent to your email");
+                        });
 
-                async function insertData() {
-                    if (user) {
-                        const result = await registerUser({ data });
-                        console.log(result);
-                        console.log("Succes to db");
-                    } else {
-                        console.log("error to db");
+                    async function insertData() {
+                        if (user) {
+                            const result = await registerUser({ data });
+                            console.log(result);
+                            console.log("Succes to db");
+                        } else {
+                            console.log("error to db");
+                        }
                     }
-                }
 
-                insertData();
-            })
-            .catch((err) => {
-                const errormessage = err.code.replace(/[-/]/g, " ");
-                setError("Error : " + errormessage.substr(errormessage.indexOf(" ") + 1));
-            });
+                    insertData();
+                })
+                .catch((err) => {
+                    const errormessage = err.code.replace(/[-/]/g, " ");
+                    setError("Error : " + errormessage.substr(errormessage.indexOf(" ") + 1));
+                });
+        }
 
-            setShowRegister(false);
+        setShowRegister(false);
     }
 
     return (
         <Box
             sx={{
                 width: "100%",
-                mt: 8,
                 px: mobile ? 1 : 13,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                maxHeight: 650,
+                maxHeight: 700,
+                mt: 7,
                 overflow: mobile ? "none" : "scroll"
             }}
         >
-            <Box sx={{ mt: 3 }}>
+                        <Typography component="h1" variant="h5">
+                Sign Up to E-Munakahat
+            </Typography>
+            <Box sx={{ mt: 1 }}>
                 {/* {valid && <Alert severity="success">{valid}</Alert>}
                 {error && <Alert severity="error">{error}</Alert>} */}
                 <TextField

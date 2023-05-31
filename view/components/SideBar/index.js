@@ -93,6 +93,7 @@ const SideBar = () => {
                             </ListItemButton>
                         </ListItem>
                     </List>
+                    <Divider />
                 </Box>
             </Drawer>
         </Box>

@@ -36,9 +36,10 @@ export default function ManageUser() {
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ display: "flex", flexDirection: "column", justifyContent: "center", overflow: "scroll" }}>
                     <Box sx={{ display: "flex", justifyContent: "center" }}>
                         {setShowRegister ?
-                            <Typography component="h1" variant="h5">
-                                Sign Up to E-Munakahat
-                            </Typography>
+                            // <Typography component="h1" variant="h5">
+                            //     Sign Up to E-Munakahat
+                            // </Typography>
+                            null
                             :
                             <Typography component="h1" variant="h5">
                                 Sign in to E-Munakahat

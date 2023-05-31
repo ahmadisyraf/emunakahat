@@ -25,7 +25,7 @@ const rows = [
     createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const ApplyCons = () => {
+const DateCons = () => {
     const [anjuran, setAnjuran] = useState();
 
     const handleChange = (event) => {
@@ -129,4 +129,4 @@ const ApplyCons = () => {
     );
 }
 
-export default ApplyCons;
+export default DateCons;

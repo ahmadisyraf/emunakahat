@@ -35,7 +35,6 @@ const NavBar = () => {
                     {/* <Button color="inherit">Login</Button> */}
                 </Toolbar>
             </AppBar>
-            {pathname == "/" ? null : <SideBar />}
         </Box>
     );
 }

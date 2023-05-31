@@ -89,6 +89,7 @@ const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
                             const result = await registerUser({ data });
                             console.log(result);
                             console.log("Succes to db");
+                            setShowRegister(false);
                         } else {
                             console.log("error to db");
                         }
@@ -113,17 +114,15 @@ const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                maxHeight: 700,
+                maxHeight: 700, 
                 mt: 7,
                 overflow: mobile ? "none" : "scroll"
             }}
         >
-                        <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5">
                 Sign Up to E-Munakahat
             </Typography>
             <Box sx={{ mt: 1 }}>
-                {/* {valid && <Alert severity="success">{valid}</Alert>}
-                {error && <Alert severity="error">{error}</Alert>} */}
                 <TextField
                     fullWidth
                     margin='normal'

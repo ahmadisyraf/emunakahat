@@ -36,7 +36,7 @@ const DateCons = () => {
     return (
 
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
-            <Typography variant='h5'>Khidmat Nasihat - Permohonan Baru</Typography>
+            <Typography variant='h5'>Khidmat Nasihat - Pemilihan Tarikh</Typography>
             <Box sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }}>
             <Box sx={{ width: "50%" }}>
                     <FormControl fullWidth size='small'>

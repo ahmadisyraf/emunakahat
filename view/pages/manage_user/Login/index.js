@@ -6,9 +6,9 @@ import {
     Link,
     Alert
 } from "@mui/material";
-import { auth } from "../../components/firebase/firebase";
+import { auth } from "../../../components/firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { getUser } from "../../pages/api/user";
+import { getUser } from "../../api/user";
 import { useState } from "react";
 
 function Copyright(props) {
@@ -24,22 +24,23 @@ function Copyright(props) {
     );
 }
 
-const Login = ({ setShowRegister }) => {
-    const [error, setError] = useState();
-    const [info, setInfo] = useState();
+// This is login class under manage user package
+const Login = ({ setShowRegister, info, setInfo, error, setError }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
     const handleShowRegister = () => {
         setShowRegister(true);
+        setError("");
+        setInfo("");
     }
 
     const handleLogin = () => {
+        setError("");
+        setInfo("");
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
-                // const userEmail = userCredential.user.email;
-
+                
                 if (userCredential.user.emailVerified) {
                     async function getUserFromDB() {
                         const user = await getUser({ email });
@@ -70,13 +71,7 @@ const Login = ({ setShowRegister }) => {
             {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                         <LockOutlinedIcon />
                     </Avatar> */}
-            <Typography component="h1" variant="h5">
-                Sign in to E-Munakahat
-            </Typography>
-
             <Box sx={{ mt: 1 }}>
-                {info && <Alert severity="info">{info}</Alert>}
-                {error && <Alert severity="error">{error}</Alert>}
                 <TextField
                     margin="normal"
                     required

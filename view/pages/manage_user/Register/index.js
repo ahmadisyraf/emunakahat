@@ -10,12 +10,14 @@ import {
     InputLabel,
     Select,
     MenuItem,
-    Alert
+    Alert,
+    useMediaQuery,
+    useTheme,
 } from "@mui/material"
 import { MuiTelInput } from 'mui-tel-input'
 import { useState, useRef, useEffect } from "react";
-import { auth } from "../../components/firebase/firebase";
-import { registerUser } from "../../pages/api/user";
+import { auth } from "../../../components/firebase/firebase";
+import { registerUser } from "../../api/user";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 
 
@@ -32,7 +34,8 @@ function Copyright(props) {
     );
 }
 
-const Register = ({ setShowRegister }) => {
+// This is register class under manage user package
+const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
 
     const [ic, setIc] = useState();
     const [name, setName] = useState();
@@ -41,9 +44,12 @@ const Register = ({ setShowRegister }) => {
     const [repassword, setRepassword] = useState();
     const [gender, setGender] = useState('');
 
-    const [valid, setValid] = useState();
-    const [error, setError] = useState();
+    // const [valid, setValid] = useState();
+    // const [error, setError] = useState();
     const [phoneNo, setPhoneNo] = useState('')
+
+    const theme = useTheme();
+    const mobile = useMediaQuery(theme.breakpoints.down('md'));
 
     const handleChange = (event) => {
         setGender(event.target.value);
@@ -74,7 +80,7 @@ const Register = ({ setShowRegister }) => {
 
                 sendEmailVerification(user)
                     .then(() => {
-                        setValid("Verification link already sent to your email");
+                        setInfo("Verification link already sent to your email");
                     });
 
                 async function insertData() {
@@ -93,6 +99,8 @@ const Register = ({ setShowRegister }) => {
                 const errormessage = err.code.replace(/[-/]/g, " ");
                 setError("Error : " + errormessage.substr(errormessage.indexOf(" ") + 1));
             });
+
+            setShowRegister(false);
     }
 
     return (
@@ -100,20 +108,17 @@ const Register = ({ setShowRegister }) => {
             sx={{
                 width: "100%",
                 mt: 8,
-                px: 13,
+                px: mobile ? 1 : 13,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 maxHeight: 650,
-                overflow: "scroll"
+                overflow: mobile ? "none" : "scroll"
             }}
         >
-            <Typography component="h1" variant="h5">
-                Sign Up to E-Munakahat
-            </Typography>
             <Box sx={{ mt: 3 }}>
-                {valid && <Alert severity="success">{valid}</Alert>}
-                {error && <Alert severity="error">{error}</Alert>}
+                {/* {valid && <Alert severity="success">{valid}</Alert>}
+                {error && <Alert severity="error">{error}</Alert>} */}
                 <TextField
                     fullWidth
                     margin='normal'

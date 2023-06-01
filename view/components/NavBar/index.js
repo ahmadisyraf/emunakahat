@@ -6,11 +6,19 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import SideBar from '../SideBar';
+import { useRouter } from "next/router";
 
 const NavBar = () => {
+
+    const router = useRouter();
+    const pathname = router.pathname;
+
+    console.log(pathname);
+
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed">
+        <Box>
+            <AppBar position="fixed" sx={{ zIndex: 2000 }}>
                 <Toolbar>
                     <IconButton
                         size="large"

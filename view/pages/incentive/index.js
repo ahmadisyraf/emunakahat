@@ -1,12 +1,12 @@
 import {
     Box
 } from "@mui/material";
-import incentive_status from "./incentive_status";
+import IncentiveStatus from "./incentive_status";
 
-export default function incentive() {
+export default function Incentive() {
     return (
         <Box>
-            <incentive_status />
+            <IncentiveStatus />
         </Box>
     );
 }

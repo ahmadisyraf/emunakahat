@@ -33,72 +33,74 @@ const IncentiveStatus = () => {
 
   const theme = useTheme();
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
-      <Typography variant='h4'>Insentif Khas Pasangan Pengantin</Typography>
-      <Stack sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }} direction={"row"} spacing={1}>
-        <Box sx={{ width: "50%" }}>
-          <FormControl fullWidth size='small'>
-            <TextField id="outlined-basic" label="Sila Masukkan No. K/P" variant="outlined" />
-          </FormControl>
-        </Box>
-        <Button variant='contained'>Buat Semakan</Button>
-      </Stack>
+        <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+            <Typography variant='h4'>Insentif Khas Pasangan Pengantin</Typography>
+            <Stack sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }} direction={"row"} spacing={1}>
+                <Box sx={{ width: "50%" }}>
+                <FormControl fullWidth size='small'>
+                    <TextField id="outlined-basic" label="Sila Masukkan No. K/P" variant="outlined" />
+                </FormControl>
+                </Box>
+                <Button variant='contained'>Buat Semakan</Button>
+            </Stack>
 
-      <TableContainer sx={{ mt: 5 }}>
-        <Typography variant='h5'>Pemohon</Typography>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>KP / Nama</TableCell>
-              <TableCell align="left">Alamat Semasa</TableCell>
-              <TableCell align="left">No. Telefon Bimbit</TableCell>
-              <TableCell align="right">Pendapatan (RM)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {pemohonRows.map((row) => (
-              <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
-                  {row.name}
-                </TableCell>
-                <TableCell align="left">{row.alamat}</TableCell>
-                <TableCell align="left">{row.telefon}</TableCell>
-                <TableCell align="right">{row.pendapatan}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            <TableContainer sx={{ mt: 5 }}>
+                <Typography variant='h5'>Pemohon</Typography>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                        <TableCell>KP / Nama</TableCell>
+                        <TableCell align="left">Alamat Semasa</TableCell>
+                        <TableCell align="left">No. Telefon Bimbit</TableCell>
+                        <TableCell align="right">Pendapatan (RM)</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {pemohonRows.map((row) => (
+                        <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
+                            {row.name}
+                            </TableCell>
+                            <TableCell align="left">{row.alamat}</TableCell>
+                            <TableCell align="left">{row.telefon}</TableCell>
+                            <TableCell align="right">{row.pendapatan}</TableCell>
+                        </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
-      <TableContainer sx={{ mt: 5 }}>
-        <Typography variant='h5'>Pasangan</Typography>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>KP / Nama</TableCell>
-              <TableCell align="left">Alamat Semasa</TableCell>
-              <TableCell align="left">No. Telefon Bimbit</TableCell>
-              <TableCell align="right">Pendapatan (RM)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {pasanganRows.map((row) => (
-              <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
-                  {row.name}
-                </TableCell>
-                <TableCell align="left">{row.alamat}</TableCell>
-                <TableCell align="left">{row.telefon}</TableCell>
-                <TableCell align="right">{row.pendapatan}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-        <Stack sx={{ justifyContent: 'center', width: "fit-content" }}>
-             <Button variant='contained'>Semak Kelayakan</Button>
-        </Stack>
-    </Paper>
+            <TableContainer sx={{ mt: 5 }}>
+                <Typography variant='h5'>Pasangan</Typography>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                        <TableCell>KP / Nama</TableCell>
+                        <TableCell align="left">Alamat Semasa</TableCell>
+                        <TableCell align="left">No. Telefon Bimbit</TableCell>
+                        <TableCell align="right">Pendapatan (RM)</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {pasanganRows.map((row) => (
+                        <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
+                            {row.name}
+                            </TableCell>
+                            <TableCell align="left">{row.alamat}</TableCell>
+                            <TableCell align="left">{row.telefon}</TableCell>
+                            <TableCell align="right">{row.pendapatan}</TableCell>
+                        </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Stack sx={{ justifyContent: 'center', width: "fit-content" }}>
+                    <Button variant='contained'>Semak Kelayakan</Button>
+            </Stack>
+        </Paper>
+
+        
   );
 }
 

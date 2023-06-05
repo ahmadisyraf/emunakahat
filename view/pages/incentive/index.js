@@ -1,13 +1,13 @@
 import {
     Box
 } from "@mui/material";
-import IncentiveStatus from "./incentive_status";
+import UploadDocument from "./upload_document";
 import ApplyIncentive from "./apply_incentive";
 
 export default function Incentive() {
     return (
         <Box>
-            <IncentiveStatus />
+            <UploadDocument />
             <ApplyIncentive />
         </Box>
     );

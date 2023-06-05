@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
         <Box sx={{ display: "flex"}}>
             <Navbar />
             {pathname == "/" ? null : <SideBar />}
-            <Box component="main" sx={{ flexGrow: 1, p:3 }}>{children}</Box>
+            <Box component="main" sx={{ flexGrow: 1}}>{children}</Box>
         </Box>
     );
 }

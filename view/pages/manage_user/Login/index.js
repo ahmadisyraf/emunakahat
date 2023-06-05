@@ -4,7 +4,11 @@ import {
     Box,
     Typography,
     Link,
-    Alert
+    Alert,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem
 } from "@mui/material";
 import { auth } from "../../../components/firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -27,7 +31,7 @@ function Copyright(props) {
 }
 
 // This is login class under manage user package
-const Login = ({ setShowRegister, info, setInfo, error, setError }) => {
+const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, setError }) => {
 
     const router = useRouter();
     const [email, setEmail] = useState();
@@ -35,6 +39,13 @@ const Login = ({ setShowRegister, info, setInfo, error, setError }) => {
 
     const handleShowRegister = () => {
         setShowRegister(true);
+        setError("");
+        setInfo("");
+    }
+
+    //HAHAHA IDK MAN
+    const handleShowforgotPassword = () => {
+        setShowforgotPassword(true);
         setError("");
         setInfo("");
     }
@@ -115,8 +126,20 @@ const Login = ({ setShowRegister, info, setInfo, error, setError }) => {
                     autoComplete="current-password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
+
+                <FormControl fullWidth margin='normal'>
+                    <InputLabel id="demo-simple-select-label">Pengguna*</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                    >
+                        <MenuItem value={"Male"}>Staff/Admin</MenuItem>
+                        <MenuItem value={"Female"}>Applicant</MenuItem>
+                    </Select>
+                </FormControl>  
+
                 <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
-                    <Button sx={{ textTransform: "none" }}>
+                    <Button sx={{ textTransform: "none" }} onClick={handleShowforgotPassword}>
                         Forgot password?
                     </Button>
                 </Box>

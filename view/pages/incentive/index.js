@@ -6,7 +6,7 @@ import ApplyIncentive from "./apply_incentive";
 
 export default function Incentive() {
     return (
-        <Box>
+        <Box sx={{ px: 5 }}>
             <UploadDocument />
             <ApplyIncentive />
         </Box>

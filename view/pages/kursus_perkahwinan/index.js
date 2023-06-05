@@ -5,7 +5,7 @@ import KursusListing from "./kursus_listing";
 
 export default function KhursusPerkahwinan() {
     return (
-        <Box>
+        <Box sx={{ px: 5}}>
             <KursusListing />
         </Box>
     );

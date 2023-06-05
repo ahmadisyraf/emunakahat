@@ -15,6 +15,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { getUser } from "../../api/user";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import ForgotPassword from "../forgotPassword";
 import Cookies from "js-cookie";
 
 function Copyright(props) {
@@ -36,6 +37,7 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
     const router = useRouter();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [showForgotPassowrd, setShowForgotPassword] = useState();
 
     const handleShowRegister = () => {
         setShowRegister(true);
@@ -44,8 +46,8 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
     }
 
     //HAHAHA IDK MAN
-    const handleShowforgotPassword = () => {
-        setShowforgotPassword(true);
+    const handleShowForgotPassword = () => {
+        setShowForgotPassword(true);
         setError("");
         setInfo("");
     }
@@ -91,72 +93,78 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
     }
 
     return (
-        <Box
-            sx={{
-                width: "100%",
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
+        <Box>
+            {showForgotPassowrd ?
+                <ForgotPassword setShowForgotPassword={setShowForgotPassword}/>
+                :
+                <Box
+                    sx={{
+                        width: "100%",
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
 
-            }}
-        >
-            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar> */}
-            <Box sx={{ mt: 1 }}>
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-
-                <FormControl fullWidth margin='normal'>
-                    <InputLabel id="demo-simple-select-label">Pengguna*</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                    >
-                        <MenuItem value={"Male"}>Staff/Admin</MenuItem>
-                        <MenuItem value={"Female"}>Applicant</MenuItem>
-                    </Select>
-                </FormControl>  
-
-                <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
-                    <Button sx={{ textTransform: "none" }} onClick={handleShowforgotPassword}>
-                        Forgot password?
-                    </Button>
-                </Box>
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    onClick={handleLogin}
+                    }}
                 >
-                    Sign In
-                </Button>
-                <Button sx={{ textTransform: "none", width: "100%" }} onClick={handleShowRegister}>
-                    Don't have an account?  Sign Up
-                </Button>
-                <Copyright sx={{ mt: 5 }} />
-            </Box>
+                    {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlinedIcon />
+                </Avatar> */}
+                    <Box sx={{ mt: 1 }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <FormControl fullWidth margin='normal'>
+                            <InputLabel id="demo-simple-select-label">Pengguna*</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                            >
+                                <MenuItem value={"Male"}>Staff/Admin</MenuItem>
+                                <MenuItem value={"Female"}>Applicant</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
+                            <Button sx={{ textTransform: "none" }} onClick={handleShowForgotPassword}>
+                                Forgot password?
+                            </Button>
+                        </Box>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            onClick={handleLogin}
+                        >
+                            Sign In
+                        </Button>
+                        <Button sx={{ textTransform: "none", width: "100%" }} onClick={handleShowRegister}>
+                            Don't have an account?  Sign Up
+                        </Button>
+                        <Copyright sx={{ mt: 5 }} />
+                    </Box>
+                </Box>
+            }
         </Box>
     );
 }

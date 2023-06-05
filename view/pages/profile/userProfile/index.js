@@ -5,8 +5,8 @@ import Item from '@mui/material/InputLabel';
 import { useState } from 'react';
 //import { auth } from "../../../components/firebase/firebase";
 
-const staffProfile = () => {
-    const [staffProfile, setstaffProfile] = useState();
+const UserProfile = () => {
+    const [userProfile, setuserProfile] = useState();
 
     const theme = useTheme();
 
@@ -91,4 +91,4 @@ const staffProfile = () => {
     );
 }  
 
-export default staffProfile;
+export default UserProfile;

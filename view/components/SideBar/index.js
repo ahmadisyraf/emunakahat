@@ -15,10 +15,14 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useRouter } from 'next/router';
 
 const drawerWidth = 280;
 
 const SideBar = () => {
+
+    const router = useRouter();
+
     return (
         <Drawer
             variant="permanent"
@@ -33,7 +37,7 @@ const SideBar = () => {
             <Box sx={{ overflow: 'auto' }}>
                 <List>
                     <ListItem key={"Profil"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => router.push("/profile")}>
                             <ListItemIcon>
                                 <PersonIcon />
                             </ListItemIcon>
@@ -41,7 +45,7 @@ const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Khursus Pra-Perkahwinan"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => router.push("/kursus_perkahwinan")}>
                             <ListItemIcon>
                                 <ImportContactsIcon />
                             </ListItemIcon>
@@ -49,7 +53,7 @@ const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Permohonan Berkahwin"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton >
                             <ListItemIcon>
                                 <ApprovalIcon />
                             </ListItemIcon>

@@ -5,37 +5,8 @@ import Item from '@mui/material/InputLabel';
 import { useState } from 'react';
 //import { auth } from "../../../components/firebase/firebase";
 
-const UserProfile = () => {
-    const [userProfile, setuserProfile] = useState();
-    // const [name, setName] = useState(initalName);
-    // const [phoneNo, setPhoneNo] = useState(initialphoneNo);
-    // const [email, setEmail] = useState(initialEmaill);
-
-    // class UserProfile extends React.Component {
-    //     state = {
-    //         id: "",
-    //         name: "",
-    //         gender: "",
-    //         phoneNo: "",
-    //         email: ""
-    //     };
-    // }
-    // componentDidMount() {
-    //     const {auth} = this.auth;
-    //     getUser(getUser.email)
-    //     .then(user => {
-    //         this.setState({
-    //             ...user
-    //         })
-    //     }).catch(err=>){
-    //         console.error(err)
-    //         this.setState({isLoading:false})
-    //     }
-    // }
-
-    // const handleChange = async(e) => {
-    //    e.preventDefault;
-    // };
+const StaffProfile = () => {
+    const [staffProfile, setstaffProfile] = useState();
 
     const theme = useTheme();
 
@@ -120,4 +91,4 @@ const UserProfile = () => {
     );
 }  
 
-export default UserProfile;
+export default StaffProfile;

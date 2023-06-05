@@ -19,11 +19,11 @@ function Copyright(props) {
     );
 }
 
-    // This is forgot password class under manage user package? ENTAH LAH
-const forgotPassword = ({ setShowRegister, info, setInfo, error, setError}) => {
+// This is forgot password class under manage user package? ENTAH LAH
+const ForgotPassword = ({ setShowForgotPassword }) => {
 
-    const handleShowRegister= () => {
-        setShowRegister(true);
+    const handleShowForgotPassword = () => {
+        setShowForgotPassword(false);
     }
 
     return (
@@ -33,6 +33,7 @@ const forgotPassword = ({ setShowRegister, info, setInfo, error, setError}) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                px: 13
             }}
         >
             {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -42,16 +43,6 @@ const forgotPassword = ({ setShowRegister, info, setInfo, error, setError}) => {
                 Forgot Password
             </Typography>
             <Box component="form" noValidate autoComplete="off" sx={{ mt: 1 }}>
-            <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="Identification"
-                    label="Identification Card Number"
-                    name="Identification"
-                    autoComplete="Identification"
-                    autoFocus
-                />
                 <TextField
                     margin="normal"
                     required
@@ -61,7 +52,6 @@ const forgotPassword = ({ setShowRegister, info, setInfo, error, setError}) => {
                     name="email"
                     autoComplete="email"
                 />
-
                 <Button
                     type="submit"
                     fullWidth
@@ -70,10 +60,13 @@ const forgotPassword = ({ setShowRegister, info, setInfo, error, setError}) => {
                 >
                     Send password
                 </Button>
+                <Button onClick={handleShowForgotPassword} sx={{ textTransform: "none"}} fullWidth>
+                    Already have an account? Sign In
+                </Button>
                 <Copyright sx={{ mt: 5 }} />
             </Box>
         </Box>
     );
 }
 
-export default forgotPassword;
+export default ForgotPassword;

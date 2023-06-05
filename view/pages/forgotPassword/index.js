@@ -3,7 +3,7 @@ import {
     TextField,
     Box,
     Typography,
-    Link
+    Link,
 } from "@mui/material";
 
 function Copyright(props) {
@@ -19,9 +19,10 @@ function Copyright(props) {
     );
 }
 
-const forgotPassword = ({ setShowRegister }) => {
+    // This is forgot password class under manage user package? ENTAH LAH
+const forgotPassword = ({ setShowRegister, info, setInfo, error, setError}) => {
 
-    const handleShowRegister = () => {
+    const handleShowRegister= () => {
         setShowRegister(true);
     }
 
@@ -38,7 +39,7 @@ const forgotPassword = ({ setShowRegister }) => {
                         <LockOutlinedIcon />
                     </Avatar> */}
             <Typography component="h1" variant="h5">
-                Sign in to E-Munakahat
+                Forgot Password
             </Typography>
             <Box component="form" noValidate autoComplete="off" sx={{ mt: 1 }}>
             <TextField

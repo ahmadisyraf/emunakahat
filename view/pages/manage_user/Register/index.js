@@ -61,7 +61,6 @@ const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
         setShowRegister(false);
     }
 
-
     const data = {
         USER_IC: ic,
         USER_NAME: name,

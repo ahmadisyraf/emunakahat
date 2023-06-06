@@ -2,14 +2,26 @@ import Paper from '@mui/material/Paper';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { Grid, Typography, TextField } from "@mui/material";
+import { Grid, Typography, TextField, MenuItem, Button } from "@mui/material";
 import { useState } from 'react';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 const ApplyIncentive = () => {
   const [value, setValue] = useState(0);
+  const [nationality, setNationality] = useState('');
+  const [jobtype, setJobtype] = useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleNationalityChange = (event) => {
+    setNationality(event.target.value);
+  };
+
+  const handleJobtypeChange = (event) => {
+    setJobtype(event.target.value);
   };
 
   const TabPanel = ({ value, index, children }) => {
@@ -33,6 +45,7 @@ const ApplyIncentive = () => {
 
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: 'white' }}>
+      <Typography variant='h6'>PERMOHONAN INSENTIF KHAS PASANGAN PENGANTIN</Typography>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -56,28 +69,308 @@ const ApplyIncentive = () => {
 
       <TabPanel value={value} index={0}>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <Typography variant="body1"><b>Nama* :</b></Typography>
-          </Grid>
-          <Grid item xs={7}>
+          <Grid item xs={6}>
             <TextField
-              style={{ width: '450px' }}
-              id="filled-hidden-label-small"
-              defaultValue=""
-              size="small"
+              fullWidth
+              margin='normal'
+              id="Identification"
+              label="No. Kad Pengenalan"
+              name="Identification"
+              autoComplete="Identification"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="telephone"
+              label="No. Telefon"
+              name="telephone"
+              autoComplete="telephone"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="bankAcc"
+              label="No. Akaun Bank"
+              name="bankAcc"
+              autoComplete="bankAcc"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="bankName"
+              label="Nama Bank"
+              name="bankName"
+              autoComplete="bankName"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="birthdate"
+              label="Tarikh Lahir"
+              name="birthdate"
+              autoComplete="birthdate"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="birthplace"
+              label="Tempat Lahir"
+              name="birthplace"
+              autoComplete="birthplace"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="age"
+              label="Umur"
+              name="age"
+              autoComplete="age"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <InputLabel id="demo-simple-select-label">Kewarganegaraan</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={nationality}
+              label="Kewarganegaraan"
+              onChange={handleNationalityChange}
+              fullWidth
+            >
+              <MenuItem value="citizen">Warganegara</MenuItem>
+              <MenuItem value="noncitizen">Bukan Warganegara</MenuItem>
+            </Select>
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="address"
+              label="Alamat semasa"
+              name="address"
+              autoComplete="address"
             />
           </Grid>
         </Grid>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        Maklumat Pasangan
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="Identification"
+              label="No. Kad Pengenalan"
+              name="Identification"
+              autoComplete="Identification"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="telephone"
+              label="No. Telefon"
+              name="telephone"
+              autoComplete="telephone"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="birthdate"
+              label="Tarikh Lahir"
+              name="birthdate"
+              autoComplete="birthdate"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="birthplace"
+              label="Tempat Lahir"
+              name="birthplace"
+              autoComplete="birthplace"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="age"
+              label="Umur"
+              name="age"
+              autoComplete="age"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <InputLabel id="demo-simple-select-label">Kewarganegaraan</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={nationality}
+              label="Kewarganegaraan"
+              onChange={handleNationalityChange}
+              fullWidth
+            >
+              <MenuItem value="citizen">Warganegara</MenuItem>
+              <MenuItem value="noncitizen">Bukan Warganegara</MenuItem>
+            </Select>
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="address"
+              label="Alamat semasa"
+              name="address"
+              autoComplete="address"
+            />
+          </Grid>
+        </Grid>
       </TabPanel>
 
       <TabPanel value={value} index={2}>
-        Maklumat Pekerjaan dan Waris
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="relativename"
+              label="Nama Waris"
+              name="relativename"
+              autoComplete="relativename"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="relationship"
+              label="Hubungan"
+              name="relationship"
+              autoComplete="relationship"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="occupation"
+              label="Pekerjaan"
+              name="occupation"
+              autoComplete="occupation"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <InputLabel id="demo-simple-select-label">Jenis Pekerjaan</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={jobtype}
+              label="Jenis Pekerjaan"
+              onChange={handleJobtypeChange}
+              fullWidth
+            >
+              <MenuItem value="government">Kerajaan</MenuItem>
+              <MenuItem value="private">Swasta</MenuItem>
+            </Select>
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="salary"
+              label="Pendapatan"
+              name="salary"
+              autoComplete="salary"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="telephone"
+              label="No. Telefon"
+              name="telephone"
+              autoComplete="telephone"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="employerName"
+              label="Nama Majikan"
+              name="employerName"
+              autoComplete="employerName"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin='normal'
+              id="employerAddress"
+              label="Alamat Majikan"
+              name="employerAddress"
+              autoComplete="employerAddress"
+            />
+          </Grid>
+        </Grid>
+
+        <Button
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            width: "200px",
+            height: "40px",
+          }}
+          type="submit"
+          variant="contained"
+          >
+            Seterusnya
+        </Button>
       </TabPanel>
       
+    
+
     </Paper>
   );
 }

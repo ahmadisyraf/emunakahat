@@ -47,7 +47,7 @@ const ApplyCons = () => {
 
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
             <Typography variant='h5'>Khidmat Nasihat - Permohonan Konsultasi</Typography>
-            <Button variant="contained" sx={{mt:2}}>Simpan</Button>
+            <Button variant="contained" sx={{mt:2}}>Kembali</Button>
             <Box sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 3 }}>
             <Box sx={{ width: "70%" }}>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -73,7 +73,7 @@ const ApplyCons = () => {
         </Box>
     </Box>
     <Stack direction="row" spacing={2} sx={{mt:2}} justifyContent={'center'}>
-                    <FormControl size='small' sx={{width:200}}>
+                    <FormControl size='small' sx={{width:400, mt:2}}>
                         <InputLabel id="demo-simple-select-label">Tujuan Aduan: </InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
@@ -88,9 +88,11 @@ const ApplyCons = () => {
                             <MenuItem value={30}>Lain-lain</MenuItem>
                         </Select>
                     </FormControl>
-                    <TextField id="outlined-size-small" label="Lain-lain: " variant="outlined" size='small'/> 
                     </Stack>
-                    <TextField fullWidth id="outlined-size-small" label="Keterangan Aduan: " variant="outlined" size='small' sx={{mt:2}}/> 
+                    <Stack direction="row" spacing={2} sx={{mt:3}} justifyContent={'center'}>
+                         <TextField fullWidth id="outlined-size-small" label="Keterangan Aduan: " multiline rows={4} variant="outlined" size='small'/> 
+                         <TextField fullWidth id="outlined-size-small" label="Solusi yang telah dibuat: " multiline rows={4} variant="outlined" size='small' sx={{mt:2}}/> 
+                    </Stack>
             <Stack direction="row" spacing={2} sx={{mt:2}} justifyContent={'center'}>
                 <Button variant="contained">Simpan</Button>
                 <Button variant="contained">Hantar</Button>

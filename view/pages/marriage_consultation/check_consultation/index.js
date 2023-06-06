@@ -87,9 +87,7 @@ const CheckCons = () => {
         </Grid>
             <Box sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }}>
                 <Box sx={{ width: "50%" }}>
-                    <Stack direction="row" spacing={2}>
-                    <TextField id="outlined-size-small" label="No K/P Yang Kena Adu:" variant="outlined" />
-                    <Button variant="contained">Semak</Button>
+                    <Stack direction="row" spacing={2} justifyContent={'center'}>
                     <Button variant="contained">Permohonan Baru</Button>
                     </Stack>
                 </Box>

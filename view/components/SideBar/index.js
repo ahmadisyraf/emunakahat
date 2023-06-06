@@ -69,7 +69,7 @@ const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Khidmat Nasihat"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => router.push("/marriage_consultation")}>
                             <ListItemIcon>
                                 <HeadsetMicIcon />
                             </ListItemIcon>

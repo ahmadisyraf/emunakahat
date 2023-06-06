@@ -13,18 +13,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import {Button, Stack, Box,FormControl,TextField,} from "@mui/material";
 
 const usersData = [
-  { ic: '910302238321', name: 'Aini Binti Zawawi', role: 'Kakitangan', status: 'Aktif' },
   { ic: '920101123456', name: 'Ikhsan Bin Fandi', role: 'Pengguna', status: 'Tidak Aktif' },
   { ic: '930202987654', name: 'Anizam Binti Mansor', role: 'Pengguna', status: 'Aktif' },
+  { ic: '910302238321', name: 'Aini Binti Zawawi', role: 'Kakitangan', status: 'Aktif' },
+  { ic: '910302238321', name: 'Adriana Afandi', role: 'Kakitangan', status: 'Aktif' },
   // Add more user data as needed
 ];
 
 const UserListing = () => {
   const [users, setUsers] = useState(usersData);
 
-  const handleDeleteUser = (identificationNumber) => {
-    // Perform delete user logic
-    // Update the users state to remove the deleted user
+  const handleDeleteUser = (ic) => {
+
     const updatedUsers = users.filter((user) => user.ic !== ic);
     setUsers(updatedUsers);
   };

@@ -1,11 +1,14 @@
 import '../styles/globals.css';
 import { Box, ThemeProvider, useTheme } from "@mui/material";
 import Layout from '../components/Layout';
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
   const theme = useTheme();
+  const router = useRouter();
+  const pathname = router.pathname;
   return (
-    <Box sx={{ backgroundColor: "lightgrey", height: "100vh",  background: "linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.60)), url(indek.png) no-repeat", backgroundSize: 'cover', backgroundPosition: "center",}}>
+    <Box sx={{ backgroundColor: "#f2f2f2", height: "100vh"}}>
       <Layout>
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />

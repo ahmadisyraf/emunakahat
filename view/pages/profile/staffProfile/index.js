@@ -15,69 +15,64 @@ const StaffProfile = () => {
         <Paper sx={{ mt: 10, px: 7, py: 5, backgroundColor: theme.palette.primary }}>
             <Typography variant='h4'>Profil</Typography>
             
-            <Grid  sx={{py:2}} container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid item xs={3}>
-                <Item><b>No. Kad Pengenalan :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                disabled
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
+            <Grid  sx={{py:2}} container rowSpacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={4}>
+            <TextField
+                    fullWidth
+                    margin='normal'
+                    id="Identification"
+                    label="No. Kad Pengenalan"
+                    name="Identification"
+                    autoComplete="Identification"
+                    onChange={(e) => setIc(e.target.value)}
                 />
-                </Box></Item>
             </Grid>
-            <Grid item xs={3}>
-                <Item><b>Nama* :</b></Item>
+            <Grid item xs={4}>
+                <Item> <TextField
+                fullWidth
+                id="Name"
+                label="Nama Penuh"
+                name="Name"
+                autoComplete="Name"
+                margin="normal"
+                onChange={(e) => setName(e.target.value)}
+                /></Item>
             </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
+            <Grid item xs={4}>
+            <Item> <TextField
+                fullWidth
+                id="Gender"
+                label="Jantina"
+                name="Gender"
+                autoComplete="Gender"
+                margin="normal"
+                onChange={(e) => setGender(e.target.value)}
+                /></Item>
             </Grid>
-            <Grid item xs={3}>
-                <Item><b>Jantina :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                disabled
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
-            </Grid>
-            <Grid item xs={3}>
-                <Item><b>No Telefon* :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
+
+            <Grid item xs={4}>
+            <Item> <TextField
+                fullWidth
+                id="phoneNo"
+                label="No. Telefon"
+                name="phoneNo"
+                autoComplete="phoneNo"
+                margin="normal"
+                onChange={(e) => setphoneNo(e.target.value)}
+                /></Item>
             </Grid>
             <Grid item xs={3}>
-                <Item><b>Email* :</b></Item>
+            <Item> <TextField
+                fullWidth
+                id="email"
+                label="Emel"
+                name="email"
+                autoComplete="email"
+                margin="normal"
+                onChange={(e) => setEmail(e.target.value)}
+                /></Item>
             </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
-            </Grid>
+            
             </Grid>
 
             <Button style={{width: "300px", height: "40px",}}

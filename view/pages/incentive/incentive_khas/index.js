@@ -24,7 +24,7 @@ const pasanganRows = [
   createData('020620062134\nSalwa Binti Ahmad', 'No116 Taman Ixora, 26800 Kuala Rompin Pahang', '0175482902', 2000.00),
 ];
 
-const UploadDocument = () => {
+const IncentiveKhas = () => {
   const [anjuran, setAnjuran] = useState('');
 
   const handleChange = (event) => {
@@ -104,4 +104,4 @@ const UploadDocument = () => {
   );
 }
 
-export default UploadDocument;
+export default IncentiveKhas;

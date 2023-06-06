@@ -1,11 +1,18 @@
+import { Box } from '@mui/material';
 import Navbar from '../NavBar';
+import SideBar from '../SideBar';
+import { useRouter } from 'next/router';
 
 const Layout = ({ children }) => {
+    const router = useRouter();
+    const pathname = router.pathname;
+
     return (
-        <>
+        <Box sx={{ display: "flex"}}>
             <Navbar />
-            <main>{children}</main>
-        </>
+            {pathname == "/" ? null : <SideBar />}
+            <Box component="main" sx={{ flexGrow: 1}}>{children}</Box>
+        </Box>
     );
 }
 

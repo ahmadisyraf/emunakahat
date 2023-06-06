@@ -36,6 +36,26 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(200).json({ userData });
 });
 
-module.exports = { registerUser };
+const getUserByEmail = asyncHandler(async (req, res) => {
+
+    const email = req.params.USER_EMAIL;
+
+    if (!email) {
+        res.status(400);
+        throw Error("All field are mandatory");
+    }
+
+    const user = await User.findOne({ "USER_EMAIL": email });
+
+    if (user) {
+        res.status(200).json({ user });
+    } else {
+        res.status(400).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ user });
+});
+
+module.exports = { registerUser, getUserByEmail };
 
 

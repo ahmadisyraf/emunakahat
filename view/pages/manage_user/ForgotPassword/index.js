@@ -3,7 +3,7 @@ import {
     TextField,
     Box,
     Typography,
-    Link
+    Link,
 } from "@mui/material";
 
 function Copyright(props) {
@@ -19,10 +19,11 @@ function Copyright(props) {
     );
 }
 
-const Login = ({ setShowRegister }) => {
+// This is forgot password class under manage user package? ENTAH LAH
+const ForgotPassword = ({ setShowForgotPassword }) => {
 
-    const handleShowRegister = () => {
-        setShowRegister(true);
+    const handleShowForgotPassword = () => {
+        setShowForgotPassword(false);
     }
 
     return (
@@ -32,16 +33,17 @@ const Login = ({ setShowRegister }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                px: 13
             }}
         >
             {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                         <LockOutlinedIcon />
                     </Avatar> */}
             <Typography component="h1" variant="h5">
-                Sign in to E-Munakahat
+                Forgot Password
             </Typography>
             <Box component="form" noValidate autoComplete="off" sx={{ mt: 1 }}>
-            <TextField
+                <TextField
                     margin="normal"
                     required
                     fullWidth
@@ -49,33 +51,17 @@ const Login = ({ setShowRegister }) => {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    autoFocus
                 />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                />
-                <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
-                    <Button sx={{ textTransform: "none" }}>
-                        Forgot password?
-                    </Button>
-                </Box>
                 <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                    Sign In
+                    Send password
                 </Button>
-                <Button sx={{ textTransform: "none", width: "100%" }} onClick={handleShowRegister}>
-                    Don't have an account?  Sign Up
+                <Button onClick={handleShowForgotPassword} sx={{ textTransform: "none"}} fullWidth>
+                    Already have an account? Sign In
                 </Button>
                 <Copyright sx={{ mt: 5 }} />
             </Box>
@@ -83,4 +69,4 @@ const Login = ({ setShowRegister }) => {
     );
 }
 
-export default Login;
+export default ForgotPassword;

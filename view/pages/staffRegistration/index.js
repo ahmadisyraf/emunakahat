@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
-import { FormControl, InputLabel, Select, Grid, Box, useTheme, Typography, TextField, Button, useMediaQuery } from "@mui/material";
-import Item from '@mui/material/InputLabel';
+import { Grid, MenuItem, FormControl, InputLabel, Select, Box, useTheme, Typography, TextField, Button, useMediaQuery } from "@mui/material";
+import { MuiTelInput } from 'mui-tel-input'
 import { useState } from 'react';
 //import { auth } from "../../../components/firebase/firebase";
 
@@ -43,38 +43,35 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
         <Paper sx={{ mt: 10, px: 7, py: 5, backgroundColor: theme.palette.primary }}>
             <Typography variant='h4'>Tambah Pengguna</Typography>
             
-            <Grid  sx={{py:2}} container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid item xs={3}>
-                <Item><b>No. Kad Pengenalan :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                disabled
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
+            <Grid  sx={{py:2}} container rowSpacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>     
+            <Grid item sm={4}>
+                <TextField
+                    fullWidth
+                    margin='normal'
+                    id="Identification"
+                    label="No. Kad Pengenalan"
+                    name="Identification"
+                    autoComplete="Identification"
+                    onChange={(e) => setIc(e.target.value)}
                 />
-                </Box></Item>
-            </Grid>
-            <Grid item xs={3}>
-                <Item><b>Nama* :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
+                </Grid>
+
+                <Grid item xs={6}>
+                <TextField
+
+                    fullWidth
+                    id="Name"
+                    label="Nama"
+                    name="Name"
+                    autoComplete="Name"
+                    margin="normal"
+                    onChange={(e) => setName(e.target.value)}
                 />
-                </Box></Item>
-            </Grid>
-            <Grid item xs={3}>
-                <Item><b>Jantina :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><FormControl fullWidth margin='normal'>
-                    <InputLabel id="demo-simple-select-label">Gender*</InputLabel>
+                </Grid>
+
+                <Grid item xs={4}>
+                <FormControl fullWidth margin='normal'>
+                    <InputLabel id="demo-simple-select-label">Jantina</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -86,56 +83,51 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
                         <MenuItem value={"Male"}>Male</MenuItem>
                         <MenuItem value={"Female"}>Female</MenuItem>
                     </Select>
-                </FormControl></Item>
-            </Grid>
-            <Grid item xs={3}>
-                <Item><b>No Telefon* :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
-            </Grid>
-            <Grid item xs={3}>
-                <Item><b>Email* :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
-            </Grid>
-            <Grid item xs={3}>
-                <Item><b>Peranan* :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
-            </Grid>
-            <Grid item xs={3}>
-                <Item><b>Password* (Default) :</b></Item>
-            </Grid>
-            <Grid item xs={7}>
-                <Item><Box>
-                <TextField style={{ width: '450px' }}
-                id="filled-hidden-label-small"
-                defaultValue=""
-                size="small"
-                />
-                </Box></Item>
-            </Grid>
+                </FormControl>
+                </Grid>
+
+                <Grid item xs={6}>
+                <MuiTelInput value={phoneNo} onChange={handlePhoneChange} margin="normal" fullWidth label="No. Telefon" defaultCountry="MY" sx={{ mt: 1 }}
+                /></Grid>
+
+                <Grid item xs={4}>
+                <TextField
+
+                    fullWidth
+                    margin="normal"
+                    id="email"
+                    label="Emel"
+                    name="email"
+                    autoComplete="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                /></Grid>
+
+                <Grid item xs={6}>
+                <TextField
+
+                    fullWidth
+                    margin="normal"
+                    name="role"
+                    label="Peranan"
+                    type="role"
+                    id="role"
+                    autoComplete="role"
+                    onChange={(e) => setRole(e.target.value)}
+                /></Grid>
+
+                <Grid item xs={4}>
+                <TextField
+
+                    fullWidth
+                    margin="normal"
+                    name="password"
+                    label="Kata Laluan"
+                    type="password"
+                    id="password"
+                    autoComplete="password"
+                    onChange={(e) => setPassword(e.target.value)}
+
+                /></Grid>
             </Grid>
 
             <Button style={{width: "300px", height: "40px",}}

@@ -8,11 +8,13 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const pathname = router.pathname;
   return (
+    <Box sx={{ backgroundColor: "#f2f2f2", height: "100vh"}}>
       <Layout>
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
         </ThemeProvider>
       </Layout>
+    </Box>
   )
 }
 

@@ -10,11 +10,11 @@ import ReviewCons from "./review_consultation";
 export default function MarriageCons() {
 
     return (
-        <Box>
-            <CheckCons />
-            <DateCons />
+        <Box sx={{ px: 5 }}>
+            {/* <CheckCons /> */}
+            {/* <DateCons /> */}
             <ApplyCons/>
-            <ReviewCons/>
+            {/* <ReviewCons/> */}
         </Box>
     );
 }

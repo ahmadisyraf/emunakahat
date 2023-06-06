@@ -61,7 +61,7 @@ const StaffProfile = () => {
                 onChange={(e) => setphoneNo(e.target.value)}
                 /></Item>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
             <Item> <TextField
                 fullWidth
                 id="email"

@@ -3,14 +3,14 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { Grid, Typography, TextField, MenuItem, Button } from "@mui/material";
-import { useState } from 'react';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
+import * as React from 'react';
 
-const ApplyIncentive = () => {
-  const [value, setValue] = useState(0);
-  const [nationality, setNationality] = useState('');
-  const [jobtype, setJobtype] = useState('');
+const ApplyIncentive = ({initialValue, initialNationality, initialJobType}) => {
+  const [value, setValue] = React.useState(initialValue);
+  const [nationality, setNationality] = React.useState(initialNationality);
+  const [jobtype, setJobtype] = React.useState(initialJobType);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -30,6 +30,21 @@ const ApplyIncentive = () => {
         {value === index && (
           <Box sx={{ p: 3 }}>
             <Typography>{children}</Typography>
+            {index === 2 && (
+              <Button
+                style={{
+                  position: "fixed",
+                  bottom: "20px",
+                  right: "20px",
+                  width: "200px",
+                  height: "40px",
+                }}
+                type="submit"
+                variant="contained"
+              >
+                Seterusnya
+              </Button>
+            )}
           </Box>
         )}
       </div>
@@ -50,8 +65,8 @@ const ApplyIncentive = () => {
         value={value}
         onChange={handleChange}
         aria-label="basic tabs example"
-        textColor="secondary"
-        indicatorColor="secondary"
+        textColor="primary" //set text color to blue
+        indicatorColor="primary" //set text color to blue
       >
         <Tab
           label="Maklumat Pemohon"
@@ -353,20 +368,6 @@ const ApplyIncentive = () => {
             />
           </Grid>
         </Grid>
-
-        <Button
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            width: "200px",
-            height: "40px",
-          }}
-          type="submit"
-          variant="contained"
-          >
-            Seterusnya
-        </Button>
       </TabPanel>
       
     

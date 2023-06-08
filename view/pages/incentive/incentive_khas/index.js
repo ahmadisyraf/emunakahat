@@ -21,14 +21,17 @@ function createData(name, alamat, telefon, pendapatan) {
 }
 
 const pemohonRows = [
-  createData('010322063013\nAli Bin Abu', 'No15 Taman Mentiga, 26600 Pekan Pahang', '0125517084', 2000.00),
+  createData("010322063013\nAli Bin Abu", "No15 Taman Mentiga, 26600 Pekan Pahang", "0125517084", 2000.00),
 ];
 
 const pasanganRows = [
-  createData('020620062134\nSalwa Binti Ahmad', 'No116 Taman Ixora, 26800 Kuala Rompin Pahang', '0175482902', 2000.00),
+  createData("020620062134\nSalwa Binti Ahmad", "No116 Taman Ixora, 26800 Kuala Rompin Pahang", "0175482902", 2000.00),
 ];
 
+{/*INCENTIVE KHAS*/}
 const IncentiveKhas = () => {
+
+
   const [anjuran, setAnjuran] = useState('');
 
   const handleChange = (event) => {
@@ -49,7 +52,7 @@ const IncentiveKhas = () => {
     };
   return (
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
-            <Typography variant='h4'>Insentif Khas Pasangan Pengantin</Typography>
+            <Typography variant='h5'>INSENTIF KHAS PASANGAN PENGANTIN</Typography>
             <Stack sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }} direction={"row"} spacing={1}>
                 <Box sx={{ width: "50%" }}>
                 <FormControl fullWidth size='small'>
@@ -60,13 +63,13 @@ const IncentiveKhas = () => {
             </Stack>
 
             <TableContainer sx={{ mt: 5 }}>
-                <Typography variant='h5'>Pemohon</Typography>
+                <Typography variant='h6'>PEMOHON</Typography>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                         <TableCell>KP / Nama</TableCell>
-                        <TableCell align="left">Alamat Semasa</TableCell>
-                        <TableCell align="left">No. Telefon Bimbit</TableCell>
+                        <TableCell align="right">Alamat Semasa</TableCell>
+                        <TableCell align="right">No. Telefon Bimbit</TableCell>
                         <TableCell align="right">Pendapatan (RM)</TableCell>
                         </TableRow>
                     </TableHead>
@@ -76,8 +79,8 @@ const IncentiveKhas = () => {
                             <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
                             {row.name}
                             </TableCell>
-                            <TableCell align="left">{row.alamat}</TableCell>
-                            <TableCell align="left">{row.telefon}</TableCell>
+                            <TableCell align="right">{row.alamat}</TableCell>
+                            <TableCell align="right">{row.telefon}</TableCell>
                             <TableCell align="right">{row.pendapatan}</TableCell>
                         </TableRow>
                         ))}
@@ -86,13 +89,13 @@ const IncentiveKhas = () => {
             </TableContainer>
 
             <TableContainer sx={{ mt: 5 }}>
-                <Typography variant='h5'>Pasangan</Typography>
+                <Typography variant='h6'>PASANGAN</Typography>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                         <TableCell>KP / Nama</TableCell>
-                        <TableCell align="left">Alamat Semasa</TableCell>
-                        <TableCell align="left">No. Telefon Bimbit</TableCell>
+                        <TableCell align="right">Alamat Semasa</TableCell>
+                        <TableCell align="right">No. Telefon Bimbit</TableCell>
                         <TableCell align="right">Pendapatan (RM)</TableCell>
                         </TableRow>
                     </TableHead>
@@ -102,8 +105,8 @@ const IncentiveKhas = () => {
                             <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
                             {row.name}
                             </TableCell>
-                            <TableCell align="left">{row.alamat}</TableCell>
-                            <TableCell align="left">{row.telefon}</TableCell>
+                            <TableCell align="right">{row.alamat}</TableCell>
+                            <TableCell align="right">{row.telefon}</TableCell>
                             <TableCell align="right">{row.pendapatan}</TableCell>
                         </TableRow>
                         ))}

@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import * as React from 'react';
 
+{/*APPLY INCENTIVE*/}
 const ApplyIncentive = ({initialValue, initialNationality, initialJobType}) => {
   const [value, setValue] = React.useState(initialValue);
   const [nationality, setNationality] = React.useState(initialNationality);

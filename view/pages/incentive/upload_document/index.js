@@ -7,7 +7,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import * as React from 'react';
 
+{/*UPLOAD DOCUMENT*/}
 const UploadDocument = () => {
+
+
   const theme = useTheme();
   const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -35,7 +38,7 @@ const UploadDocument = () => {
 
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
-      <Typography variant='h4'>Muat Naik Dokumen</Typography>
+      <Typography variant='h5'>MUAT NAIK DOKUMEN</Typography>
 
       <div>
         <Typography variant="body1">Slip Gaji format (.PDF)</Typography>

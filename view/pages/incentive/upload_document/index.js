@@ -1,6 +1,11 @@
 import Paper from '@mui/material/Paper';
-import { useTheme, Typography, Button } from "@mui/material";
+import { useTheme, Typography, Button, Stack } from "@mui/material";
 import { useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import * as React from 'react';
 
 const UploadDocument = () => {
   const theme = useTheme();
@@ -18,11 +23,20 @@ const UploadDocument = () => {
     console.log("Submitted files:", selectedFiles);
   };
 
+    const [open, setOpen] = React.useState(false);
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
       <Typography variant='h4'>Muat Naik Dokumen</Typography>
 
-      {/* File upload elements */}
       <div>
         <Typography variant="body1">Slip Gaji format (.PDF)</Typography>
         <input type="file" onChange={handleFileChange} />
@@ -50,7 +64,26 @@ const UploadDocument = () => {
 
       {/* Submit button */}
       <div>
-        <Button variant="contained" onClick={handleSubmit}>Hantar</Button>
+        <Stack sx={{ justifyContent: 'center', width: "fit-content", mt: 2 }}>
+          <Button variant="contained" onClick={handleClickOpen}>Hantar</Button>
+        </Stack>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-describedby="alert-dialog-description"
+        >
+        
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Dokumen berjaya dihantar.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button variant="contained" onClick={handleClose} autoFocus>
+              Seterusnya
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
       
     </Paper>

@@ -10,6 +10,10 @@ import { Box, useTheme, Typography, Stack, Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 
 
 function createData(name, alamat, telefon, pendapatan) {
@@ -32,6 +36,17 @@ const IncentiveKhas = () => {
   };
 
   const theme = useTheme();
+
+  {/*Semak Kelayakan*/}
+  const [open, setOpen] = React.useState(false);
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
   return (
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
             <Typography variant='h4'>Insentif Khas Pasangan Pengantin</Typography>
@@ -95,9 +110,30 @@ const IncentiveKhas = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Stack sx={{ justifyContent: 'center', width: "fit-content" }}>
-                    <Button variant='contained'>Semak Kelayakan</Button>
-            </Stack>
+
+            {/* Submit button */}
+            <div>
+                <Stack sx={{ justifyContent: 'center', width: "fit-content", mt: 2 }}>
+                <Button variant="contained" onClick={handleClickOpen}>Semak Kelayakan</Button>
+                </Stack>
+                <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-describedby="alert-dialog-description"
+                >
+                
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    Tahniah! Anda layak menerima insentif.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="contained" onClick={handleClose} autoFocus>
+                        Seterusnya
+                    </Button>
+                </DialogActions>
+                </Dialog>
+            </div>
         </Paper>
 
         

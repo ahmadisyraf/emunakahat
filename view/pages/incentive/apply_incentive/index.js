@@ -1,17 +1,21 @@
+import { Grid, Typography, TextField, MenuItem, Button, Stack } from "@mui/material";
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 import Paper from '@mui/material/Paper';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { Grid, Typography, TextField, MenuItem, Button } from "@mui/material";
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
 import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 
-{/*APPLY INCENTIVE*/}
-const ApplyIncentive = ({initialValue, initialNationality, initialJobType}) => {
+const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) => {
   const [value, setValue] = React.useState(initialValue);
   const [nationality, setNationality] = React.useState(initialNationality);
   const [jobtype, setJobtype] = React.useState(initialJobType);
+  const [open, setOpen] = React.useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -25,6 +29,14 @@ const ApplyIncentive = ({initialValue, initialNationality, initialJobType}) => {
     setJobtype(event.target.value);
   };
 
+  const handleDialogOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpen(false);
+  };
+
   const TabPanel = ({ value, index, children }) => {
     return (
       <div role="tabpanel" hidden={value !== index}>
@@ -32,19 +44,27 @@ const ApplyIncentive = ({initialValue, initialNationality, initialJobType}) => {
           <Box sx={{ p: 3 }}>
             <Typography>{children}</Typography>
             {index === 2 && (
-              <Button
-                style={{
-                  position: "fixed",
-                  bottom: "20px",
-                  right: "20px",
-                  width: "200px",
-                  height: "40px",
-                }}
-                type="submit"
-                variant="contained"
-              >
-                Seterusnya
-              </Button>
+              <div>
+                <Stack sx={{ justifyContent: 'center', width: "fit-content", mt: 2 }}>
+                  <Button variant="contained" onClick={handleDialogOpen}>Hantar</Button>
+                </Stack>
+                <Dialog
+                  open={open}
+                  onClose={handleDialogClose}
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      Dokumen berjaya dihantar.
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button variant="contained" onClick={handleDialogClose} autoFocus>
+                      Seterusnya
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
             )}
           </Box>
         )}
@@ -66,8 +86,8 @@ const ApplyIncentive = ({initialValue, initialNationality, initialJobType}) => {
         value={value}
         onChange={handleChange}
         aria-label="basic tabs example"
-        textColor="primary" //set text color to blue
-        indicatorColor="primary" //set text color to blue
+        textColor="primary"
+        indicatorColor="primary"
       >
         <Tab
           label="Maklumat Pemohon"
@@ -370,9 +390,6 @@ const ApplyIncentive = ({initialValue, initialNationality, initialJobType}) => {
           </Grid>
         </Grid>
       </TabPanel>
-      
-    
-
     </Paper>
   );
 }

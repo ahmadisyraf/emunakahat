@@ -16,7 +16,7 @@ function createData(bil, name, slip, tarikh, status) {
 }
 
 const initialStatusRows = [
-    createData(1, "010322063013\nAli Bin Abu", "M3/2022 000001", "23-10-2-22", "Diterima")
+    createData(1, "010322063013\nAli Bin Abu", "M3/2022 000001", "23-10-2022", "Diterima")
   ];
 
 /* INCENTIVE STATUS */

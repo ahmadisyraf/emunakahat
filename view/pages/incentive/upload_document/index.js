@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import * as React from 'react';
+import { useRouter } from 'next/router';
 
 {/*UPLOAD DOCUMENT*/}
 const UploadDocument = () => {
@@ -26,6 +27,7 @@ const UploadDocument = () => {
     console.log("Submitted files:", selectedFiles);
   };
 
+    const router = useRouter();
     const [open, setOpen] = React.useState(false);
   
     const handleClickOpen = () => {
@@ -34,6 +36,7 @@ const UploadDocument = () => {
   
     const handleClose = () => {
       setOpen(false);
+      router.push('./apply_incentive'); // Navigate to the "Apply incentive" page
     };
 
   return (

@@ -10,6 +10,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("All field are mandatory");
     }
 
+    //exist user based on IC
     const userExist = await User.findOne({ USER_IC });
 
     if (userExist) {
@@ -24,6 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
         USER_EMAIL
     });
 
+    //get user data based on IC
     const userData = await User.findOne({ USER_IC });
 
     if (user) {
@@ -36,6 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(200).json({ userData });
 });
 
+//get user by email
 const getUserByEmail = asyncHandler(async (req, res) => {
 
     const email = req.params.USER_EMAIL;
@@ -56,6 +59,54 @@ const getUserByEmail = asyncHandler(async (req, res) => {
     res.status(200).json({ user });
 });
 
-module.exports = { registerUser, getUserByEmail };
+//update user data
+const getUserUpdate = asyncHandler(async(req, res) => {
+
+    try{
+    const ic = req.params.USER_IC;
+
+    const {
+        USER_NAME, 
+        USER_GENDER, 
+        USER_PHONE_NO, 
+        USER_EMAIL, 
+        USER_BIRTH_DATE, 
+        USER_RACE, 
+        USER_NATIONALITY, 
+        USER_ADDRESS, 
+        USER_EDUCATIONAL_STATUS,
+        USER_EMPLOYMENT_POSITION, 
+        USER_SALARY, 
+        USER_MARRIAGE_STATUS, 
+        USER_PARTNER_IC } = req.body;
+
+    const updatedData = {
+        USER_NAME, 
+        USER_GENDER, 
+        USER_PHONE_NO, 
+        USER_EMAIL, 
+        USER_BIRTH_DATE, 
+        USER_RACE, 
+        USER_NATIONALITY, 
+        USER_ADDRESS, 
+        USER_EDUCATIONAL_STATUS,
+        USER_EMPLOYMENT_POSITION, 
+        USER_SALARY, 
+        USER_MARRIAGE_STATUS, 
+        USER_PARTNER_IC, 
+    };
+
+    const options = {new: true};
+
+    const result = await User.findOneAndUpdate(ic, updatedData, options);
+
+    res.send(result);
+
+} catch (error) {
+    res.status(400).json({ message: "Cant update profile" });
+}
+})
+
+module.exports = { registerUser, getUserByEmail, getUserUpdate };
 
 

@@ -1,4 +1,5 @@
 import Paper from '@mui/material/Paper';
+import React, { useState } from 'react';
 import { useTheme, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,13 +15,20 @@ function createData(bil, name, slip, tarikh, status) {
   return { bil, name, slip, tarikh, status };
 }
 
-const statusRows = [
-  createData(1, "010322063013\nAli Bin Abu", "M3/2022 000001", "23-10-2-22", "Diterima"),
-];
+const initialStatusRows = [
+    createData(1, "010322063013\nAli Bin Abu", "M3/2022 000001", "23-10-2-22", "Diterima")
+  ];
 
 /* INCENTIVE STATUS */
 const IncentiveStatus = () => {
   const theme = useTheme();
+  const [statusRows, setStatusRows] = useState(initialStatusRows);
+
+  // DELETE APPLICATION
+  const handleDeleteApplication = (name) => {
+    const updatedRows = statusRows.filter(row => row.name !== name);
+    setStatusRows(updatedRows);
+  };
 
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
@@ -35,7 +43,7 @@ const IncentiveStatus = () => {
               <TableCell align="right">No. Slip Permohonan</TableCell>
               <TableCell align="right">Tarikh Hantar</TableCell>
               <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Operasi</TableCell>
+              <TableCell align="right" colSpan={2}>Operasi</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -48,15 +56,16 @@ const IncentiveStatus = () => {
                 <TableCell align="right">{row.slip}</TableCell>
                 <TableCell align="right">{row.tarikh}</TableCell>
                 <TableCell align="right">{row.status}</TableCell>
-                <TableCell align="right">
-                  <div style={{ display: 'flex', gap: '0.1rem' }}>
-                    <IconButton aria-label="edit" disabled color="primary">
-                      <EditIcon />
+                <TableCell align="right" style={{ paddingTop: '0.5rem' }}>
+                    <IconButton
+                        aria-label="delete"
+                        onClick={() => handleDeleteApplication(row.name)}
+                    >
+                        <DeleteIcon />
                     </IconButton>
-                    <IconButton aria-label="delete" disabled color="primary">
-                      <DeleteIcon />
+                    <IconButton aria-label="edit">
+                        <EditIcon />
                     </IconButton>
-                  </div>
                 </TableCell>
               </TableRow>
             ))}

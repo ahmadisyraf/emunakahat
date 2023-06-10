@@ -16,8 +16,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
 
-function createData(name, alamat, telefon, pendapatan) {
-  return { name, alamat, telefon, pendapatan };
+function createData(ic, alamat, telefon, pendapatan) {
+  return { ic, alamat, telefon, pendapatan };
 }
 
 const pemohonRows = [
@@ -75,9 +75,9 @@ const IncentiveKhas = () => {
                     </TableHead>
                     <TableBody>
                         {pemohonRows.map((row) => (
-                        <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                        <TableRow key={row.ic} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                             <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
-                            {row.name}
+                            {row.ic}
                             </TableCell>
                             <TableCell align="right">{row.alamat}</TableCell>
                             <TableCell align="right">{row.telefon}</TableCell>
@@ -101,9 +101,9 @@ const IncentiveKhas = () => {
                     </TableHead>
                     <TableBody>
                         {pasanganRows.map((row) => (
-                        <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                        <TableRow key={row.ic} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                             <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
-                            {row.name}
+                            {row.ic}
                             </TableCell>
                             <TableCell align="right">{row.alamat}</TableCell>
                             <TableCell align="right">{row.telefon}</TableCell>

@@ -30,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(200).json({ userData });
     } else {
         res.status(400);
-        throw new Error("Failed to resgiter user");
+        throw new Error("Failed to register user");
     }
 
     res.status(200).json({ userData });

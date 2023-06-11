@@ -60,51 +60,51 @@ const getUserByEmail = asyncHandler(async (req, res) => {
 });
 
 //update user data
-const getUserUpdate = asyncHandler(async(req, res) => {
+const getUserUpdate = asyncHandler(async (req, res) => {
 
-    try{
-    const ic = req.params.USER_IC;
+    const IC = req.params.USER_IC;
 
     const {
-        USER_NAME, 
-        USER_GENDER, 
-        USER_PHONE_NO, 
-        USER_EMAIL, 
-        USER_BIRTH_DATE, 
-        USER_RACE, 
-        USER_NATIONALITY, 
-        USER_ADDRESS, 
+        USER_NAME,
+        USER_GENDER,
+        USER_PHONE_NO,
+        USER_EMAIL,
+        USER_BIRTH_DATE,
+        USER_RACE,
+        USER_NATIONALITY,
+        USER_ADDRESS,
         USER_EDUCATIONAL_STATUS,
-        USER_EMPLOYMENT_POSITION, 
-        USER_SALARY, 
-        USER_MARRIAGE_STATUS, 
+        USER_EMPLOYMENT_POSITION,
+        USER_SALARY,
+        USER_MARRIAGE_STATUS,
         USER_PARTNER_IC } = req.body;
 
     const updatedData = {
-        USER_NAME, 
-        USER_GENDER, 
-        USER_PHONE_NO, 
-        USER_EMAIL, 
-        USER_BIRTH_DATE, 
-        USER_RACE, 
-        USER_NATIONALITY, 
-        USER_ADDRESS, 
+        USER_NAME,
+        USER_GENDER,
+        USER_PHONE_NO,
+        USER_EMAIL,
+        USER_BIRTH_DATE,
+        USER_RACE,
+        USER_NATIONALITY,
+        USER_ADDRESS,
         USER_EDUCATIONAL_STATUS,
-        USER_EMPLOYMENT_POSITION, 
-        USER_SALARY, 
-        USER_MARRIAGE_STATUS, 
-        USER_PARTNER_IC, 
+        USER_EMPLOYMENT_POSITION,
+        USER_SALARY,
+        USER_MARRIAGE_STATUS,
+        USER_PARTNER_IC,
     };
 
-    const options = {new: true};
+    const options = { new: true };
 
-    const result = await User.findOneAndUpdate(ic, updatedData, options);
+    const result = await User.findOneAndUpdate(IC, updatedData, options);
 
-    res.send(result);
+    if (result) {
+        res.status(200).json({ result });
+    } else {
+        res.status(400).json({ message: "Failed to update" });
+    }
 
-} catch (error) {
-    res.status(400).json({ message: "Cant update profile" });
-}
 })
 
 module.exports = { registerUser, getUserByEmail, getUserUpdate };

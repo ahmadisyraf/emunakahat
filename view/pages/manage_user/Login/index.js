@@ -17,6 +17,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import ForgotPassword from "../forgotPassword";
 import Cookies from "js-cookie";
+import { setUser } from "../../../state/action";
+import { useDispatch } from "react-redux";
 
 function Copyright(props) {
     return (
@@ -38,6 +40,7 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [showForgotPassowrd, setShowForgotPassword] = useState();
+    const dispatch = useDispatch();
 
     const handleShowRegister = () => {
         setShowRegister(true);
@@ -77,8 +80,11 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
                             salary: user.user.USER_SALARY? user.user.USER_SALARY : null,
                             marriage_status: user.user.USER_MARRIAGE_STATUS? user.user.USER_MARRIAGE_STATUS : null,
                             partner_ic: user.user.USER_PARTNER_IC? user.user.USER_PARTNER_IC : null,
+                            nationality: user.user.USER_NATIONALITY? user.user.USER_NATIONALITY : null,
                             login: true,
                         }
+
+                        dispatch(setUser(user_data));
 
                         if (user) {
                             Cookies.set("user_data", JSON.stringify(user_data));

@@ -5,41 +5,36 @@ import Item from '@mui/material/InputLabel';
 import { useState, useEffect } from 'react';
 import DatePicker from '@mui/lab/DatePicker';
 import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
 //import { auth } from "../../../components/firebase/firebase";
 
 const UserProfile = () => {
+    const IC = useSelector((state) => state.user.ic);
+    const email = useSelector((state) => state.user.email);
+    const gender = useSelector((state) => state.user.gender);
+    const name = useSelector((state) => state.user.name);
+    const address = useSelector((state) => state.user.address);
+    const phone = useSelector((state) => state.user.phone);
+    const educational_status = useSelector((state) => state.user.educational_status);
+    const salary = useSelector((state) => state.user.salary);
+    const race = useSelector((state) => state.user.race);
+    const birth_date = useSelector((state) => state.user.birth_date);
 
-    const cookie = Cookies.get("user_data");
-    let user_data = {};
-    const [userIC, setUserIC] = useState();
-    const [userName, setUserName] = useState();
-    const [userGender, setUserGender] = useState();
-    const [userEmail, setUserEmail] = useState();
-    const [userAddress, setUserAddress] = useState();
-    const [userPhoneNo, setUserPhoneNo] = useState();
-    const [userEducationalStatus, setUserEduationalStatus] = useState();
+
+    const [userIC, setUserIC] = useState(IC);
+    const [userName, setUserName] = useState(name);
+    const [userGender, setUserGender] = useState(gender);
+    const [userEmail, setUserEmail] = useState(email);
+    const [userAddress, setUserAddress] = useState(address);
+    const [userPhoneNo, setUserPhoneNo] = useState(phone);
+    const [userEducationalStatus, setUserEduationalStatus] = useState(educational_status);
     const [userSalary, setUserSalary] = useState();
     const [userNationality, setUserNationality] = useState();
-    const [userRace, setUserRace] = useState();
-    const [userBirthDate, setUserBirthDate] = useState();
-
-    useEffect(() => {
-        user_data = JSON.parse(Cookies.get("user_data"))
-        setUserIC(user_data.ic? user_data.ic : null);
-        setUserName(user_data.name? user_data.name : null);
-        setUserGender(user_data.gender? user_data.gender : null);
-        setUserEmail(user_data.email? user_data.email : null);
-        setUserAddress(user_data.address? user_data.address : null);
-        setUserPhoneNo(user_data.phone? user_data.phone : null);
-        setUserEduationalStatus(user_data.educational_status? user_data.educational_status : null);
-        setUserSalary(user_data.salary? user_data.salary : null)
-        setUserRace(user_data.race? user_data.race : null);
-    }, [cookie])
-
-    console.log(userIC)
+    const [userRace, setUserRace] = useState(race);
+    const [userBirthDate, setUserBirthDate] = useState(birth_date);
+    // const user = useSelector((state) => state.user);
 
     const theme = useTheme();
-
 
     const handleChange = (event) => {
         setUserNationality(event.target.value);

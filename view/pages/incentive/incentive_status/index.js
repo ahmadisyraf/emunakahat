@@ -11,12 +11,12 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-function createData(bil, name, slip, tarikh, status) {
-  return { bil, name, slip, tarikh, status };
+function createData(bil, name, tarikh, status) {
+  return { bil, name, tarikh, status };
 }
 
 const initialStatusRows = [
-    createData(1, "010322063013\nAli Bin Abu", "M3/2022 000001", "23-10-2022", "Diterima")
+    createData(1, "010322063013\nAli Bin Abu","23-10-2022", "Diterima")
   ];
 
 /* INCENTIVE STATUS */
@@ -40,7 +40,6 @@ const IncentiveStatus = () => {
             <TableRow>
               <TableCell align="left">Bil.</TableCell>
               <TableCell>KP / Nama</TableCell>
-              <TableCell align="right">No. Slip Permohonan</TableCell>
               <TableCell align="right">Tarikh Hantar</TableCell>
               <TableCell align="right">Status</TableCell>
               <TableCell align="right" colSpan={2}>Operasi</TableCell>
@@ -53,7 +52,6 @@ const IncentiveStatus = () => {
                 <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
                   {row.name}
                 </TableCell>
-                <TableCell align="right">{row.slip}</TableCell>
                 <TableCell align="right">{row.tarikh}</TableCell>
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right" style={{ paddingTop: '0.5rem' }}>

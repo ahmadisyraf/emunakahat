@@ -60,53 +60,23 @@ const getUserByEmail = asyncHandler(async (req, res) => {
 });
 
 //update user data
-const getUserUpdate = asyncHandler(async(req, res) => {
+const updateUser = asyncHandler(async (req, res) => {
+    const EMAIL = req.params.USER_EMAIL;
+    const data = req.body;
 
-    try{
-    const ic = req.params.USER_IC;
+    try {
+        const result = await User.findOneAndUpdate({ "USER_EMAIL": EMAIL }, data, { upsert: true, new: true });
 
-    const {
-        USER_NAME, 
-        USER_GENDER, 
-        USER_PHONE_NO, 
-        USER_EMAIL, 
-        USER_BIRTH_DATE, 
-        USER_RACE, 
-        USER_NATIONALITY, 
-        USER_ADDRESS, 
-        USER_EDUCATIONAL_STATUS,
-        USER_EMPLOYMENT_POSITION, 
-        USER_SALARY, 
-        USER_MARRIAGE_STATUS, 
-        USER_PARTNER_IC } = req.body;
+        if (result) {
+            res.status(200).json({ result });
+        } else {
+            res.status(400).json({ message: "Failed to update" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Failed to update user" });
+    }
+});
 
-    const updatedData = {
-        USER_NAME, 
-        USER_GENDER, 
-        USER_PHONE_NO, 
-        USER_EMAIL, 
-        USER_BIRTH_DATE, 
-        USER_RACE, 
-        USER_NATIONALITY, 
-        USER_ADDRESS, 
-        USER_EDUCATIONAL_STATUS,
-        USER_EMPLOYMENT_POSITION, 
-        USER_SALARY, 
-        USER_MARRIAGE_STATUS, 
-        USER_PARTNER_IC, 
-    };
-
-    const options = {new: true};
-
-    const result = await User.findOneAndUpdate(ic, updatedData, options);
-
-    res.send(result);
-
-} catch (error) {
-    res.status(400).json({ message: "Cant update profile" });
-}
-})
-
-module.exports = { registerUser, getUserByEmail, getUserUpdate };
+module.exports = { registerUser, getUserByEmail, updateUser };
 
 

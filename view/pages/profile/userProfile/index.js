@@ -248,7 +248,7 @@ const UserProfile = () => {
                         name="Sector"
                         autoComplete="Sector"
                         margin="normal"
-                        onChange={(e) => setSector(e.target.value)}
+                        //onChange={(e) => setSector(e.target.value)}
                     /></Item>
                 </Grid>
                 <Grid item xs={3.5}>

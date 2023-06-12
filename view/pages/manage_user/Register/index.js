@@ -17,7 +17,7 @@ import {
 import { MuiTelInput } from 'mui-tel-input'
 import { useState, useRef, useEffect } from "react";
 import { auth } from "../../../components/firebase/firebase";
-import { registerUser } from "../../api/user";
+import { registerUser, } from "../../api/user";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { cookies } from "next/headers";
 

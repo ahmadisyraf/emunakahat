@@ -18,3 +18,13 @@ export async function getUser({ email }) {
 
     return res;
 }
+
+export async function updateUser({ email, updatedData }) {
+    const res = await apiRequest({
+        path: `/users/updateUser/${email}`,
+        body: updatedData,
+        method: "PUT",
+    });
+
+    return res;
+}

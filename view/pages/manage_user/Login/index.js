@@ -17,6 +17,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import ForgotPassword from "../forgotPassword";
 import Cookies from "js-cookie";
+import { setUser } from "../../../state/action";
+import { useDispatch } from "react-redux";
 
 function Copyright(props) {
     return (
@@ -38,6 +40,7 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [showForgotPassowrd, setShowForgotPassword] = useState();
+    const dispatch = useDispatch();
 
     const handleShowRegister = () => {
         setShowRegister(true);
@@ -64,13 +67,24 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
                         console.log(user);
 
                         const user_data = {
-                            email: user.user.USER_EMAIL,
-                            gender: user.user.USER_GENDER,
                             ic: user.user.USER_IC,
                             name: user.user.USER_NAME,
+                            gender: user.user.USER_GENDER,
                             phone: user.user.USER_PHONE_NO,
+                            email: user.user.USER_EMAIL,
+                            birth_date: user.user.USER_BIRTH_DATE? user.user.USER_BIRTH_DATE : null ,
+                            race: user.user.USER_RACE? user.user.USER_RACE : null,
+                            address: user.user.USER_ADDRESS? user.user.USER_ADDRESS : null,
+                            educational_status: user.user.USER_EDUCATIONAL_STATUS? user.user.USER_EDUCATIONAL_STATUS : null,
+                            employment_position: user.user.USER_EMPLOYMENT_POSITION? user.user.USER_EMPLOYMENT_POSITION : null,
+                            salary: user.user.USER_SALARY? user.user.USER_SALARY : null,
+                            marriage_status: user.user.USER_MARRIAGE_STATUS? user.user.USER_MARRIAGE_STATUS : null,
+                            partner_ic: user.user.USER_PARTNER_IC? user.user.USER_PARTNER_IC : null,
+                            nationality: user.user.USER_NATIONALITY? user.user.USER_NATIONALITY : null,
                             login: true,
                         }
+
+                        dispatch(setUser(user_data));
 
                         if (user) {
                             Cookies.set("user_data", JSON.stringify(user_data));
@@ -80,7 +94,7 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
                     }
 
                     getUserFromDB();
-                    router.push("/test");
+                    router.push("/profile");
                 } else {
                     setInfo("Email not verify please check inbox");
                 }

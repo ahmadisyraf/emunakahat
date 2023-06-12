@@ -10,9 +10,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import { useState } from "react";
 
 const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) => {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = useState(0);
   const [nationality, setNationality] = React.useState(initialNationality);
   const [jobtype, setJobtype] = React.useState(initialJobType);
   const [open, setOpen] = React.useState(false);

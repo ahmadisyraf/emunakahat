@@ -3,11 +3,12 @@ import Paper from '@mui/material/Paper';
 import { Grid, MenuItem, FormControl, InputLabel, Select, Box, useTheme, Typography, TextField, Button, useMediaQuery } from "@mui/material";
 import { MuiTelInput } from 'mui-tel-input'
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 //import { auth } from "../../../components/firebase/firebase";
 
 const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) => {
     const [staffProfile, setstaffProfile] = useState();
-    const [ic, setIc] = useState();
+    const [id, setIc] = useState();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -30,11 +31,48 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
     }
 
     const data = {
-        STAFF_IC: ic,
+        STAFF_ID: id,
         STAFF_NAME: name,
         STAFF_GENDER: gender,
         STAFF_PHONE_NO: phoneNo,
         STAFF_EMAIL: email,
+    }
+
+
+    const handleStaffRegister = () => {
+        const defaultPassword = "defaultPassword123";
+
+        if (password !== repassword) {
+            setError('Password not the same');
+            setShowRegister(false);
+        } else {
+            createUserWithEmailAndPassword(auth, email, defaultPassword)
+                .then(() => {
+                    
+                    sendEmailVerification(user)
+                        .then(() => {
+                            setInfo("Verification link already sent to your email");
+                        });
+                        async function insertData() {
+                            if (user) {
+                                const result = await registerStaff({data}); 
+                                console.log(result);
+                                console.log("Success to db");
+                                setShowRegister(false);
+                            } else {
+                                console.log("Error to db");
+                            }
+                        }
+        
+                        insertData();
+                    })
+                    .catch((err) => {
+                        const errorCode = err.code.replace(/[-/]/g, " ");
+                        setError("Error: " + errorCode.substr(errorCode.indexOf(" ") + 1));
+                        setShowRegister(false);
+                    });
+            }
+        };
     }
 
 
@@ -134,11 +172,11 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
                     type="submit"
                     fullWidth
                     variant="contained"
+                    onClick={handleStaffRegister}
                     sx={{ mt: 3, mb: 1 }}>
                     Daftar Pengguna
                 </Button>
         </Paper>
     );
-}  
 
 export default staffRegistration;

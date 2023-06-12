@@ -31,7 +31,7 @@ const IncentiveStatus = () => {
   };
 
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5 }}>
       <Typography variant='h5'>STATUS PERMOHONAN</Typography>
 
       <TableContainer sx={{ mt: 5 }}>
@@ -57,7 +57,7 @@ const IncentiveStatus = () => {
                 <TableCell align="right" style={{ paddingTop: '0.5rem' }}>
                     <IconButton
                         aria-label="delete"
-                        onClick={() => handleDeleteApplication(row.name)}
+                        // onClick={() => handleDeleteApplication(row.name)}
                     >
                         <DeleteIcon />
                     </IconButton>

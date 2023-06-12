@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const relativeInfoSchema = new mongoose.Schema({
 
 
-    
+    RI_ID: {
+        required: true,
+        type: String
+      },
     RI_OCCUPATION: {
         required: true,
         type: String
@@ -36,6 +39,6 @@ const relativeInfoSchema = new mongoose.Schema({
         required: true,
         type: String 
     }
-})
+});
 
 module.exports = mongoose.model('RelativeInfo', relativeInfoSchema)

@@ -4,20 +4,21 @@ const mongoose = require('mongoose');
 
 const specialIncentiveApplicationSchema = new mongoose.Schema({
   
+  SIA_ID: {
+    required: true,
+    type: String
+  },
   USER_IC: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to user model
-    required: true
+    required: true,
+    type: String
   },
   RI_ID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'RelativeInfo', // Reference to relative info model
-    required: true
+    required: true,
+    type: String
   },
   SID_ID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'SpecialIncentiveDocument', // Reference to special incentive document model
-    required: true
+    required: true,
+    type: String
   },
   SIA_ACCOUNT_BANK_NO: {
     required: true,

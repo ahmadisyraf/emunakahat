@@ -9,31 +9,31 @@ const specialIncentiveApplicationSchema = new mongoose.Schema({
     type: String
   },
   USER_IC: {
-    required: true,
+    required: false,
     type: String
   },
   RI_ID: {
-    required: true,
+    required: false,
     type: String
   },
   SID_ID: {
-    required: true,
+    required: false,
     type: String
   },
   SIA_ACCOUNT_BANK_NO: {
-    required: true,
+    required: false,
     type: String
   },
   SIA_BANK_NAME: {
-    required: true,
+    required: false,
     type: String
   },
   SIA_BIRTH_PLACE: {
-    required: true,
+    required: false,
     type: String
   },
   SIA_AGE: {
-    required: true,
+    required: false,
     type: Number
   }
 });

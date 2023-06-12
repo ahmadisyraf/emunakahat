@@ -25,7 +25,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   const router = useRouter();
 
 
-  //PEMOHON,PASANGAN
+  //PEMOHON
   const IC = useSelector((state) => state.userIC);
   const phone = useSelector((state) => state.userPhoneNo);
   const bankAcc = useSelector((state) => state.userBankAcc);
@@ -34,6 +34,14 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   const birthPlace = useSelector((state) => state.userBirthPlace);
   const age = useSelector((state) => state.userAge);
   const address = useSelector((state) => state.userAddress);
+
+  //PASANGAN
+  const partnerIC = useSelector((state) => state.partnerIC);
+  const partnerPhoneNo = useSelector((state) => state.partnerPhoneNo);
+  const partnerBirthDate = useSelector((state) => state.partnerBirthDate);
+  const partnerBirthPlace = useSelector((state) => state.partnerBirthPlace);
+  const partnerAge = useSelector((state) => state.partnerAge);
+  const partnerAddress = useSelector((state) => state.partnerAddress);
 
   //RELATIVE
   const relativeName = useSelector((state) => state.relativeName);
@@ -60,6 +68,10 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
 
 
   const handleNationalityChange = (event) => {
+    setNationality(event.target.value);
+  };
+
+  const handlePartnerNationalityChange = (event) => {
     setNationality(event.target.value);
   };
 
@@ -363,8 +375,8 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               name="Identification"
               autoComplete="Identification"
               defaultValue={" "}
-              value={userIC}
-              onChange={(e) => setIc(e.target.value)}
+              value={partnerIC}
+              onChange={(e) => setPartnerIc(e.target.value)}
             />
           </Grid>
 
@@ -377,8 +389,8 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               name="telephone"
               autoComplete="telephone"
               defaultValue={" "}
-              value={userPhoneNo}
-              onChange={(e) => setUserPhoneNo(e.target.value)}
+              value={partnerPhoneNo}
+              onChange={(e) => setPartnerPhoneNo(e.target.value)}
             />
           </Grid>
 
@@ -391,8 +403,8 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               name="birthdate"
               autoComplete="birthdate"
               defaultValue={" "}
-              value={userBirthDate}
-              onChange={(e) => setUserBirthDate(e.target.value)}
+              value={partnerBirthDate}
+              onChange={(e) => setPartnerBirthDate(e.target.value)}
             />
           </Grid>
 
@@ -405,8 +417,8 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               name="birthplace"
               autoComplete="birthplace"
               defaultValue={" "}
-              value={userBirthPlace}
-              onChange={(e) => setUserBirthPlace(e.target.value)}
+              value={partnerBirthPlace}
+              onChange={(e) => setPartnerBirthPlace(e.target.value)}
             />
           </Grid>
 
@@ -419,8 +431,8 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               name="age"
               autoComplete="age"
               defaultValue={" "}
-              value={userAge}
-              onChange={(e) => setUserAge(e.target.value)}
+              value={partnerAge}
+              onChange={(e) => setPartnerAge(e.target.value)}
             />
           </Grid>
 
@@ -429,9 +441,9 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={nationality}
+              value={partnerNationality}
               label="Kewarganegaraan"
-              onChange={handleNationalityChange}
+              onChange={handlePartnerNationalityChange}
               fullWidth
             >
               <MenuItem value="citizen">Warganegara</MenuItem>
@@ -448,8 +460,8 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               name="address"
               autoComplete="address"
               defaultValue={" "}
-              value={userAddress}
-              onChange={(e) => setUserAddress(e.target.value)}
+              value={partnerAddress}
+              onChange={(e) => setPartnerAddress(e.target.value)}
             />
           </Grid>
         </Grid>

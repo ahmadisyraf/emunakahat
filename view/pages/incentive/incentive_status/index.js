@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 function createData(bil, name, tarikh, status) {
   return { bil, name, tarikh, status };
@@ -30,8 +32,33 @@ const IncentiveStatus = () => {
     setStatusRows(updatedRows);
   };
 
+  // Define breadcrumb links and their corresponding routes
+  const breadcrumbLinks = [
+    { label: 'Semak Kelayakan', href: '/incentive/incentive_khas' },
+    { label: 'Muat Naik Dokumen', href: '/incentive/upload_document' },
+    { label: 'Permohonan Insentif', href: '/incentive/apply_incentive' },
+    { label: 'Status Permohonan', href: '/incentive/incentive_status' },
+  ];
+
+
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5 }}>
+
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+          {breadcrumbLinks.map((link, index) => {
+            const isLast = index === breadcrumbLinks.length - 1;
+            return isLast ? (
+              <Typography key={index} color="text.primary">
+                {link.label}
+              </Typography>
+            ) : (
+              <Link key={index} color="inherit" href={link.href}>
+                {link.label}
+              </Link>
+            );
+          })}
+        </Breadcrumbs>
+        
       <Typography variant='h5'>STATUS PERMOHONAN</Typography>
 
       <TableContainer sx={{ mt: 5 }}>
@@ -57,7 +84,7 @@ const IncentiveStatus = () => {
                 <TableCell align="right" style={{ paddingTop: '0.5rem' }}>
                     <IconButton
                         aria-label="delete"
-                        // onClick={() => handleDeleteApplication(row.name)}
+                        onClick={() => handleDeleteApplication(row.name)}
                     >
                         <DeleteIcon />
                     </IconButton>

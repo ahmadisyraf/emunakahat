@@ -16,7 +16,8 @@ function createData(bil, name, tarikh, status) {
 }
 
 const initialStatusRows = [
-    createData(1, "010322063013\nAli Bin Abu","23-10-2022", "Diterima")
+    createData
+    (1, "010322063013\nAli Bin Abu","23-10-2022", "Diterima")
   ];
 
 /* INCENTIVE LISTING */
@@ -31,7 +32,7 @@ const IncentiveListing = () => {
   };
 
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5}}>
       <Typography variant='h5'>SENARAI PERMOHONAN INSENTIF</Typography>
 
       <TableContainer sx={{ mt: 5 }}>
@@ -40,7 +41,7 @@ const IncentiveListing = () => {
             <TableRow>
               <TableCell align="left">Bil.</TableCell>
               <TableCell>KP / Nama</TableCell>
-              <TableCell align="right">Tarikh Hantar</TableCell>
+              <TableCell align="right">Tarikh Terima</TableCell>
               <TableCell align="right">Status</TableCell>
               <TableCell align="right" colSpan={2}>Operasi</TableCell>
             </TableRow>

@@ -7,6 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import * as React from 'react';
 import { useRouter } from 'next/router';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+
 
 {/*UPLOAD DOCUMENT*/}
 const UploadDocument = () => {
@@ -39,8 +42,30 @@ const UploadDocument = () => {
       router.push('/incentive/apply_incentive'); // Navigate to the "Apply incentive" page
     };
 
+    // Define breadcrumb links and their corresponding routes
+    const breadcrumbLinks = [
+      { label: 'Semak Kelayakan', href: '/incentive/incentive_khas' },
+      { label: 'Muat Naik Dokumen', href: '/incentive/upload_document' },
+    ];
+
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary,mx: 5 }}>
+
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+          {breadcrumbLinks.map((link, index) => {
+            const isLast = index === breadcrumbLinks.length - 1;
+            return isLast ? (
+              <Typography key={index} color="text.primary">
+                {link.label}
+              </Typography>
+            ) : (
+              <Link key={index} color="inherit" href={link.href}>
+                {link.label}
+              </Link>
+            );
+          })}
+        </Breadcrumbs>
+
       <Typography variant='h5'>MUAT NAIK DOKUMEN</Typography>
 
       <div>

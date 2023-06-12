@@ -11,16 +11,53 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useState } from "react";
+import { useRouter } from 'next/router';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import { useSelector, useDispatch } from 'react-redux';
 
-const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) => {
+const ApplyIncentive = ({ initialNationality, initialJobType }) => {
+
   const [value, setValue] = useState(0);
   const [nationality, setNationality] = React.useState(initialNationality);
   const [jobtype, setJobtype] = React.useState(initialJobType);
   const [open, setOpen] = React.useState(false);
+  const router = useRouter();
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
+  //PEMOHON,PASANGAN
+  const IC = useSelector((state) => state.userIC);
+  const phone = useSelector((state) => state.userPhoneNo);
+  const bankAcc = useSelector((state) => state.userBankAcc);
+  const bankName = useSelector((state) => state.userBankName);
+  const birthDate = useSelector((state) => state.userBirthDate);
+  const birthPlace = useSelector((state) => state.userBirthPlace);
+  const age = useSelector((state) => state.userAge);
+  const address = useSelector((state) => state.userAddress);
+
+  //RELATIVE
+  const relativeName = useSelector((state) => state.relativeName);
+  const relativeRelationship = useSelector((state) => state.relativeRelationship);
+  const relativeOccupation = useSelector((state) => state.relativeOccupation);
+  const relativeSalary = useSelector((state) => state.relativeSalary);
+  const relativePhone = useSelector((state) => state.relativePhone);
+  const relativeEmployer = useSelector((state) => state.relativeEmployer);
+  const relativeEmployerAdd = useSelector((state) => state.relativeEmployerAdd);
+
+
+
+  const [userIC, setIc] = useState(IC);
+  const [userPhoneNo, setUserPhoneNo] = useState(phone);
+  const [userBankAcc, setUserBankAcc] = useState(bankAcc);
+  const [userBankName, setUserBankName] = useState(bankName);
+  const [userBirthDate, setUserBirthDate] = useState(birthDate);
+  const [userBirthPlace, setUserBirthPlace] = useState(birthPlace);
+  const [userNationality, setUserNationality] = useState();
+  const [userAge, setUserAge] = useState(age);
+  const [userAddress, setUserAddress] = useState(address);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
 
   const handleNationalityChange = (event) => {
     setNationality(event.target.value);
@@ -30,19 +67,81 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
     setJobtype(event.target.value);
   };
 
+  const handleUpdateUser = async () => {
+    try {
+        const updatedData = {
+            USER_IC: userIC,
+            USER_PHONE_NO: userPhoneNo,
+            USER_BANK_ACC: userBankAcc,
+            USER_BANK_NAME: userBankName,
+            USER_BIRTH_DATE: userBirthDate,
+            USER_BIRTH_PLACE: userBirthPlace,
+            USER_NATIONALITY: userNationality,
+            USER_AGE: userAge,
+            USER_ADDRESS: userAddress,
+        };
+
+        const updateData = await updateUser({ ic, updatedData });
+        const data = updateData.updatedData;
+
+        if (updateData) {
+            console.log('Success');
+            console.log(updateData);
+
+            const user_data = {
+                ic: IC,
+                phone: updatedData.USER_PHONE_NO,
+                bank_acc: updatedData.USER_BANK_ACC ? updatedData.USER_BANK_ACC : null,
+                bank_name: updatedData.USER_BANK_NAME ? updatedData.USER_BANK_NAME : null,
+                birth_date: updatedData.USER_BIRTH_DATE ? updatedData.USER_BIRTH_DATE : null,
+                birth_place: updatedData.USER_BIRTH_PLACE ? updatedData.USER_BIRTH_PLACE : null,
+                address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
+                partner_ic: updatedData.USER_PARTNER_IC ? updatedData.USER_PARTNER_IC : null,
+                nationality: updatedData.USER_NATIONALITY ? updatedData.USER_NATIONALITY : null,
+                age: updatedData.USER_AGE ? updatedData.USER_AGE : null,
+                address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
+                login: true,
+            };
+
+            dispatch(setUser(user_data));
+        } else {
+            console.log('Error');
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+};
+
+
+
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+
   const handleDialogOpen = () => {
     setOpen(true);
   };
 
   const handleDialogClose = () => {
     setOpen(false);
+    router.push('/incentive/incentive_status'); // Navigate to the "Incentive status" page
   };
+
+  // Define breadcrumb links and their corresponding routes
+  const breadcrumbLinks = [
+    { label: 'Semak Kelayakan', href: '/incentive/incentive_khas' },
+    { label: 'Muat Naik Dokumen', href: '/incentive/upload_document' },
+    { label: 'Permohonan Insentif', href: '/incentive/apply_incentive' },
+  ];
 
   const TabPanel = ({ value, index, children }) => {
     return (
+
       <div role="tabpanel" hidden={value !== index}>
         {value === index && (
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ p: 3,  mt: 5}}>
             <Typography>{children}</Typography>
             {index === 2 && (
               <div>
@@ -56,7 +155,7 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
                 >
                   <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                      Dokumen berjaya dihantar.
+                      Maklumat berjaya dihantar.
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions>
@@ -82,6 +181,22 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
 
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: 'white' }}>
+
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+          {breadcrumbLinks.map((link, index) => {
+            const isLast = index === breadcrumbLinks.length - 1;
+            return isLast ? (
+              <Typography key={index} color="text.primary">
+                {link.label}
+              </Typography>
+            ) : (
+              <Link key={index} color="inherit" href={link.href}>
+                {link.label}
+              </Link>
+            );
+          })}
+        </Breadcrumbs>
+
       <Typography variant='h6'>PERMOHONAN INSENTIF KHAS PASANGAN PENGANTIN</Typography>
       <Tabs
         value={value}
@@ -104,6 +219,7 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
         />
       </Tabs>
 
+      {/*PEMOHON*/}
       <TabPanel value={value} index={0}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -114,6 +230,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="No. Kad Pengenalan"
               name="Identification"
               autoComplete="Identification"
+              defaultValue={" "}
+              value={userIC}
+              onChange={(e) => setIc(e.target.value)}
             />
           </Grid>
 
@@ -125,6 +244,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="No. Telefon"
               name="telephone"
               autoComplete="telephone"
+              defaultValue={" "}
+              value={userPhoneNo}
+              onChange={(e) => setUserPhoneNo(e.target.value)}
             />
           </Grid>
 
@@ -136,6 +258,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="No. Akaun Bank"
               name="bankAcc"
               autoComplete="bankAcc"
+              defaultValue={" "}
+              value={userBankAcc}
+              onChange={(e) => setUserBankAcc(e.target.value)}
             />
           </Grid>
 
@@ -147,6 +272,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Nama Bank"
               name="bankName"
               autoComplete="bankName"
+              defaultValue={" "}
+              value={userBankName}
+              onChange={(e) => setUserBankName(e.target.value)}
             />
           </Grid>
 
@@ -158,6 +286,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Tarikh Lahir"
               name="birthdate"
               autoComplete="birthdate"
+              defaultValue={" "}
+              value={userBirthDate}
+              onChange={(e) => setUserBirthDate(e.target.value)}
             />
           </Grid>
 
@@ -169,6 +300,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Tempat Lahir"
               name="birthplace"
               autoComplete="birthplace"
+              defaultValue={" "}
+              value={userBirthPlace}
+              onChange={(e) => setUserBirthPlace(e.target.value)}
             />
           </Grid>
 
@@ -180,6 +314,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Umur"
               name="age"
               autoComplete="age"
+              defaultValue={" "}
+              value={userAge}
+              onChange={(e) => setUserAge(e.target.value)}
             />
           </Grid>
 
@@ -188,13 +325,13 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={nationality}
+              value={userNationality}
               label="Kewarganegaraan"
               onChange={handleNationalityChange}
               fullWidth
             >
-              <MenuItem value="citizen">Warganegara</MenuItem>
-              <MenuItem value="noncitizen">Bukan Warganegara</MenuItem>
+              <MenuItem value="warganegara">Warganegara</MenuItem>
+              <MenuItem value="bukan warganegara">Bukan Warganegara</MenuItem>
             </Select>
           </Grid>
 
@@ -206,11 +343,15 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Alamat semasa"
               name="address"
               autoComplete="address"
+              defaultValue={" "}
+              value={userAddress}
+              onChange={(e) => setUserAddress(e.target.value)}
             />
           </Grid>
         </Grid>
       </TabPanel>
 
+      {/*PASANGAN*/}
       <TabPanel value={value} index={1}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -221,6 +362,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="No. Kad Pengenalan"
               name="Identification"
               autoComplete="Identification"
+              defaultValue={" "}
+              value={userIC}
+              onChange={(e) => setIc(e.target.value)}
             />
           </Grid>
 
@@ -232,6 +376,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="No. Telefon"
               name="telephone"
               autoComplete="telephone"
+              defaultValue={" "}
+              value={userPhoneNo}
+              onChange={(e) => setUserPhoneNo(e.target.value)}
             />
           </Grid>
 
@@ -243,6 +390,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Tarikh Lahir"
               name="birthdate"
               autoComplete="birthdate"
+              defaultValue={" "}
+              value={userBirthDate}
+              onChange={(e) => setUserBirthDate(e.target.value)}
             />
           </Grid>
 
@@ -254,6 +404,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Tempat Lahir"
               name="birthplace"
               autoComplete="birthplace"
+              defaultValue={" "}
+              value={userBirthPlace}
+              onChange={(e) => setUserBirthPlace(e.target.value)}
             />
           </Grid>
 
@@ -265,6 +418,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Umur"
               name="age"
               autoComplete="age"
+              defaultValue={" "}
+              value={userAge}
+              onChange={(e) => setUserAge(e.target.value)}
             />
           </Grid>
 
@@ -291,11 +447,15 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Alamat semasa"
               name="address"
               autoComplete="address"
+              defaultValue={" "}
+              value={userAddress}
+              onChange={(e) => setUserAddress(e.target.value)}
             />
           </Grid>
         </Grid>
       </TabPanel>
 
+        {/*WARIS*/}
       <TabPanel value={value} index={2}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -306,6 +466,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Nama Waris"
               name="relativename"
               autoComplete="relativename"
+              defaultValue={" "}
+              value={relativeName}
+              onChange={(e) => setRelativeName(e.target.value)}
             />
           </Grid>
 
@@ -317,6 +480,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Hubungan"
               name="relationship"
               autoComplete="relationship"
+              defaultValue={" "}
+              value={relativeRelationship}
+              onChange={(e) => setRelativeRelationship(e.target.value)}
             />
           </Grid>
 
@@ -328,6 +494,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Pekerjaan"
               name="occupation"
               autoComplete="occupation"
+              defaultValue={" "}
+              value={relativeOccupation}
+              onChange={(e) => setRelativeOccupation(e.target.value)}
             />
           </Grid>
 
@@ -354,6 +523,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Pendapatan"
               name="salary"
               autoComplete="salary"
+              defaultValue={" "}
+              value={relativeSalary}
+              onChange={(e) => setRelativeSalary(e.target.value)}
             />
           </Grid>
 
@@ -365,6 +537,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="No. Telefon"
               name="telephone"
               autoComplete="telephone"
+              defaultValue={" "}
+              value={relativePhone}
+              onChange={(e) => setRelativePhone(e.target.value)}
             />
           </Grid>
 
@@ -376,6 +551,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Nama Majikan"
               name="employerName"
               autoComplete="employerName"
+              defaultValue={" "}
+              value={relativeEmployer}
+              onChange={(e) => setRelativeEmployer(e.target.value)}
             />
           </Grid>
 
@@ -387,6 +565,9 @@ const ApplyIncentive = ({ initialValue, initialNationality, initialJobType }) =>
               label="Alamat Majikan"
               name="employerAddress"
               autoComplete="employerAddress"
+              defaultValue={" "}
+              value={relativeEmployerAdd}
+              onChange={(e) => setRelativeEmployerAdd(e.target.value)}
             />
           </Grid>
         </Grid>

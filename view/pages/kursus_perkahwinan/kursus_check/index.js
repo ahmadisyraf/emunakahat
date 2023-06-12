@@ -11,17 +11,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('010728060073', "AHMAD ISYRAF BIN MOHD FAISHAL-ADZHA", "12345", "28 July 2001", "LULUS"),
-
-];
+import { useSelector } from 'react-redux';
+import { getBookingById } from '../../api/course';
 
 function Bread() {
     return (
@@ -42,10 +35,27 @@ function Bread() {
 
 const KursusCheck = () => {
     const [anjuran, setAnjuran] = useState();
+    const IC = useSelector((state) => state.user.ic);
+    const [result, setResult] = useState();
 
     const handleChange = (event) => {
         setAnjuran(event.target.value);
     };
+
+    async function getBooking() {
+        const res = await getBookingById(IC);
+
+        if (res) {
+            console.log(res, "..result");
+            setResult(res);
+        } else {
+            console.log("Error");
+        }
+    }
+
+    useEffect(() => {
+        getBooking();
+    }, [IC]);
 
     const theme = useTheme();
     return (
@@ -58,27 +68,25 @@ const KursusCheck = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>No. Kad Pengenalan</TableCell>
-                                <TableCell align="right">Nama</TableCell>
+                                {/* <TableCell align="right">Nama</TableCell> */}
                                 <TableCell align="right">No. Siri Taklimat</TableCell>
-                                <TableCell align="right">Tarikh Mohon</TableCell>
+                                {/* <TableCell align="right">Tarikh Mohon</TableCell> */}
                                 <TableCell align="right">Status</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
                                 <TableRow
-                                    key={row.name}
+                                    // key={row.name}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {row.name}
+                                        {result?.MCB_USER_IC}
                                     </TableCell>
-                                    <TableCell align="right">{row.calories}</TableCell>
-                                    <TableCell align="right">{row.fat}</TableCell>
-                                    <TableCell align="right">{row.carbs}</TableCell>
-                                    <TableCell align="right" sx={{ color: "green" }}>{row.protein}</TableCell>
+                                    {/* <TableCell align="right">{result?.USER_NAME}</TableCell> */}
+                                    <TableCell align="right">{result?._id}</TableCell>
+                                    {/* <TableCell align="right">{result.}</TableCell> */}
+                                    <TableCell align="right" sx={{ color: "green" }}>{result?.MCB_STATUS}</TableCell>
                                 </TableRow>
-                            ))}
                         </TableBody>
                     </Table>
                 </TableContainer>

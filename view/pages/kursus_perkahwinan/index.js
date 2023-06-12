@@ -26,7 +26,7 @@ export default function KhursusPerkahwinan() {
     const [showSemakkan, setShowSemakkan] = useState();
     const router = useRouter();
     return (
-        <Box sx={{ px: 10 }}>
+        <Box sx={{ px: 5 }}>
             <Paper sx={{ mt: 10, px: 3, py: 3 }}>
                 <Bread />
                 <Typography variant='h4'>Kursus Pra-Perkahwinan</Typography>

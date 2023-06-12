@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 const relativeInfoSchema = new mongoose.Schema({
 
 
-    RI_ID: {
-        required: true,
-        type: String
-    },
+    
     RI_OCCUPATION: {
         required: true,
         type: String

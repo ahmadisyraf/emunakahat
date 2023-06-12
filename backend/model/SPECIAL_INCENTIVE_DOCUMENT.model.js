@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 
 const specialIncentiveDocumentSchema = new mongoose.Schema({
 
-    SID_ID: {
-        required: true,
-        type: String
-    },
+    
     SID_SALARY_SLIP: {
         required: true,
         type: Buffer

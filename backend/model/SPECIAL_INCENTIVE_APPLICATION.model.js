@@ -1,15 +1,9 @@
 const mongoose = require('mongoose');
-const User = require('./user.model');
-const RelativeInfo = require('./RELATIVE_INFO.model');
-const SpecialIncentiveDocument = require('./specialIncentiveDocument.model');
 
 
 
 const specialIncentiveApplicationSchema = new mongoose.Schema({
-  SIA_ID: {
-    required: true,
-    type: String
-  },
+  
   USER_IC: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Reference to user model

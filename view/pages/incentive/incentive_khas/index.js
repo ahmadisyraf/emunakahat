@@ -46,7 +46,7 @@ const IncentiveKhas = () => {
   
   const handleClose = () => {
     setOpen(false);
-    router.push('./upload_document'); // Navigate to the "UploadDocument" page
+    router.push('/incentive/upload_document'); // Navigate to the "UploadDocument" page
   };
   
   return (

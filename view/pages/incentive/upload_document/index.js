@@ -36,7 +36,7 @@ const UploadDocument = () => {
   
     const handleClose = () => {
       setOpen(false);
-      router.push('./apply_incentive'); // Navigate to the "Apply incentive" page
+      router.push('/incentive/apply_incentive'); // Navigate to the "Apply incentive" page
     };
 
   return (

@@ -11,9 +11,9 @@ export default function Incentive() {
     return (
         <Box sx={{ px: 5 }}>
             <IncentiveKhas />
-            <UploadDocument />
+            {/* <UploadDocument />
             <ApplyIncentive />
-            <IncentiveStatus />
+            <IncentiveStatus /> */}
         </Box>
     );
 }

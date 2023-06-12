@@ -10,15 +10,17 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useRouter } from 'next/router';
 
 function createData(bil, name, tarikh, status) {
   return { bil, name, tarikh, status };
 }
 
 const initialStatusRows = [
-    createData
-    (1, "010322063013\nAli Bin Abu","23-10-2022", "Diterima")
-  ];
+  createData(1, "010322063013\nAli Bin Abu", "23-10-2022", "Diterima"),
+  createData(2, "991206060129\nRaffi Bin Jalal", "2-3-2023", "Diterima"),
+  createData(3, "950120061041\nAkmal Bin Jefri", "5-4-2023", "Ditolak")
+];
 
 /* INCENTIVE LISTING */
 const IncentiveListing = () => {
@@ -31,8 +33,16 @@ const IncentiveListing = () => {
     setStatusRows(updatedRows);
   };
 
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+
+  const handleDialogClose = () => {
+    setOpen(false);
+    router.push('/manage_incentive/applicant_info'); // Navigate to the "applicant_info" page
+  };
+
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5}}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5 }}>
       <Typography variant='h5'>SENARAI PERMOHONAN INSENTIF</Typography>
 
       <TableContainer sx={{ mt: 5 }}>
@@ -56,15 +66,15 @@ const IncentiveListing = () => {
                 <TableCell align="right">{row.tarikh}</TableCell>
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right" style={{ paddingTop: '0.5rem' }}>
-                    <IconButton
-                        aria-label="delete"
-                        onClick={() => handleDeleteApplication(row.name)}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                    <IconButton aria-label="edit">
-                        <EditIcon />
-                    </IconButton>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDeleteApplication(row.name)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                  <IconButton aria-label="edit" onClick={handleDialogClose}>
+                    <EditIcon />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}

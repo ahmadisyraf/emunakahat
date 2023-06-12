@@ -19,9 +19,9 @@ import { useSelector, useDispatch } from 'react-redux';
 const ApplyIncentive = ({ initialNationality, initialJobType }) => {
 
   const [value, setValue] = useState(0);
-  const [nationality, setNationality] = React.useState(initialNationality);
-  const [jobtype, setJobtype] = React.useState(initialJobType);
-  const [open, setOpen] = React.useState(false);
+  const [nationality, setNationality] = useState(initialNationality);
+  const [jobtype, setJobtype] = useState(initialJobType);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
 
@@ -66,13 +66,14 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const [partnerNationality, setPartnerNationality] = useState();
 
   const handleNationalityChange = (event) => {
-    setNationality(event.target.value);
+    setUserNationality(event.target.value);
   };
 
   const handlePartnerNationalityChange = (event) => {
-    setNationality(event.target.value);
+    setPartnerNationality(event.target.value);
   };
 
   const handleJobtypeChange = (event) => {
@@ -242,7 +243,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Kad Pengenalan"
               name="Identification"
               autoComplete="Identification"
-              defaultValue={" "}
               value={userIC}
               onChange={(e) => setIc(e.target.value)}
             />
@@ -256,7 +256,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Telefon"
               name="telephone"
               autoComplete="telephone"
-              defaultValue={" "}
               value={userPhoneNo}
               onChange={(e) => setUserPhoneNo(e.target.value)}
             />
@@ -270,7 +269,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Akaun Bank"
               name="bankAcc"
               autoComplete="bankAcc"
-              defaultValue={" "}
               value={userBankAcc}
               onChange={(e) => setUserBankAcc(e.target.value)}
             />
@@ -284,7 +282,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Nama Bank"
               name="bankName"
               autoComplete="bankName"
-              defaultValue={" "}
               value={userBankName}
               onChange={(e) => setUserBankName(e.target.value)}
             />
@@ -298,7 +295,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Tarikh Lahir"
               name="birthdate"
               autoComplete="birthdate"
-              defaultValue={" "}
               value={userBirthDate}
               onChange={(e) => setUserBirthDate(e.target.value)}
             />
@@ -312,7 +308,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Tempat Lahir"
               name="birthplace"
               autoComplete="birthplace"
-              defaultValue={" "}
               value={userBirthPlace}
               onChange={(e) => setUserBirthPlace(e.target.value)}
             />
@@ -326,7 +321,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Umur"
               name="age"
               autoComplete="age"
-              defaultValue={" "}
               value={userAge}
               onChange={(e) => setUserAge(e.target.value)}
             />
@@ -355,7 +349,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Alamat semasa"
               name="address"
               autoComplete="address"
-              defaultValue={" "}
               value={userAddress}
               onChange={(e) => setUserAddress(e.target.value)}
             />
@@ -374,9 +367,8 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Kad Pengenalan"
               name="Identification"
               autoComplete="Identification"
-              defaultValue={" "}
               value={partnerIC}
-              onChange={(e) => setPartnerIc(e.target.value)}
+              onChange={(e) => setIc(e.target.value)}
             />
           </Grid>
 
@@ -388,7 +380,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Telefon"
               name="telephone"
               autoComplete="telephone"
-              defaultValue={" "}
               value={partnerPhoneNo}
               onChange={(e) => setPartnerPhoneNo(e.target.value)}
             />
@@ -402,7 +393,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Tarikh Lahir"
               name="birthdate"
               autoComplete="birthdate"
-              defaultValue={" "}
               value={partnerBirthDate}
               onChange={(e) => setPartnerBirthDate(e.target.value)}
             />
@@ -416,7 +406,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Tempat Lahir"
               name="birthplace"
               autoComplete="birthplace"
-              defaultValue={" "}
               value={partnerBirthPlace}
               onChange={(e) => setPartnerBirthPlace(e.target.value)}
             />
@@ -430,7 +419,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Umur"
               name="age"
               autoComplete="age"
-              defaultValue={" "}
               value={partnerAge}
               onChange={(e) => setPartnerAge(e.target.value)}
             />
@@ -459,7 +447,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Alamat semasa"
               name="address"
               autoComplete="address"
-              defaultValue={" "}
               value={partnerAddress}
               onChange={(e) => setPartnerAddress(e.target.value)}
             />
@@ -478,7 +465,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Nama Waris"
               name="relativename"
               autoComplete="relativename"
-              defaultValue={" "}
               value={relativeName}
               onChange={(e) => setRelativeName(e.target.value)}
             />
@@ -492,7 +478,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Hubungan"
               name="relationship"
               autoComplete="relationship"
-              defaultValue={" "}
               value={relativeRelationship}
               onChange={(e) => setRelativeRelationship(e.target.value)}
             />
@@ -506,7 +491,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Pekerjaan"
               name="occupation"
               autoComplete="occupation"
-              defaultValue={" "}
               value={relativeOccupation}
               onChange={(e) => setRelativeOccupation(e.target.value)}
             />
@@ -535,7 +519,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Pendapatan"
               name="salary"
               autoComplete="salary"
-              defaultValue={" "}
               value={relativeSalary}
               onChange={(e) => setRelativeSalary(e.target.value)}
             />
@@ -549,7 +532,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Telefon"
               name="telephone"
               autoComplete="telephone"
-              defaultValue={" "}
               value={relativePhone}
               onChange={(e) => setRelativePhone(e.target.value)}
             />
@@ -563,7 +545,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Nama Majikan"
               name="employerName"
               autoComplete="employerName"
-              defaultValue={" "}
               value={relativeEmployer}
               onChange={(e) => setRelativeEmployer(e.target.value)}
             />
@@ -577,7 +558,6 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Alamat Majikan"
               name="employerAddress"
               autoComplete="employerAddress"
-              defaultValue={" "}
               value={relativeEmployerAdd}
               onChange={(e) => setRelativeEmployerAdd(e.target.value)}
             />

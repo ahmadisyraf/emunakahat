@@ -37,3 +37,6 @@ app.use('/courses', course);
 
 const booking = require('./routes/marriage_booking_course.routes');
 app.use("/booking", booking);
+
+const marriageRequest = require("./routes/marriage_request.routes");
+app.use("/marriageRequest", marriageRequest);

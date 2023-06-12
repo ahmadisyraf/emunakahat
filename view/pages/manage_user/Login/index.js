@@ -84,12 +84,6 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
                         }
 
                         dispatch(setUser(user_data));
-
-                        if (user) {
-                            Cookies.set("user_data", JSON.stringify(user_data));
-                        } else {
-                            console.log("Error to save in cookies");
-                        }
                     }
 
                     getUserFromDB();

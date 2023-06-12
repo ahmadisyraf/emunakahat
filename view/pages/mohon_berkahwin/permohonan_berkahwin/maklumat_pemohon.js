@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
-import { FormControl, InputLabel, Select, Grid, MenuItem, useTheme, Typography, TextField, Button } from "@mui/material";
+import { FormControl, InputLabel, Select, Grid, MenuItem, useTheme, Typography, TextField, Button, Box } from "@mui/material";
 import Item from '@mui/material/InputLabel';
 import { useState, useEffect } from 'react';
 import DatePicker from '@mui/lab/DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUser, getUserByIC } from '../../api/user';
+import { updateUser } from '../../api/user';
 import { setUser } from '../../../state/action';
 
-const UserProfile = () => {
+const MaklumatPemohon = () => {
     const IC = useSelector((state) => state.user.ic);
     const email = useSelector((state) => state.user.email);
     const gender = useSelector((state) => state.user.gender);
@@ -19,7 +19,6 @@ const UserProfile = () => {
     const salary = useSelector((state) => state.user.salary);
     const race = useSelector((state) => state.user.race);
     const birth_date = useSelector((state) => state.user.birth_date);
-    const partner_ic = useSelector((state) => state.user.partner_ic)
 
 
     const [userIC, setUserIC] = useState(IC);
@@ -33,7 +32,6 @@ const UserProfile = () => {
     const [userNationality, setUserNationality] = useState();
     const [userRace, setUserRace] = useState(race);
     const [userBirthDate, setUserBirthDate] = useState(birth_date);
-    const [userPartnerIC, setUserPartnerIC] = useState(partner_ic);
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
@@ -45,64 +43,62 @@ const UserProfile = () => {
 
     const handleUpdateUser = async () => {
         try {
-          const updatedData = {
-            USER_IC: userIC,
-            USER_NAME: userName,
-            USER_GENDER: userGender,
-            USER_PHONE_NO: userPhoneNo,
-            USER_EMAIL: userEmail,
-            USER_BIRTH_DATE: userBirthDate,
-            USER_RACE: userRace,
-            USER_NATIONALITY: userNationality,
-            USER_ADDRESS: userAddress,
-            USER_EDUCATIONAL_STATUS: userEducationalStatus,
-            USER_SALARY: userSalary,
-            USER_PARTNER_IC: userPartnerIC,
-          };
-      
-          const updateData = await updateUser({email, updatedData});
-
-          if (updateData) {
-            console.log('Success');
-            console.log(updateData);
-      
-            const user_data = {
-              ic: IC,
-              name: updatedData.USER_NAME,
-              gender: updatedData.USER_GENDER,
-              phone: updatedData.USER_PHONE_NO,
-              email: updatedData.USER_EMAIL,
-              birth_date: updatedData.USER_BIRTH_DATE ? updatedData.USER_BIRTH_DATE : null,
-              race: updatedData.USER_RACE ? updatedData.USER_RACE : null,
-              address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
-              educational_status: updatedData.USER_EDUCATIONAL_STATUS ? updatedData.USER_EDUCATIONAL_STATUS : null,
-              employment_position: updatedData.USER_EMPLOYMENT_POSITION ? updatedData.USER_EMPLOYMENT_POSITION : null,
-              salary: updatedData.USER_SALARY ? updatedData.USER_SALARY : null,
-              marriage_status: updatedData.USER_MARRIAGE_STATUS ? updatedData.USER_MARRIAGE_STATUS : null,
-              partner_ic: updatedData.USER_PARTNER_IC ? updatedData.USER_PARTNER_IC : null,
-              nationality: updatedData.USER_NATIONALITY ? updatedData.USER_NATIONALITY : null,
-              login: true,
+            const updatedData = {
+                USER_IC: userIC,
+                USER_NAME: userName,
+                USER_GENDER: userGender,
+                USER_PHONE_NO: userPhoneNo,
+                USER_EMAIL: userEmail,
+                USER_BIRTH_DATE: userBirthDate,
+                USER_RACE: userRace,
+                USER_NATIONALITY: userNationality,
+                USER_ADDRESS: userAddress,
+                USER_EDUCATIONAL_STATUS: userEducationalStatus,
+                USER_SALARY: userSalary,
             };
-      
-            dispatch(setUser(user_data));
-          } else {
-            console.log('Error');
-          }
+
+            const updateData = await updateUser({ email, updatedData });
+            const data = updateData.updatedData;
+
+            if (updateData) {
+                console.log('Success');
+                console.log(updateData);
+
+                const user_data = {
+                    ic: IC,
+                    name: updatedData.USER_NAME,
+                    gender: updatedData.USER_GENDER,
+                    phone: updatedData.USER_PHONE_NO,
+                    email: updatedData.USER_EMAIL,
+                    birth_date: updatedData.USER_BIRTH_DATE ? updatedData.USER_BIRTH_DATE : null,
+                    race: updatedData.USER_RACE ? updatedData.USER_RACE : null,
+                    address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
+                    educational_status: updatedData.USER_EDUCATIONAL_STATUS ? updatedData.USER_EDUCATIONAL_STATUS : null,
+                    employment_position: updatedData.USER_EMPLOYMENT_POSITION ? updatedData.USER_EMPLOYMENT_POSITION : null,
+                    salary: updatedData.USER_SALARY ? updatedData.USER_SALARY : null,
+                    marriage_status: updatedData.USER_MARRIAGE_STATUS ? updatedData.USER_MARRIAGE_STATUS : null,
+                    partner_ic: updatedData.USER_PARTNER_IC ? updatedData.USER_PARTNER_IC : null,
+                    nationality: updatedData.USER_NATIONALITY ? updatedData.USER_NATIONALITY : null,
+                    login: true,
+                };
+
+                dispatch(setUser(user_data));
+            } else {
+                console.log('Error');
+            }
         } catch (error) {
-          console.log('Error:', error);
+            console.log('Error:', error);
         }
-      };
-      
+    };
+
 
 
 
     return (
 
-        <Paper sx={{ mt: 10, px: 7, py: 5, backgroundColor: theme.palette.primary }}>
-            <Typography variant='h4'>Profil</Typography>
-
+        <Box sx={{ px: 7, py: 5, backgroundColor: theme.palette.primary }}>
+            <Typography variant={"h4"}>Maklumat Permohonan</Typography>
             <Grid sx={{ py: 2 }} container rowSpacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-
                 <Grid item xs={4}>
                     <TextField
                         fullWidth
@@ -266,32 +262,10 @@ const UserProfile = () => {
                         onChange={(e) => setUserSalary(e.target.value)}
                     /></Item>
                 </Grid>
-                <Grid item xs={3.5}>
-                    <Item> <TextField
-                        fullWidth
-                        id="Income"
-                        label="No. Kad Pengenalan Pasangan"
-                        name="Income"
-                        autoComplete="Income"
-                        margin="normal"
-                        defaultValue={" "}
-                        value={userPartnerIC}
-                        onChange={(e) => setUserPartnerIC(e.target.value)}
-                    /></Item>
-                </Grid>
 
             </Grid>
-
-            <Button style={{ width: "300px", height: "40px", }}
-                type="submit"
-                fullWidth
-                variant="contained"
-                onClick={handleUpdateUser}
-                sx={{ mt: 1, mb: 1 }}>
-                Simpan
-            </Button>
-        </Paper>
+        </Box>
     );
 }
 
-export default UserProfile;
+export default MaklumatPemohon;

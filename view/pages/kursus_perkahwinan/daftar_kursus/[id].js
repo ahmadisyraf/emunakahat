@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
-import { FormControl, InputLabel, Select, Grid, MenuItem, useTheme, Typography, TextField, Button, Breadcrumbs, Link, Box } from "@mui/material";
+import { FormControl, InputLabel, Select, Grid, MenuItem, useTheme, Typography, TextField, Button, Breadcrumbs, Link, Box, Snackbar, Alert } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -64,6 +64,7 @@ const DaftarKursus = () => {
     const [userBirthDate, setUserBirthDate] = useState(birth_date);
     const user = useSelector((state) => state.user);
     const [userReciept, setUserReciept] = useState();
+    const [open, setOpen] = useState(false);
 
     const theme = useTheme();
     const router = useRouter();
@@ -77,7 +78,7 @@ const DaftarKursus = () => {
         setResult(res);
     }
 
-    const course_id = result? result._id : null;
+    const course_id = result ? result._id : null;
 
     const data = {
         MCB_USER_IC: userIC,
@@ -93,9 +94,14 @@ const DaftarKursus = () => {
         if (insert) {
             console.log("Success");
             console.log(insert);
+            setOpen(true);
         } else {
             console.log("None");
         }
+
+        setTimeout(() => {
+            router.push("/kursus_perkahwinan/kursus_check");
+        }, 2000);
     }
 
 
@@ -107,6 +113,14 @@ const DaftarKursus = () => {
     const handleChange = (event) => {
         setUserNationality(event.target.value);
     };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
 
     return (
         <Box sx={{}}>
@@ -365,6 +379,11 @@ const DaftarKursus = () => {
                     sx={{ mt: 1, mb: 1 }}>
                     Sahkan dan Bayar
                 </Button>
+                <Snackbar open={open} autoHideDuration={6000 } onClose={handleClose}>
+                    <Alert severity="success" sx={{ width: '100%' }} onClose={handleClose} >
+                        Daftar Perkahwinan Kursus Berjaya
+                    </Alert>
+                </Snackbar>
             </Paper>
         </Box>
     );

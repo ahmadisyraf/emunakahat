@@ -45,7 +45,6 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
         setInfo("");
     }
 
-    //HAHAHA IDK MAN
     const handleShowForgotPassword = () => {
         setShowForgotPassword(true);
         setError("");

@@ -29,5 +29,11 @@ app.listen(8000, () => {
     console.log(`Server Started at ${8000}`)
 })
 
-const user = require('./routes/user.router');
+const user = require('./routes/user.routes');
 app.use('/users', user)
+
+const course = require('./routes/course_listing.routes');
+app.use('/courses', course);
+
+const booking = require('./routes/marriage_booking_course.routes');
+app.use("/booking", booking);

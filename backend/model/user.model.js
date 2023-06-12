@@ -52,8 +52,12 @@ const userSchema = new mongoose.Schema({
     USER_MARRIAGE_STATUS: {
         required: false,
         type: String
-    }, 
+    },
     USER_PARTNER_IC: {
+        required: false,
+        type: String
+    },
+    USER_NATIONALITY: {
         required: false,
         type: String
     }

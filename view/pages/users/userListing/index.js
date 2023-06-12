@@ -20,7 +20,7 @@ const usersData = [
   // Add more user data as needed
 ];
 
-const UserListing = () => {
+const UserListing = ({setShowStaffRegister, setInfo, setError}) => {
   const [users, setUsers] = useState(usersData);
 
   const handleDeleteUser = (ic) => {
@@ -28,6 +28,12 @@ const UserListing = () => {
     const updatedUsers = users.filter((user) => user.ic !== ic);
     setUsers(updatedUsers);
   };
+
+  const handleShowStaffRegister = () => {
+    setShowStaffRegister(true);
+    setError("");
+    setInfo("");
+}
 
   return (
     <Paper elevation={3}sx={{ mt: 10, px: 7, py: 5}}>
@@ -82,6 +88,7 @@ const UserListing = () => {
                     type="add"
                     fullWidth
                     variant="contained"
+                    onClick={handleShowStaffRegister}
                     sx={{ mt: 4, mb: 1 }}>
                     Tambah Pengguna
                 </Button>

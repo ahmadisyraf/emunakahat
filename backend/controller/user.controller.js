@@ -10,6 +10,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("All field are mandatory");
     }
 
+    //exist user based on IC
     const userExist = await User.findOne({ USER_IC });
 
     if (userExist) {
@@ -24,6 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
         USER_EMAIL
     });
 
+    //get user data based on IC
     const userData = await User.findOne({ USER_IC });
 
     if (user) {
@@ -36,6 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(200).json({ userData });
 });
 
+//get user by email
 const getUserByEmail = asyncHandler(async (req, res) => {
 
     const email = req.params.USER_EMAIL;
@@ -56,6 +59,24 @@ const getUserByEmail = asyncHandler(async (req, res) => {
     res.status(200).json({ user });
 });
 
-module.exports = { registerUser, getUserByEmail };
+//update user data
+const updateUser = asyncHandler(async (req, res) => {
+    const EMAIL = req.params.USER_EMAIL;
+    const data = req.body;
+
+    try {
+        const result = await User.findOneAndUpdate({ "USER_EMAIL": EMAIL }, data, { upsert: true, new: true });
+
+        if (result) {
+            res.status(200).json({ result });
+        } else {
+            res.status(400).json({ message: "Failed to update" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Failed to update user" });
+    }
+});
+
+module.exports = { registerUser, getUserByEmail, updateUser };
 
 

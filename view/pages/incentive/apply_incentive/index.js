@@ -98,21 +98,49 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   //PASANGAN
     const ic = useSelector((state) => state.user.partner_ic);
 
-    const [partnerIC, setPartnerIC] = useState();
-    const [partnerAddress, setPartnerAddress] = useState();
-    const [partnerPhoneNo, setPartnerPhoneNo] = useState();
-    const [partnerNationality, setPartnerNationality] = useState();
-    const [partnerBirthDate, setPartnerBirthDate] = useState();
-    const [partnerBirthPlace, setPartnerBirthPlace] = useState();
-    const [partnerAge, setPartnerAge] = useState();
+    const [userIC, setPartnerIC] = useState();
+    const [userAddress, setPartnerAddress] = useState();
+    const [userPhoneNo, setPartnerPhoneNo] = useState();
+    const [userNationality, setPartnerNationality] = useState();
+    const [userBirthDate, setPartnerBirthDate] = useState();
+    const [userBirthPlace, setPartnerBirthPlace] = useState();
+    const [userAge, setPartnerAge] = useState();
     const [partnerExist, setPartnerExist] = useState(false);
 
-    
-    const handlePartnerNationalityChange = (event) => {
-      setPartnerNationality(event.target.value);
-    };
 
 
+    async function getPartner() {
+      console.log("masuk");
+      try {
+          const partner = await getUserByIC({ ic });
+
+          if (partner) {
+              setPartnerIC(partner.USER_IC);
+              setPartnerAddress(partner.USER_ADDRESS);
+              setPartnerPhoneNo(partner.USER_PHONE_NO);
+              setUserNationality(partner.USER_NATIONALITY);
+              setPartnerBirthDate(partner.USER_BIRTH_DATE);
+              setPartnerBirthPlace(partner.USER_BIRTH_PLACE);
+              setPartnerAge(partner.USER_AGE);
+              setPartnerExist(true);
+
+              console.log("success");
+              console.log(partner);
+          } else {
+              console.log("error")
+              setPartnerExist(false);
+          }
+
+      } catch (err) {
+          console.log(err)
+          setPartnerExist(false);
+      }
+  }
+
+  useEffect(() => {
+      console.log("Maklumat Pasangan")
+      getPartner();
+  });
 
   //RELATIVE
   const relativeName = useSelector((state) => state.relativeName);
@@ -374,7 +402,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Kad Pengenalan"
               name="Identification"
               autoComplete="Identification"
-              value={partnerIC}
+              value={userIC}
               onChange={(e) => setPartnerIC(e.target.value)}
             />
           </Grid>
@@ -387,7 +415,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="No. Telefon"
               name="telephone"
               autoComplete="telephone"
-              value={partnerPhoneNo}
+              value={userPhoneNo}
               onChange={(e) => setPartnerPhoneNo(e.target.value)}
             />
           </Grid>
@@ -400,7 +428,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Tarikh Lahir"
               name="birthdate"
               autoComplete="birthdate"
-              value={partnerBirthDate}
+              value={userBirthDate}
               onChange={(e) => setPartnerBirthDate(e.target.value)}
             />
           </Grid>
@@ -413,7 +441,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Tempat Lahir"
               name="birthplace"
               autoComplete="birthplace"
-              value={partnerBirthPlace}
+              value={userBirthPlace}
               onChange={(e) => setPartnerBirthPlace(e.target.value)}
             />
           </Grid>
@@ -426,7 +454,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Umur"
               name="age"
               autoComplete="age"
-              value={partnerAge}
+              value={userAge}
               onChange={(e) => setPartnerAge(e.target.value)}
             />
           </Grid>
@@ -436,9 +464,9 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={partnerNationality}
+              value={userNationality}
               label="Kewarganegaraan"
-              onChange={handlePartnerNationalityChange}
+              onChange={handleChangeNationality}
               fullWidth
             >
               <MenuItem value="citizen">Warganegara</MenuItem>
@@ -454,7 +482,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               label="Alamat semasa"
               name="address"
               autoComplete="address"
-              value={partnerAddress}
+              value={userAddress}
               onChange={(e) => setPartnerAddress(e.target.value)}
             />
           </Grid>

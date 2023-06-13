@@ -14,7 +14,7 @@ const NavBar = () => {
 
     const router = useRouter();
     const pathname = router.pathname;
-    const role = useSelector((state) => state.user.role);
+    const role = useSelector((state) => state.user? state.user.role : "user");
 
     console.log(pathname);
 

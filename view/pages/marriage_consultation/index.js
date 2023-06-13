@@ -4,7 +4,8 @@ import {
 import CheckCons from "./check_consultation";
 import DateCons from "./date_consultation";
 import ApplyCons from "./apply_consultation";
-import ReviewCons from "./review_consultation";
+import UpdateCons from "./update_consultation";
+import AdvView from "./advisor_review";
 
 //this is marriage consultation package view
 export default function MarriageCons() {
@@ -14,7 +15,8 @@ export default function MarriageCons() {
             {/* <CheckCons /> */}
             {/* <DateCons /> */}
             <ApplyCons/>
-            {/* <ReviewCons/> */}
+            {/* <UpdateCons/> */}
+            {/* <AdvView/> */}
         </Box>
     );
 }

@@ -28,3 +28,12 @@ export async function updateUser({ email, updatedData }) {
 
     return res;
 }
+
+export async function getUserByIC({ ic }) {
+    const res = await apiRequest({
+        path: `/users/getUserByIC/${ic}`,
+        method: "GET",
+    });
+
+    return res;
+}

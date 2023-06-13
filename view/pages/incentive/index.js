@@ -1,14 +1,17 @@
 import {
     Box
 } from "@mui/material";
-import UploadDocument from "./upload_document";
-import ApplyIncentive from "./apply_incentive";
+import IncentiveKhas from "./incentive_khas";
+
+
 
 export default function Incentive() {
     return (
         <Box sx={{ px: 5 }}>
-            <UploadDocument />
+            <IncentiveKhas />
+            {/* <UploadDocument />
             <ApplyIncentive />
+            <IncentiveStatus /> */}
         </Box>
     );
 }

@@ -53,7 +53,7 @@ const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Permohonan Berkahwin"} disablePadding>
-                        <ListItemButton >
+                        <ListItemButton  onClick={() => router.push("/mohon_berkahwin")}>
                             <ListItemIcon>
                                 <ApprovalIcon />
                             </ListItemIcon>

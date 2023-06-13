@@ -32,9 +32,6 @@ app.listen(8000, () => {
 const user = require('./routes/user.routes');
 app.use('/users', user)
 
-const staff = require('./routes/staff.routes');
-app.use('/staffs', staff)
-
 const course = require('./routes/course_listing.routes');
 app.use('/courses', course);
 

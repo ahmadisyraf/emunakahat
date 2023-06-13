@@ -61,10 +61,12 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
         setInfo("");
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                const verify = userCredential.user.emailVerified;
+                console.log(verify)
 
                 async function getUserFromDB() {
-                    if (userCredential.user.emailVerified) {
-                        if (role == "user") {
+                    if (role === "user") {
+                        if (verify === true) {
                             const user = await getUser({ email });
                             console.log(user);
 
@@ -170,7 +172,7 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
                                 onChange={(e) => setRole(e.target.value)}
                             >
                                 <MenuItem value={"staff"}>Staff/Admin</MenuItem>
-                                <MenuItem value={"pengguna"}>Applicant</MenuItem>
+                                <MenuItem value={"user"}>Applicant</MenuItem>
                             </Select>
                         </FormControl>
 

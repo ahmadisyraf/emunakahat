@@ -2,7 +2,7 @@ import apiRequest from "../../../utils/apiRequest";
 
 export async function insertIncentiveApplication({ data }) {
     const res = apiRequest({
-        path: "/incentive_application/insertIncentiveApplication",
+        path: "/specialIncentiveApplication/insertIncentiveApplication",
         method: "POST",
         body: data,
     });

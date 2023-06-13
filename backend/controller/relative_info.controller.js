@@ -1,5 +1,5 @@
 const express = require("express");
-const RelativeInfo = require("../model/relative_info.model");
+const RelativeInfo = require("../model/RELATIVE_INFO.model");
 const asyncHandler = require("express-async-handler");
 
 const insertRelativeInfo = asyncHandler(async (req, res) => {

@@ -1,5 +1,5 @@
 const express = require("express");
-const SpecialIncentiveApplication = require("../model/special_incentive_application.model");
+const SpecialIncentiveApplication = require("../model/SPECIAL_INCENTIVE_APPLICATION.model");
 const asyncHandler = require("express-async-handler");
 
 const insertIncentiveApplication = asyncHandler(async (req, res) => {

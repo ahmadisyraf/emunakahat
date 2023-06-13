@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 const specialIncentiveApplicationSchema = new mongoose.Schema({
   
   SIA_ID: {
-    required: true,
+    required: false,
     type: String
   },
   USER_IC: {
-    required: true,
+    required: false,
     type: String
   },
   RI_ID: {

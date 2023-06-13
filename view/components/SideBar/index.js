@@ -82,38 +82,44 @@ const SideBar = () => {
                             </ListItemButton>
                         </ListItem>
                     }
-                    <ListItem key={"Permohonan Berkahwin"} disablePadding>
-                        <ListItemButton onClick={() => router.push("/mohon_berkahwin")}>
-                            <ListItemIcon>
-                                <ApprovalIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Permohonan Berkahwin"} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem key={"Pendaftaran Perkahwinan"} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <HowToRegIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Pendaftaran Perkahwinan"} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem key={"Khidmat Nasihat"} disablePadding>
-                        <ListItemButton onClick={() => router.push("/marriage_consultation")}>
-                            <ListItemIcon>
-                                <HeadsetMicIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Khidmat Nasihat"} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem key={"Incetive Khas Pasangan Pengantin"} disablePadding>
-                        <ListItemButton onClick={() => router.push("/manage_incentive")}>
-                            <ListItemIcon>
-                                <VolunteerActivismIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Incentive Khas Pasangan Pengantin"} />
-                        </ListItemButton>
-                    </ListItem>
+                    {role === "user" ?
+                        <Box>
+                            <ListItem key={"Permohonan Berkahwin"} disablePadding>
+                                <ListItemButton onClick={() => router.push("/mohon_berkahwin")}>
+                                    <ListItemIcon>
+                                        <ApprovalIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Permohonan Berkahwin"} />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={"Pendaftaran Perkahwinan"} disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <HowToRegIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Pendaftaran Perkahwinan"} />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={"Khidmat Nasihat"} disablePadding>
+                                <ListItemButton onClick={() => router.push("/marriage_consultation")}>
+                                    <ListItemIcon>
+                                        <HeadsetMicIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Khidmat Nasihat"} />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={"Incetive Khas Pasangan Pengantin"} disablePadding>
+                                <ListItemButton onClick={() => router.push("/incentive")}>
+                                    <ListItemIcon>
+                                        <VolunteerActivismIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Incentive Khas Pasangan Pengantin"} />
+                                </ListItemButton>
+                            </ListItem>
+                        </Box>
+                        :
+                        null
+                    }
                 </List>
                 <Divider />
                 <List>

@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, useTheme, Typography, Stack, Button } from "@mui/material";
+import { Box, useTheme, Typography, Stack, Button} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
@@ -15,6 +15,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useRouter } from 'next/router';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+
+
+
 
 function createData(ic, alamat, telefon, pendapatan) {
   return { ic, alamat, telefon, pendapatan };
@@ -48,9 +53,31 @@ const IncentiveKhas = () => {
     setOpen(false);
     router.push('/incentive/upload_document'); // Navigate to the "UploadDocument" page
   };
+
+  // Define breadcrumb links and their corresponding routes
+  const breadcrumbLinks = [
+    { label: 'Semak Kelayakan', href: '/incentive/incentive_khas' },
+    
+  ];
   
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5}}>
+
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+        {breadcrumbLinks.map((link, index) => {
+          const isLast = index === breadcrumbLinks.length - 1;
+          return isLast ? (
+            <Typography key={index} color="text.primary">
+              {link.label}
+            </Typography>
+          ) : (
+            <Link key={index} color="inherit" href={link.href}>
+              {link.label}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
+
       <Typography variant='h5'>INSENTIF KHAS PASANGAN PENGANTIN</Typography>
       <Stack sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }} direction={"row"} spacing={1}>
         <Box sx={{ width: "50%" }}>

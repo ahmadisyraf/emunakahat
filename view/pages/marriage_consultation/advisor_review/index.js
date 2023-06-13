@@ -14,21 +14,8 @@ import PageviewIcon from '@mui/icons-material/Pageview';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-/*<TableCell>Bil.</TableCell>
-                            <TableCell align="right">KP / Nama Kena Adu</TableCell>
-                            <TableCell align="right">No. Daftar</TableCell>
-                            <TableCell align="right">Tarikh Mohon</TableCell>
-                            <TableCell align="right">Status</TableCell>
-                            <TableCell align="right">Operasi</TableCell>
-                            <TableCell align="right">Ulasan</TableCell>*/
-const rows = [
-    createData(1, 123456, '20/5/2023', 'dalam proses')
-];
 
-const CheckCons = () => {
+const  AdvView = () => {
     const [anjuran, setAnjuran] = useState();
 
     const handleChange = (event) => {
@@ -48,7 +35,7 @@ const CheckCons = () => {
     return (
 
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
-            <Typography variant='h5'>Khidmat Nasihat</Typography>
+            <Typography variant='h5'>Khidmat Nasihat - Ulasan Penasihat</Typography>
         <Grid container spacing={2} justifyContent={'center'}>
           <Grid item xs={6}>
             {
@@ -87,48 +74,16 @@ const CheckCons = () => {
                   </Stack> 
               </Box>
         </Grid>
-            <Box sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }}>
-                <Box sx={{ width: "50%" }}>
-                    <Stack direction="row" spacing={2} justifyContent={'center'}>
-                    <Button variant="contained">Permohonan Baru</Button>
-                    </Stack>
-                </Box>
-            </Box>
-            <TableContainer sx={{ mt: 5 }}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Bil.</TableCell>
-                            <TableCell align="right">KP / Nama Kena Adu</TableCell>
-                            <TableCell align="right">No. Daftar</TableCell>
-                            <TableCell align="right">Tarikh Mohon</TableCell>
-                            <TableCell align="right">Status</TableCell>
-                            <TableCell align="right">Operasi</TableCell>
-                            <TableCell align="right">Ulasan</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                                key={row.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell>
-                                <TableCell align="left"><Button variant='contained' endIcon={<PageviewIcon />}></Button><Button variant='contained' endIcon={<EditIcon />}></Button><Button variant='contained' endIcon={<DeleteIcon />}></Button></TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <Stack direction="row" spacing={2} sx={{mt:3}} justifyContent={'center'}>
+                         <TextField fullWidth id="outlined-size-small" label="Keterangan Aduan: " multiline rows={4} variant="outlined" size='small'/> 
+                         <TextField fullWidth id="outlined-size-small" label="Ulasan Penasihat: " multiline rows={4} variant="outlined" size='small' sx={{mt:2}}/> 
+                    </Stack> 
+            <Stack direction="row" spacing={2} sx={{mt:2}} justifyContent={'center'}>
+                <Button variant="contained">Kembali</Button>
+            </Stack>
         </Paper>
 
     );
 }
 
-export default CheckCons;
+export default AdvView;

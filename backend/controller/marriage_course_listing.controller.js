@@ -43,4 +43,35 @@ const getCourseById = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { insertCourse, getCourse, getCourseById }
+const deleteCourse = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const result = await Course.findByIdAndDelete(id);
+
+        if (result) {
+            res.status(200).json({ messsage: "Success delete user" });
+        }
+    } catch (err) {
+        throw new Error(err)
+    }
+});
+
+const updateCourse = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+
+    const options = { new: true, upsert: true }
+
+    try {
+        const result = await Course.findOneAndUpdate({ "_id": id }, data, options)
+
+        if (result) {
+            res.status(200).json(result);
+        }
+    } catch (err) {
+        throw new Error(err);
+    }
+});
+
+module.exports = { insertCourse, getCourse, getCourseById, deleteCourse, updateCourse }

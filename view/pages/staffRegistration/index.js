@@ -1,10 +1,10 @@
 import {
     Box,
 } from "@mui/material";
-import registerStaff from "../staffRegistration/registerStaff";
+import staffRegistration from "../staffRegistration/registerStaff";
 
 export default function staffRegistration() {
-    const [showRegister, setShowRegister] = useState(false);
+    const [showStaffRegister, setShowStaffRegister] = useState(false);
     const [error, setError] = useState();
     const [info, setInfo] = useState();
     const theme = useTheme();
@@ -14,9 +14,9 @@ export default function staffRegistration() {
     return (
         
         <Box sx={{ px: 5}}>
-              {showRegister ?
-            <registerStaff 
-            setShowRegister={setShowRegister}
+              {showStaffRegister ?
+            <staffRegistration
+            setShowStaffRegister={setShowStaffRegister}
             info={info}
             setInfo={setInfo}
             error={error}
@@ -25,7 +25,7 @@ export default function staffRegistration() {
             />
             :
              <Login
-            setShowRegister={setShowRegister}
+             setShowStaffRegister={setShowStaffRegister}
             info={info}
             setInfo={setInfo}
             error={error}

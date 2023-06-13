@@ -89,7 +89,7 @@ const UserProfile = () => {
                 console.log('Error');
             }
         }
-     } catch (error) {
+     catch (error) {
             console.log('Error:', error);
         }
     };
@@ -295,6 +295,7 @@ const UserProfile = () => {
             </Paper>
         </Zoom>
     );
+
 }
 
 export default UserProfile;

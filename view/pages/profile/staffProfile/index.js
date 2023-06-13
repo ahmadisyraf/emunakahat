@@ -82,6 +82,7 @@ const StaffProfile = () => {
 
             <Button style={{width: "300px", height: "40px",}}
                     type="submit"
+                    color="secondary"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 1 }}>

@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 function Bread() {
     return (
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-            <Link underline="hover" color="text.primary" href="/mohon_berkahwin">
+            <Link underline="hover" color="text.primary" href="/Mohon_Berkahwin">
                 Mohon Berkahwin
             </Link>
         </Breadcrumbs>
@@ -37,8 +37,8 @@ export default function PermohonanBerkahwin() {
                         <Alert severity="warning">Pemohon tidak dibenarkan memohon selagi status permohonan masih diproses</Alert>
                     </Stack>
                     <Stack direction={"row"} spacing={2} sx={{ mt: 5 }}>
-                        <Button variant="contained" onClick={() => router.push("/mohon_berkahwin/semakkan_permohonan")}>Semakkan</Button>
-                        <Button variant="contained" onClick={() => router.push("/mohon_berkahwin/permohonan_berkahwin")}>Mohon</Button>
+                        <Button variant="contained" onClick={() => router.push("/Mohon_Berkahwin/Semakkan_Permohonan")}>Semakkan</Button>
+                        <Button variant="contained" onClick={() => router.push("/Mohon_Berkahwin/Permohonan_Berkahwin")}>Mohon</Button>
                     </Stack>
                 </Paper>
             </Zoom>

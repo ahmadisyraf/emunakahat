@@ -14,22 +14,26 @@ import Select from '@mui/material/Select';
 import { useState } from 'react';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { useRouter } from "next/router";
-import { getCourse, deleteCourse } from '../../api/course';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import dayjs from 'dayjs';
+import { getCourse } from '../../api/course';
 
 function Bread() {
     return (
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-            <Link underline="hover" color="text.primary" href="/kursus_perkahwinan">
-                Malumat Kursus Pra-Perkahwinan
+            <Link underline="hover" color="inherit" href="/Kursus_Perkahwinan">
+                Kursus Pra-Perkahwinan
+            </Link>
+            <Link
+                underline="hover"
+                color="text.primary"
+                href="/Kursus_Perkahwinan/Senarai_Kursus"
+            >
+                Daftar Kursus Pra-Perkahwinan
             </Link>
         </Breadcrumbs>
     );
 }
 
-const MaklumatKursus = ({ res }) => {
+const KursusListing = ({ res }) => {
     const [anjuran, setAnjuran] = useState();
     const router = useRouter();
 
@@ -45,10 +49,27 @@ const MaklumatKursus = ({ res }) => {
             <Zoom in={true}>
                 <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
                     <Bread />
-                    <Typography variant='h4'>Maklumat Kursus Pra-Perkahwinan</Typography>
-                    <Box sx={{ mt: 2, width: "100%", textAlign: "right" }}>
-                        <Button variant="contained" color='secondary' onClick={() => router.push("/Kursus_Perkahwinan/Tambah_Kursus")}>Tambah Kursus</Button>
+                    <Typography variant='h4'>Daftar Kursus Pra-Perkahwinan</Typography>
+                    {/* <Stack sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }} direction={"row"} spacing={1}>
+                    <Box sx={{ width: "50%" }}>
+                        <FormControl fullWidth size='small'>
+                            <InputLabel id="demo-simple-select-label">Anjuran:</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={anjuran}
+                                label="Age"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Box>
+                    <Button variant='contained'>Cari</Button>
+                </Stack> */}
+
                     <TableContainer sx={{ mt: 5 }}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
@@ -72,33 +93,7 @@ const MaklumatKursus = ({ res }) => {
                                         <TableCell align="right">{row.MCL_VENUE_NAME}</TableCell>
                                         <TableCell align="right">{row.MCL_START_DATE} hingga {row.MCL_END_DATE}</TableCell>
                                         <TableCell align="right">{row.MCL_SLOT}</TableCell>
-                                        <TableCell align='right'>
-                                            {/* <Button variant='contained' endIcon={<HowToRegIcon />} onClick={() => router.push(`/kursus_perkahwinan/daftar_kursus/${row._id}`)}>Daftar
-                                        </Button> */}
-                                            <Stack direction={"row"}>
-                                                <IconButton onClick={() => router.push(`/Kursus_Perkahwinan/Kemaskini_Kursus/${row._id}`)}>
-                                                    <EditIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    onClick={async () => {
-                                                        const id = row._id;
-
-                                                        try {
-                                                            const result = await deleteCourse({ id });
-
-                                                            if (result) {
-                                                                console.log(result);
-                                                                router.reload();
-                                                            }
-                                                        } catch (err) {
-                                                            console.log(err);
-                                                        }
-                                                    }}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </Stack>
-                                        </TableCell>
+                                        <TableCell align='right'><Button variant='contained' endIcon={<HowToRegIcon />} onClick={() => router.push(`/Kursus_Perkahwinan/Daftar_Kursus/${row._id}`)}>Daftar</Button></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -110,7 +105,7 @@ const MaklumatKursus = ({ res }) => {
     );
 }
 
-export default MaklumatKursus;
+export default KursusListing;
 
 export const getStaticProps = async () => {
     const res = await getCourse();

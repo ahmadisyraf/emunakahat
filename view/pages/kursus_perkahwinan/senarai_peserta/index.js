@@ -25,13 +25,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 function Bread() {
     return (
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-            <Link underline="hover" color="inherit" href="/kursus_perkahwinan">
-                Kursus Pra-Perkahwinan
-            </Link>
             <Link
                 underline="hover"
                 color="text.primary"
-                href="/kursus_perkahwinan/kursus_check"
+                href="/Kurus_Perkahwinan/Semak_Kursus"
             >
                 Senarai Peserta Kursus Pra-Perkahwinan
             </Link>

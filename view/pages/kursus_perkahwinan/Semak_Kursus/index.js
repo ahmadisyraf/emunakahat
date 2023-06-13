@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, useTheme, Typography, Stack, Button, IconButton, Breadcrumbs, Link } from "@mui/material";
+import { Box, useTheme, Typography, Stack, Button, IconButton, Breadcrumbs, Link, Zoom } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -19,13 +19,13 @@ import { getBookingById } from '../../api/course';
 function Bread() {
     return (
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-            <Link underline="hover" color="inherit" href="/kursus_perkahwinan">
+            <Link underline="hover" color="inherit" href="/Kursus_Perkahwinan">
                 Kursus Pra-Perkahwinan
             </Link>
             <Link
                 underline="hover"
                 color="text.primary"
-                href="/kursus_perkahwinan/kursus_check"
+                href="/Kursus_Perkahwinan/Semak_Kursus"
             >
                 Semak Kursus Pra-Perkahwinan
             </Link>
@@ -60,19 +60,20 @@ const KursusCheck = () => {
     const theme = useTheme();
     return (
         <Box sx={{ px: 5 }}>
-            <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
-                <Bread />
-                <Typography variant='h4'>Semakkan Daftar Kursus Pra-Perkahwinan</Typography>
-                <TableContainer sx={{ mt: 5 }}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>No. Kad Pengenalan</TableCell>
-                                <TableCell align="right">No. Siri Taklimat</TableCell>
-                                <TableCell align="right">Status</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
+            <Zoom in={true}>
+                <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+                    <Bread />
+                    <Typography variant='h4'>Semakkan Daftar Kursus Pra-Perkahwinan</Typography>
+                    <TableContainer sx={{ mt: 5 }}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>No. Kad Pengenalan</TableCell>
+                                    <TableCell align="right">No. Siri Taklimat</TableCell>
+                                    <TableCell align="right">Status</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
                                 <TableRow
                                     // key={row.name}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -83,10 +84,11 @@ const KursusCheck = () => {
                                     <TableCell align="right">{result?._id}</TableCell>
                                     <TableCell align="right" sx={{ color: "green" }}>{result?.MCB_STATUS}</TableCell>
                                 </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Paper>
+            </Zoom>
         </Box>
     );
 }

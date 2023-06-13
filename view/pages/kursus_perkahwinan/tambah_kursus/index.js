@@ -22,13 +22,13 @@ import { useRouter } from "next/router";
 function Bread() {
     return (
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-            <Link underline="hover" color="inherit" href="/kursus_perkahwinan/maklumat_kursus">
+            <Link underline="hover" color="inherit" href="/Kursus_Perkahwinan/Maklumat_Kursus">
                 Kursus Pra-Perkahwinan
             </Link>
             <Link
                 underline="hover"
                 color="text.primary"
-                href="/kursus_perkahwinan/kursus_check"
+                href="/Kurusu_Perkahwinan/Semak_Kursus"
             >
                 Tambah Kursus Pra-Perkahwinan
             </Link>
@@ -77,7 +77,7 @@ const TambahKursus = () => {
                 setOpen(true)
 
                 setTimeout(() => {
-                    router.push("/kursus_perkahwinan/maklumat_kursus");
+                    router.push("/Kursus_Perkahwinan/Maklumat_Kursus");
                 }, 2000);
             }
         } catch (err) {

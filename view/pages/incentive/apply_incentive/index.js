@@ -193,7 +193,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   };
 
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: 'white' }}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, mx:5, backgroundColor: 'white' }}>
 
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
           {breadcrumbLinks.map((link, index) => {

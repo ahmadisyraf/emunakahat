@@ -36,3 +36,32 @@ export async function getBookingById(id) {
 
     return res;
 }
+
+export async function insertCourse({ data }) {
+    const res = await apiRequest({
+        path: `/courses/insertCourse`,
+        method: "POST",
+        body: data
+    })
+
+    return res;
+}
+
+export async function deleteCourse({ id }) {
+    const res = await apiRequest({
+        path: `/courses/deleteCourse/${id}`,
+        method: "DELETE",
+    });
+
+    return res;
+}
+
+export async function updateCourse({ id, data }) {
+    const res = await apiRequest({
+        path: `/courses/updateCourse/${id}`,
+        method: "PUT",
+        body: data
+    });
+
+    return res;
+}

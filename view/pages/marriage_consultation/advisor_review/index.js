@@ -8,12 +8,36 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Box, useTheme, Typography, Button, Stack, TextField} from "@mui/material";
+import { Box, useTheme, Typography, Button, Stack, TextField, Breadcrumbs, Link} from "@mui/material";
 import { useState } from 'react';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useRouter } from "next/router";
 
+function Bread() {
+  return (
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
+          <Link underline="hover" color="inherit" href="/marriage_consultation">
+              Konsultasi Perkahwinan
+          </Link>
+          <Link
+              underline="hover"
+              color="text.primary"
+              href="/marriage_consultation/check_consultation"
+          >
+              Semak Konsultasi
+          </Link>
+          <Link
+              underline="hover"
+              color="text.primary"
+              href="/marriage_consultation/advisor_review"
+          >
+              Ulasan Penasihat
+          </Link>
+      </Breadcrumbs>
+  );
+}
 
 const  AdvView = () => {
     const [anjuran, setAnjuran] = useState();
@@ -31,10 +55,12 @@ const  AdvView = () => {
     }));
 
     const theme = useTheme();
+    const router = useRouter();
 
     return (
 
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+            <Bread/>
             <Typography variant='h5'>Khidmat Nasihat - Ulasan Penasihat</Typography>
         <Grid container spacing={2} justifyContent={'center'}>
           <Grid item xs={6}>
@@ -79,7 +105,7 @@ const  AdvView = () => {
                          <TextField fullWidth id="outlined-size-small" label="Ulasan Penasihat: " multiline rows={4} variant="outlined" size='small' sx={{mt:2}}/> 
                     </Stack> 
             <Stack direction="row" spacing={2} sx={{mt:2}} justifyContent={'center'}>
-                <Button variant="contained">Kembali</Button>
+                <Button variant="contained" onClick={() => router.push("/marriage_consultation/check_consultation")}>Kembali</Button>
             </Stack>
         </Paper>
 

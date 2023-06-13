@@ -36,8 +36,15 @@ const courseSchema = new mongoose.Schema({
     MC_CONSULTATION_DATE: {
         required: false,
         type: String,
+    },
+    MC_CONSULTATION_STATUS: {
+        required: false,
+        type: String,
+    },
+    MC_COMPLAINT_SOLUTION: {
+        required: false,
+        type: String,
     }
-
 })
 
 module.exports = mongoose.model('MarriageConsultation', courseSchema)

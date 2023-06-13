@@ -43,3 +43,9 @@ app.use("/marriageRequest", marriageRequest);
 
 const staff = require("./routes/staff.routes");
 app.use("/staff", staff);
+
+const specialIncentiveApplication = require("./routes/special_incentive_application.routes");
+app.use("/specialIncentiveApplication", specialIncentiveApplication);
+
+const relative = require("./routes/relative_info.routes");
+app.use("/relative", relative);

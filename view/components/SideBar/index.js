@@ -15,13 +15,19 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Face6Icon from '@mui/icons-material/Face6';
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../state/action';
 
 const drawerWidth = 280;
 
 const SideBar = () => {
 
     const router = useRouter();
+    const role = useSelector((state) => state.user.role);
+    const dispatch = useDispatch();
+
 
     return (
         <Drawer
@@ -44,51 +50,87 @@ const SideBar = () => {
                             <ListItemText primary={"Profil"} />
                         </ListItemButton>
                     </ListItem>
+                    {role === "user" ?
+                        null
+                        :
+                        <ListItem key={"Senarai Pengguna"} disablePadding>
+                            <ListItemButton onClick={() => router.push("/users/userListing")}>
+                                <ListItemIcon>
+                                    <Face6Icon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Senarai Pengguna"} />
+                            </ListItemButton>
+                        </ListItem>
+                    }
                     <ListItem key={"Khursus Pra-Perkahwinan"} disablePadding>
-                        <ListItemButton onClick={() => router.push("/kursus_perkahwinan")}>
+                        <ListItemButton onClick={() => router.push(role === "user" ? "/kursus_perkahwinan" : "/kursus_perkahwinan/maklumat_kursus")}>
                             <ListItemIcon>
                                 <ImportContactsIcon />
                             </ListItemIcon>
                             <ListItemText primary={"Kursus Pra-Perkahwinan"} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem key={"Permohonan Berkahwin"} disablePadding>
-                        <ListItemButton >
-                            <ListItemIcon>
-                                <ApprovalIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Permohonan Berkahwin"} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem key={"Pendaftaran Perkahwinan"} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <HowToRegIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Pendaftaran Perkahwinan"} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem key={"Khidmat Nasihat"} disablePadding>
-                        <ListItemButton onClick={() => router.push("/marriage_consultation")}>
-                            <ListItemIcon>
-                                <HeadsetMicIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Khidmat Nasihat"} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem key={"Incetive Khas Pasangan Pengantin"} disablePadding>
-                        <ListItemButton onClick={() => router.push("/incentive")}>
-                            <ListItemIcon>
-                                <VolunteerActivismIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Incentive Khas Pasangan Pengantin"} />
-                        </ListItemButton>
-                    </ListItem>
+                    {role === "user" ?
+                        null
+                        :
+                        <ListItem key={"Senarai Peserta"} disablePadding>
+                            <ListItemButton onClick={() => router.push("/kursus_perkahwinan/senarai_peserta")}>
+                                <ListItemIcon>
+                                    <Face6Icon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Senarai Peserta Kursus"} />
+                            </ListItemButton>
+                        </ListItem>
+                    }
+                    {role === "user" ?
+                        <Box>
+                            <ListItem key={"Permohonan Berkahwin"} disablePadding>
+                                <ListItemButton onClick={() => router.push("/mohon_berkahwin")}>
+                                    <ListItemIcon>
+                                        <ApprovalIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Permohonan Berkahwin"} />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={"Pendaftaran Perkahwinan"} disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <HowToRegIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Pendaftaran Perkahwinan"} />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={"Khidmat Nasihat"} disablePadding>
+                                <ListItemButton onClick={() => router.push("/marriage_consultation")}>
+                                    <ListItemIcon>
+                                        <HeadsetMicIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Khidmat Nasihat"} />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={"Incetive Khas Pasangan Pengantin"} disablePadding>
+                                <ListItemButton onClick={() => router.push("/incentive")}>
+                                    <ListItemIcon>
+                                        <VolunteerActivismIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Incentive Khas Pasangan Pengantin"} />
+                                </ListItemButton>
+                            </ListItem>
+                        </Box>
+                        :
+                        null
+                    }
                 </List>
                 <Divider />
                 <List>
                     <ListItem key={"Log Keluar"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={
+                            () => {
+                                router.push("/");
+                                dispatch(setUser({}));
+
+                            }
+                        }>
                             <ListItemIcon>
                                 <LogoutIcon />
                             </ListItemIcon>

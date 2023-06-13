@@ -38,5 +38,14 @@ app.use('/courses', course);
 const booking = require('./routes/marriage_booking_course.routes');
 app.use("/booking", booking);
 
-const consultation = require('./routes/marriage_consultation.routes');
-app.use("/consultation", consultation);
+const marriageRequest = require("./routes/marriage_request.routes");
+app.use("/marriageRequest", marriageRequest);
+
+const staff = require("./routes/staff.routes");
+app.use("/staff", staff);
+
+const specialIncentiveApplication = require("./routes/special_incentive_application.routes");
+app.use("/specialIncentiveApplication", specialIncentiveApplication);
+
+const relative = require("./routes/relative_info.routes");
+app.use("/relative", relative);

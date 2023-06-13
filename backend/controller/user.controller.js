@@ -77,6 +77,33 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { registerUser, getUserByEmail, updateUser };
+const getUserByIC = asyncHandler(async (req, res) => {
+    const ic = req.params.ic;
+
+    try {
+        const result = await User.findOne({ "USER_IC": ic });
+
+        if (result) {
+            res.status(201).json(result);
+        }
+    } catch (err) {
+        throw new Error(err);
+    }
+});
+
+const getUsers = asyncHandler(async (req, res) => {
+    try {
+        const result = await User.find();
+
+        if (result) {
+            res.status(200).json(result);
+        }
+
+    } catch (err) {
+        res.status(400).json({ err });
+    }
+});
+
+module.exports = { registerUser, getUserByEmail, updateUser, getUserByIC, getUsers };
 
 

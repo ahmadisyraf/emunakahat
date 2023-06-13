@@ -1,4 +1,5 @@
 import apiRequest from "../../../utils/apiRequest";
+export const apiEndpoint = 'http://localhost:3000';
 
 export async function registerUser({ data }) {
     const res = await apiRequest({
@@ -28,3 +29,21 @@ export async function updateUser({ email, updatedData }) {
 
     return res;
 }
+
+export async function getUserByIC({ ic }) {
+    const res = await apiRequest({
+        path: `/users/getUserByIC/${ic}`,
+        method: "GET",
+    });
+
+    return res;
+}
+
+export async function getUsers() {
+    const res = await apiRequest({
+      path: "/users/getUsers",
+      method: "GET",
+    });
+  
+    return res;
+  }

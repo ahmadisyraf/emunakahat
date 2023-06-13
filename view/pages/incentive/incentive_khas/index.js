@@ -6,10 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, useTheme, Typography, Stack, Button} from "@mui/material";
+import { Box, useTheme, Typography, Stack, Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -17,6 +17,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import { useRouter } from 'next/router';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
+import { getUserByIC } from '../../api/user';
+import { useSelector } from 'react-redux';
 
 
 
@@ -36,19 +38,48 @@ const pasanganRows = [
 const IncentiveKhas = () => {
 
   const [anjuran, setAnjuran] = useState('');
+  const [user, setUser] = useState();
+  const [partner, setPartner] = useState({})
+  const ic = useSelector((state) => state.user.ic);
+  const partneric = useSelector((state) => state.user.partner_ic.trim());
+
   const handleChange = (event) => {
     setAnjuran(event.target.value);
   };
+
+  async function getUserData() {
+    try {
+      const userD = await getUserByIC({ ic });
+
+      if (userD) {
+        setUser(userD);
+      }
+
+      const partnerD = await getUserByIC({ "ic" : partneric });
+
+      if (partner) {
+        setPartner(partnerD);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, [ic, partneric]);
+
+  // console.log(user, "..test jhe")
 
   const theme = useTheme();
   const router = useRouter();
 
   const [open, setOpen] = React.useState(false);
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
     router.push('/incentive/upload_document'); // Navigate to the "UploadDocument" page
@@ -57,11 +88,11 @@ const IncentiveKhas = () => {
   // Define breadcrumb links and their corresponding routes
   const breadcrumbLinks = [
     { label: 'Semak Kelayakan', href: '/incentive/incentive_khas' },
-    
+
   ];
-  
+
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5}}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5 }}>
 
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
         {breadcrumbLinks.map((link, index) => {
@@ -78,16 +109,7 @@ const IncentiveKhas = () => {
         })}
       </Breadcrumbs>
 
-      <Typography variant='h5'>INSENTIF KHAS PASANGAN PENGANTIN</Typography>
-      <Stack sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }} direction={"row"} spacing={1}>
-        <Box sx={{ width: "50%" }}>
-          <FormControl fullWidth size='small'>
-            <TextField id="outlined-basic" label="Sila Masukkan No. K/P" variant="outlined" />
-          </FormControl>
-        </Box>
-        <Button variant='contained'>Buat Semakan</Button>
-      </Stack>
-
+      <Typography variant='h4'>INSENTIF KHAS PASANGAN PENGANTIN</Typography>
       <TableContainer sx={{ mt: 5 }}>
         <Typography variant='h6'>PEMOHON</Typography>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -100,16 +122,16 @@ const IncentiveKhas = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {pemohonRows.map((row) => (
-              <TableRow key={row.ic} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
-                  {row.ic}
-                </TableCell>
-                <TableCell align="right">{row.alamat}</TableCell>
-                <TableCell align="right">{row.telefon}</TableCell>
-                <TableCell align="right">{row.pendapatan}</TableCell>
-              </TableRow>
-            ))}
+            {/* {user.map((row) => ( */}
+            <TableRow key={user?.USER_IC} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
+                {user?.USER_IC}
+              </TableCell>
+              <TableCell align="right">{user?.USER_ADDRESS}</TableCell>
+              <TableCell align="right">{user?.USER_PHONE_NO}</TableCell>
+              <TableCell align="right">{user?.USER_SALARY}</TableCell>
+            </TableRow>
+            {/* ))} */}
           </TableBody>
         </Table>
       </TableContainer>
@@ -126,16 +148,16 @@ const IncentiveKhas = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {pasanganRows.map((row) => (
-              <TableRow key={row.ic} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            {/* {pasanganRows.map((row) => ( */}
+              <TableRow key={partner.USER_IC} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row" sx={{ whiteSpace: 'pre-wrap' }}>
-                  {row.ic}
+                  {partner.USER_IC}
                 </TableCell>
-                <TableCell align="right">{row.alamat}</TableCell>
-                <TableCell align="right">{row.telefon}</TableCell>
-                <TableCell align="right">{row.pendapatan}</TableCell>
+                <TableCell align="right">{partner.USER_ADDRESS}</TableCell>
+                <TableCell align="right">{partner.USER_PHONE_NO}</TableCell>
+                <TableCell align="right">{partner.USER_SALARY}</TableCell>
               </TableRow>
-            ))}
+            {/* ))} */}
           </TableBody>
         </Table>
       </TableContainer>

@@ -5,7 +5,6 @@ const asyncHandler = require("express-async-handler");
 const registerStaff = asyncHandler(async (req, res) => {
     const { STAFF_ID, STAFF_NAME, STAFF_GENDER, STAFF_PHONE_NO, STAFF_EMAIL, STAFF_ROLE } = req.body;
 
-
     // Check if staff already exists based on email
     const staffExist = await Staff.findOne({ STAFF_EMAIL });
 
@@ -13,7 +12,6 @@ const registerStaff = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Staff already exists");
     }
-
 
     // Create a new staff document
     const newStaff = await Staff.create({
@@ -36,11 +34,9 @@ const registerStaff = asyncHandler(async (req, res) => {
     }
 });
 
-//get staff by email
-const getStaffByEmail = asyncHandler(async (req, res) => {
+const getStaffUpdate = asyncHandler(async (req, res) => {
 
-    const email = req.params.STAFF_EMAIL;
-
+    const ID = req.params.STAFF_ID;
 
     const {
         STAFF_NAME,
@@ -60,10 +56,10 @@ const getStaffByEmail = asyncHandler(async (req, res) => {
 
     const options = { new: true };
 
-    const staff = await Staff.findOne({ "STAFF_EMAIL": email });
+    const result = await Staff.findOneAndUpdate(ID, updatedData, options);
 
-    if (staff) {
-        res.status(200).json({ staff });
+    if (result) {
+        res.status(200).json({ result });
     } else {
         res.status(400).json({ message: "Failed to update" });
     }
@@ -82,23 +78,8 @@ const getStaffByEmail = asyncHandler(async (req, res) => {
         throw new Error(err);
     }
 
-//update staff profile
-const updateStaff = asyncHandler(async (req, res) => {
-    const EMAIL = req.params.STAFF_EMAIL;
-    const staffData = req.body;
+})
 
-    try {
-        const result = await Staff.findOneAndUpdate({ "STAFF_EMAIL": EMAIL }, staffData, { upsert: true, new: true });
 
-        if (result) {
-            res.status(200).json({ result });
-        } else {
-            res.status(400).json({ message: "Failed to update" });
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Failed to update user" });
-    }
-});
 
-module.exports = {registerStaff, getStaffByEmail, updateStaff}
-
+module.exports = { registerStaff, getStaffUpdate, getStaffByEmail }

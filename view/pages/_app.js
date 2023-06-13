@@ -13,15 +13,15 @@ function MyApp({ Component, pageProps }) {
   const pathname = router.pathname;
   return (
     <Box sx={{ backgroundColor: "#f2f2f2", height: "100vh" }}>
-      <Layout>
-        <ThemeProvider theme={theme}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout>
+            <ThemeProvider theme={theme}>
               <Component {...pageProps} />
-            </PersistGate>
-          </Provider>
-        </ThemeProvider>
-      </Layout>
+            </ThemeProvider>
+          </Layout>
+        </PersistGate>
+      </Provider>
     </Box>
   );
 }

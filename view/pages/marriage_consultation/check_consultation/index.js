@@ -36,8 +36,15 @@ function Bread() {
 }
 
 const CheckCons = () => {
-    const [checkconsult, setCheckConsult] = useState();
     const IC = useSelector((state) => state.user.ic);
+    const name = useSelector((state) => state.user.name);
+    const address = useSelector((state) => state.user.address);
+    const phone = useSelector((state) => state.user.phone);
+
+    const user = useSelector((state) => state.user);
+
+    const [checkconsult, setCheckConsult] = useState();
+    
     const [result, setResult] = useState();
 
     const handleChange = (event) => {

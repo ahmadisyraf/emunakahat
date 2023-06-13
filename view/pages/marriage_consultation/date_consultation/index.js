@@ -10,9 +10,33 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Box, useTheme, Typography, Button, Stack, TextField} from "@mui/material";
+import { Box, useTheme, Typography, Button, Stack, TextField, Breadcrumbs, Link} from "@mui/material";
 import { useState } from 'react';
 import { useRouter } from "next/router";
+
+function Bread() {
+    return (
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
+            <Link underline="hover" color="inherit" href="/marriage_consultation">
+                Konsultasi Perkahwinan
+            </Link>
+            <Link
+                underline="hover"
+                color="text.primary"
+                href="/marriage_consultation/check_consultation"
+            >
+                Semak Konsultasi
+            </Link>
+            <Link
+                underline="hover"
+                color="text.primary"
+                href="/marriage_consultation/apply_consultation"
+            >
+                Permohonan Konsultasi
+            </Link>
+        </Breadcrumbs>
+    );
+}
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -35,6 +59,7 @@ const DateCons = () => {
     return (
 
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
+            <Bread/>
             <Typography variant='h5'>Khidmat Nasihat - Pemilihan Tarikh</Typography>
             <Box sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 5 }}>
             <Box sx={{ width: "50%" }}>

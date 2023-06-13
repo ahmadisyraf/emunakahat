@@ -143,14 +143,26 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   });
 
   //RELATIVE
-  const relativeName = useSelector((state) => state.relativeName);
-  const relativeRelationship = useSelector((state) => state.relativeRelationship);
-  const relativeOccupation = useSelector((state) => state.relativeOccupation);
-  const relativeSalary = useSelector((state) => state.relativeSalary);
-  const relativePhone = useSelector((state) => state.relativePhone);
-  const relativeEmployer = useSelector((state) => state.relativeEmployer);
-  const relativeEmployerAdd = useSelector((state) => state.relativeEmployerAdd);
 
+  const [relativeName, setRelativeName] = useState();
+  const [relativeRelationship, setRelativeRelationship] = useState();
+  const [relativeOccupation, setRelativeOccupation] = useState();
+  const [relativeSalary, setRelativeSalary] = useState();
+  const [relativePhone, setRelativePhone] = useState();
+  const [relativeEmployer, setRelativeEmployer] = useState();
+  const [relativeEmployerAdd, setRelativeEmployerAdd] = useState();
+
+  const data = {
+    "USER_IC": ic,
+    "PARTNER_IC": partner_ic,
+    "RI_NAME": relativeName,
+    "RI_RELATIONSHIP": relativeRelationship,
+    "RI_OCCUPATION": relativeOccupation,
+    "RI_SALARY": relativeSalary,
+    "RI_PHONE": relativePhone,
+    "RI_EMPLOYER_NAME": relativeEmployer,
+    "RI_EMPLOYER_ADDRESS": relativeEmployerAdd,
+}
 
   const handleJobtypeChange = (event) => {
     setJobtype(event.target.value);

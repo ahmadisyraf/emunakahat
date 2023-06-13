@@ -38,38 +38,6 @@ const registerStaff = asyncHandler(async (req, res) => {
 
 //get staff by email
 const getStaffByEmail = asyncHandler(async (req, res) => {
-
-    const email = req.params.STAFF_EMAIL;
-
-
-    const {
-        STAFF_NAME,
-        STAFF_GENDER,
-        STAFF_PHONE_NO,
-        STAFF_EMAIL,
-        STAFF_ROLE_
-    } = req.body;
-
-    const updatedData = {
-        STAFF_NAME,
-        STAFF_GENDER,
-        STAFF_PHONE_NO,
-        STAFF_EMAIL,
-        STAFF_ROLE_
-    };
-
-    const options = { new: true };
-
-    const staff = await Staff.findOne({ "STAFF_EMAIL": email });
-
-    if (staff) {
-        res.status(200).json({ staff });
-    } else {
-        res.status(400).json({ message: "Failed to update" });
-    }
-});
-
-const getStaffByEmail = asyncHandler(async (req, res) => {
     const email = req.params.email;
 
     try {
@@ -81,6 +49,8 @@ const getStaffByEmail = asyncHandler(async (req, res) => {
     } catch (err) {
         throw new Error(err);
     }
+
+});
 
 //update staff profile
 const updateStaff = asyncHandler(async (req, res) => {

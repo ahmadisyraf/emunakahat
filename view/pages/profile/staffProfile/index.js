@@ -4,9 +4,12 @@ import { Grid, Box, useTheme, Typography, TextField, Button } from "@mui/materia
 import Item from '@mui/material/InputLabel';
 import { useState } from 'react';
 //import { auth } from "../../../components/firebase/firebase";
+import { useSelector } from 'react-redux';
 
 const StaffProfile = () => {
     const [staffProfile, setstaffProfile] = useState();
+    const userName = useSelector((state) => state.user.name); 
+    const [name, setName] = useState(userName)
 
     const theme = useTheme();
 
@@ -35,6 +38,8 @@ const StaffProfile = () => {
                 name="Name"
                 autoComplete="Name"
                 margin="normal"
+                defaultValue={" "}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
                 /></Item>
             </Grid>

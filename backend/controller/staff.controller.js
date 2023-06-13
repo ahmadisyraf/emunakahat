@@ -5,19 +5,16 @@ const asyncHandler = require("express-async-handler");
 const registerStaff = asyncHandler(async (req, res) => {
     const { STAFF_ID, STAFF_NAME, STAFF_GENDER, STAFF_PHONE_NO, STAFF_EMAIL, STAFF_ROLE } = req.body;
 
-    if (!STAFF_ID || !STAFF_NAME, !STAFF_GENDER || !STAFF_PHONE_NO || !STAFF_EMAIL) {
-        res.status(400);
-        throw new Error("All field are mandatory");
-    }
-
-    //exist user based on STAFF ID
-    const staffExist = await Staff.findOne({ STAFF_ID });
+    // Check if staff already exists based on email
+    const staffExist = await Staff.findOne({ STAFF_EMAIL });
 
     if (staffExist) {
         res.status(400);
-        throw new Error("Staff already exist");
+        throw new Error("Staff already exists");
     }
-    const Staff = await Staff.create({
+
+    // Create a new staff document
+    const newStaff = await Staff.create({
         STAFF_ID,
         STAFF_NAME,
         STAFF_GENDER,
@@ -26,17 +23,15 @@ const registerStaff = asyncHandler(async (req, res) => {
         STAFF_ROLE
     });
 
-    //get staff data based on STAFF ID
-    const staffData = await Staff.findOne({ STAFF_ID });
+    // Get staff data based on email
+    const staffData = await Staff.findOne({ STAFF_EMAIL });
 
-    if (Staff) {
+    if (newStaff) {
         res.status(200).json({ staffData });
     } else {
         res.status(400);
         throw new Error("Failed to register staff");
     }
-
-    res.status(200).json({ staffData });
 });
 
 const getStaffUpdate = asyncHandler(async (req, res) => {
@@ -59,18 +54,32 @@ const getStaffUpdate = asyncHandler(async (req, res) => {
         STAFF_ROLE_
     };
 
-    const options = {new:true};
+    const options = { new: true };
 
     const result = await Staff.findOneAndUpdate(ID, updatedData, options);
 
     if (result) {
         res.status(200).json({ result });
     } else {
-        res.status(400).json({ message: "Failed to update"
-
+        res.status(400).json({ message: "Failed to update" });
+    }
 });
+
+const getStaffByEmail = asyncHandler(async (req, res) => {
+    const email = req.params.email;
+
+    try {
+        const result = await Staff.findOne({ "STAFF_EMAIL": email });
+
+        if (result) {
+            res.status(200).json(result);
+        }
+    } catch (err) {
+        throw new Error(err);
     }
 
 })
 
-module.exports = {registerStaff, getStaffUpdate}
+
+
+module.exports = { registerStaff, getStaffUpdate, getStaffByEmail }

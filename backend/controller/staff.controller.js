@@ -10,14 +10,14 @@ const registerStaff = asyncHandler(async (req, res) => {
         throw new Error("All field are mandatory");
     }
 
-    //exist user based on STAFF ID
+    //exist staff based on STAFF ID
     const staffExist = await Staff.findOne({ STAFF_ID });
 
     if (staffExist) {
         res.status(400);
         throw new Error("Staff already exist");
     }
-    const Staff = await Staff.create({
+    const staff = await Staff.create({
         STAFF_ID,
         STAFF_NAME,
         STAFF_GENDER,
@@ -39,38 +39,44 @@ const registerStaff = asyncHandler(async (req, res) => {
     res.status(200).json({ staffData });
 });
 
-const getStaffUpdate = asyncHandler(async (req, res) => {
+//get staff by email
+const getStaffByEmail = asyncHandler(async (req, res) => {
 
-    const ID = req.params.STAFF_ID;
+    const email = req.params.STAFF_EMAIL;
 
-    const {
-        STAFF_NAME,
-        STAFF_GENDER,
-        STAFF_PHONE_NO,
-        STAFF_EMAIL,
-        STAFF_ROLE_
-    } = req.body;
-
-    const updatedData = {
-        STAFF_NAME,
-        STAFF_GENDER,
-        STAFF_PHONE_NO,
-        STAFF_EMAIL,
-        STAFF_ROLE_
-    };
-
-    const options = {new:true};
-
-    const result = await Staff.findOneAndUpdate(ID, updatedData, options);
-
-    if (result) {
-        res.status(200).json({ result });
-    } else {
-        res.status(400).json({ message: "Failed to update"
-
-});
+    if (!email) {
+        res.status(400);
+        throw Error("All field are mandatory");
     }
 
-})
+    const staff = await Staff.findOne({ "STAFF_EMAIL": email });
 
-module.exports = {registerStaff, getStaffUpdate}
+    if (staff) {
+        res.status(200).json({ staff });
+    } else {
+        res.status(400).json({ message: "Staff not found" });
+    }
+
+    res.status(200).json({ staff });
+});
+
+
+//update staff profile
+const updateStaff = asyncHandler(async (req, res) => {
+    const EMAIL = req.params.STAFF_EMAIL;
+    const staffData = req.body;
+
+    try {
+        const result = await Staff.findOneAndUpdate({ "STAFF_EMAIL": EMAIL }, staffData, { upsert: true, new: true });
+
+        if (result) {
+            res.status(200).json({ result });
+        } else {
+            res.status(400).json({ message: "Failed to update" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Failed to update user" });
+    }
+});
+
+module.exports = {registerStaff, getStaffByEmail, updateStaff}

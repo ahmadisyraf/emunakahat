@@ -3,7 +3,6 @@ import Paper from '@mui/material/Paper';
 import { FormControl, InputLabel, Select, Grid, MenuItem, useTheme, Typography, TextField, Button } from "@mui/material";
 import Item from '@mui/material/InputLabel';
 import { useState, useEffect } from 'react';
-import DatePicker from '@mui/lab/DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../api/user';
 import { setUser } from '../../../state/action';
@@ -17,6 +16,8 @@ const UserProfile = () => {
     const phone = useSelector((state) => state.user.phone);
     const educational_status = useSelector((state) => state.user.educational_status);
     const salary = useSelector((state) => state.user.salary);
+    const nationality = useSelector((state) => state.user.nationality);
+    const job_sector = useSelector((state) => state.user.job_sector);
     const race = useSelector((state) => state.user.race);
     const birth_date = useSelector((state) => state.user.birth_date);
 
@@ -27,9 +28,10 @@ const UserProfile = () => {
     const [userEmail, setUserEmail] = useState(email);
     const [userAddress, setUserAddress] = useState(address);
     const [userPhoneNo, setUserPhoneNo] = useState(phone);
-    const [userEducationalStatus, setUserEduationalStatus] = useState(educational_status);
+    const [userEducationalStatus, setUserEducationalStatus] = useState(educational_status);
     const [userSalary, setUserSalary] = useState(salary);
-    const [userNationality, setUserNationality] = useState();
+    const [userJobSector, setUserSector] = useState(job_sector);
+    const [userNationality, setUserNationality] = useState(nationality);
     const [userRace, setUserRace] = useState(race);
     const [userBirthDate, setUserBirthDate] = useState(birth_date);
     const user = useSelector((state) => state.user);
@@ -53,6 +55,7 @@ const UserProfile = () => {
             USER_RACE: userRace,
             USER_NATIONALITY: userNationality,
             USER_ADDRESS: userAddress,
+            USER_JOB_SECTOR : userJobSector,
             USER_EDUCATIONAL_STATUS: userEducationalStatus,
             USER_SALARY: userSalary,
           };
@@ -74,6 +77,7 @@ const UserProfile = () => {
               race: updatedData.USER_RACE ? updatedData.USER_RACE : null,
               address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
               educational_status: updatedData.USER_EDUCATIONAL_STATUS ? updatedData.USER_EDUCATIONAL_STATUS : null,
+              job_sector: updatedData.USER_JOB_SECTOR ? updatedData.USER_JOB_SECTOR : null,
               employment_position: updatedData.USER_EMPLOYMENT_POSITION ? updatedData.USER_EMPLOYMENT_POSITION : null,
               salary: updatedData.USER_SALARY ? updatedData.USER_SALARY : null,
               marriage_status: updatedData.USER_MARRIAGE_STATUS ? updatedData.USER_MARRIAGE_STATUS : null,
@@ -236,10 +240,11 @@ const UserProfile = () => {
                         margin="normal"
                         defaultValue={" "}
                         value={userEducationalStatus}
-                        onChange={(e) => setUserEduationalStatus(e.target.value)}
+                        onChange={(e) => setUserEducationalStatus(e.target.value)}
                     /></Item>
                 </Grid>
 
+                
                 <Grid item xs={4}>
                     <Item> <TextField
                         fullWidth
@@ -248,7 +253,8 @@ const UserProfile = () => {
                         name="Sector"
                         autoComplete="Sector"
                         margin="normal"
-                        onChange={(e) => setSector(e.target.value)}
+                        value={userJobSector}
+                        onChange={(e) => setUserSector(e.target.value)}
                     /></Item>
                 </Grid>
                 <Grid item xs={3.5}>

@@ -8,7 +8,7 @@ import { registerStaff, } from "../../api/user";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../../components/firebase/firebase";
 
-const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) => {
+const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
 
     const [id, setId] = useState();
     const [name, setName] = useState();
@@ -16,7 +16,9 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
     const [password, setPassword] = useState();
     const [role, setRole] = useState();
     const [gender, setGender] = useState('');
-    const [phoneNo, setPhoneNo] = useState('')
+    const [phoneNo, setPhoneNo] = useState('');
+    const [error, setError] = useState('');
+
     
     const theme = useTheme();
     const mobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -27,10 +29,6 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
 
     const handlePhoneChange = (newValue) => {
         setPhoneNo(newValue)
-    }
-
-    const handleShowLogin = () => {
-        setShowRegister(false);
     }
     
     const staffData = {
@@ -59,7 +57,7 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
                                 const result = await registerStaff({staffData}); 
                                 console.log(result);
                                 console.log("Success to db");
-                                setShowRegister(false);
+                                setShowStaffRegister(false);
                             } else {
                                 console.log("Error to db");
                             }
@@ -68,9 +66,9 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
                         insertData();
                     })
                     .catch((err) => {
-                        const errorCode = err.code.replace(/[-/]/g, " ");
-                        setError("Error: " + errorCode.substr(errorCode.indexOf(" ") + 1));
-                        setShowRegister(false);
+                        const errormessage = err.code.replace(/[-/]/g, " ");
+                        setError("Error : " + errormessage.substr(errormessage.indexOf(" ") + 1));
+                        setShowStaffRegister(false);
                     });
             }
         }

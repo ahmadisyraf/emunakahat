@@ -243,7 +243,7 @@ const UserProfile = () => {
                         /></Item>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    {/*<Grid item xs={4}>
                         <Item> <TextField
                             fullWidth
                             id="Sector"
@@ -253,7 +253,8 @@ const UserProfile = () => {
                             margin="normal"
                             onChange={(e) => setSector(e.target.value)}
                         /></Item>
-                    </Grid>
+                    </Grid> */} 
+                    
                     <Grid item xs={3.5}>
                         <Item> <TextField
                             fullWidth

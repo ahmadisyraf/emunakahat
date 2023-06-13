@@ -26,58 +26,29 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
 
 
   //PEMOHON
-  const IC = useSelector((state) => state.userIC);
-  const phone = useSelector((state) => state.userPhoneNo);
-  const bankAcc = useSelector((state) => state.userBankAcc);
-  const bankName = useSelector((state) => state.userBankName);
-  const birthDate = useSelector((state) => state.userBirthDate);
-  const birthPlace = useSelector((state) => state.userBirthPlace);
-  const age = useSelector((state) => state.userAge);
-  const address = useSelector((state) => state.userAddress);
-
-  //PASANGAN
-  const partnerIC = useSelector((state) => state.partnerIC);
-  const partnerPhoneNo = useSelector((state) => state.partnerPhoneNo);
-  const partnerBirthDate = useSelector((state) => state.partnerBirthDate);
-  const partnerBirthPlace = useSelector((state) => state.partnerBirthPlace);
-  const partnerAge = useSelector((state) => state.partnerAge);
-  const partnerAddress = useSelector((state) => state.partnerAddress);
-
-  //RELATIVE
-  const relativeName = useSelector((state) => state.relativeName);
-  const relativeRelationship = useSelector((state) => state.relativeRelationship);
-  const relativeOccupation = useSelector((state) => state.relativeOccupation);
-  const relativeSalary = useSelector((state) => state.relativeSalary);
-  const relativePhone = useSelector((state) => state.relativePhone);
-  const relativeEmployer = useSelector((state) => state.relativeEmployer);
-  const relativeEmployerAdd = useSelector((state) => state.relativeEmployerAdd);
-
-
+  const IC = useSelector((state) => state.user.ic);
+  const phone = useSelector((state) => state.user.phone);
+  const bankAcc = useSelector((state) => state.user.BankAcc);
+  const bankName = useSelector((state) => state.user.BankName);
+  const birth_date = useSelector((state) => state.user.birth_date);
+  const birth_place = useSelector((state) => state.user.birthPlace);
+  const age = useSelector((state) => state.user.age);
+  const address = useSelector((state) => state.user.address);
 
   const [userIC, setIc] = useState(IC);
   const [userPhoneNo, setUserPhoneNo] = useState(phone);
   const [userBankAcc, setUserBankAcc] = useState(bankAcc);
   const [userBankName, setUserBankName] = useState(bankName);
-  const [userBirthDate, setUserBirthDate] = useState(birthDate);
-  const [userBirthPlace, setUserBirthPlace] = useState(birthPlace);
+  const [userBirthDate, setUserBirthDate] = useState(birth_date);
+  const [userBirthPlace, setUserBirthPlace] = useState(birth_place);
   const [userNationality, setUserNationality] = useState();
   const [userAge, setUserAge] = useState(age);
   const [userAddress, setUserAddress] = useState(address);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const [partnerNationality, setPartnerNationality] = useState();
-
-  const handleNationalityChange = (event) => {
+  const handleChangeNationality = (event) => {
     setUserNationality(event.target.value);
-  };
-
-  const handlePartnerNationalityChange = (event) => {
-    setPartnerNationality(event.target.value);
-  };
-
-  const handleJobtypeChange = (event) => {
-    setJobtype(event.target.value);
   };
 
   const handleUpdateUser = async () => {
@@ -122,7 +93,43 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
         }
     } catch (error) {
         console.log('Error:', error);
-    }
+  }
+
+  //PASANGAN
+    const ic = useSelector((state) => state.user.partner_ic);
+
+    const [partnerIC, setPartnerIC] = useState();
+    const [partnerAddress, setPartnerAddress] = useState();
+    const [partnerPhoneNo, setPartnerPhoneNo] = useState();
+    const [partnerNationality, setPartnerNationality] = useState();
+    const [partnerBirthDate, setPartnerBirthDate] = useState();
+    const [partnerBirthPlace, setPartnerBirthPlace] = useState();
+    const [partnerAge, setPartnerAge] = useState();
+    const [partnerExist, setPartnerExist] = useState(false);
+
+    
+    const handlePartnerNationalityChange = (event) => {
+      setPartnerNationality(event.target.value);
+    };
+
+
+
+  //RELATIVE
+  const relativeName = useSelector((state) => state.relativeName);
+  const relativeRelationship = useSelector((state) => state.relativeRelationship);
+  const relativeOccupation = useSelector((state) => state.relativeOccupation);
+  const relativeSalary = useSelector((state) => state.relativeSalary);
+  const relativePhone = useSelector((state) => state.relativePhone);
+  const relativeEmployer = useSelector((state) => state.relativeEmployer);
+  const relativeEmployerAdd = useSelector((state) => state.relativeEmployerAdd);
+
+
+  const handleJobtypeChange = (event) => {
+    setJobtype(event.target.value);
+  };
+
+
+  
 };
 
 
@@ -333,7 +340,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               id="demo-simple-select"
               value={userNationality}
               label="Kewarganegaraan"
-              onChange={handleNationalityChange}
+              onChange={handleChangeNationality}
               fullWidth
             >
               <MenuItem value="warganegara">Warganegara</MenuItem>
@@ -368,7 +375,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               name="Identification"
               autoComplete="Identification"
               value={partnerIC}
-              onChange={(e) => setIc(e.target.value)}
+              onChange={(e) => setPartnerIC(e.target.value)}
             />
           </Grid>
 

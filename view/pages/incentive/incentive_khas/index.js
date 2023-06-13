@@ -21,20 +21,6 @@ import { getUserByIC } from '../../api/user';
 import { useSelector } from 'react-redux';
 
 
-
-
-function createData(ic, alamat, telefon, pendapatan) {
-  return { ic, alamat, telefon, pendapatan };
-}
-
-const pemohonRows = [
-  createData("010322063013\nAli Bin Abu", "No15 Taman Mentiga, 26600 Pekan Pahang", "0125517084", 2000.00),
-];
-
-const pasanganRows = [
-  createData("020620062134\nSalwa Binti Ahmad", "No116 Taman Ixora, 26800 Kuala Rompin Pahang", "0175482902", 2000.00),
-];
-
 const IncentiveKhas = () => {
 
   const [anjuran, setAnjuran] = useState('');

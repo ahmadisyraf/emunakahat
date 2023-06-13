@@ -37,7 +37,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
 
   const [userIC, setIc] = useState(IC);
   const [userPhoneNo, setUserPhoneNo] = useState(phone);
-  const [userBankAcc, setUserBankAcc] = useState(bankAcc);
+  const [userBankAcc, setUserBankAcc] = useState();
   const [userBankName, setUserBankName] = useState(bankName);
   const [userBirthDate, setUserBirthDate] = useState(birth_date);
   const [userBirthPlace, setUserBirthPlace] = useState(birth_place);
@@ -47,61 +47,73 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const [relativeName, setRelativeName] = useState();
+  const [relativeRelationship, setRelativeRelationship] = useState();
+  const [relativeOccupation, setRelativeOccupation] = useState();
+  const [relativeSalary, setRelativeSalary] = useState();
+  const [relativePhone, setRelativePhone] = useState();
+  const [relativeEmployer, setRelativeEmployer] = useState();
+  const [relativeEmployerAdd, setRelativeEmployerAdd] = useState();
+
+  const handleJobChange = (event) => {
+    setJobtype(event.target.value);
+  };
+
   const handleChangeNationality = (event) => {
     setUserNationality(event.target.value);
   };
 
   const handleUpdateUser = async () => {
     try {
-        const updatedData = {
-            USER_IC: userIC,
-            USER_PHONE_NO: userPhoneNo,
-            USER_BANK_ACC: userBankAcc,
-            USER_BANK_NAME: userBankName,
-            USER_BIRTH_DATE: userBirthDate,
-            USER_BIRTH_PLACE: userBirthPlace,
-            USER_NATIONALITY: userNationality,
-            USER_AGE: userAge,
-            USER_ADDRESS: userAddress,
+      const updatedData = {
+        USER_IC: userIC,
+        USER_PHONE_NO: userPhoneNo,
+        USER_BANK_ACC: userBankAcc,
+        USER_BANK_NAME: userBankName,
+        USER_BIRTH_DATE: userBirthDate,
+        USER_BIRTH_PLACE: userBirthPlace,
+        USER_NATIONALITY: userNationality,
+        USER_AGE: userAge,
+        USER_ADDRESS: userAddress,
+      };
+
+      const updateData = await updateUser({ ic, updatedData });
+      const data = updateData.updatedData;
+
+      if (updateData) {
+        console.log('Success');
+        console.log(updateData);
+
+        const user_data = {
+          ic: IC,
+          phone: updatedData.USER_PHONE_NO,
+          bank_acc: updatedData.USER_BANK_ACC ? updatedData.USER_BANK_ACC : null,
+          bank_name: updatedData.USER_BANK_NAME ? updatedData.USER_BANK_NAME : null,
+          birth_date: updatedData.USER_BIRTH_DATE ? updatedData.USER_BIRTH_DATE : null,
+          birth_place: updatedData.USER_BIRTH_PLACE ? updatedData.USER_BIRTH_PLACE : null,
+          address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
+          partner_ic: updatedData.USER_PARTNER_IC ? updatedData.USER_PARTNER_IC : null,
+          nationality: updatedData.USER_NATIONALITY ? updatedData.USER_NATIONALITY : null,
+          age: updatedData.USER_AGE ? updatedData.USER_AGE : null,
+          address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
+          login: true,
         };
 
-        const updateData = await updateUser({ ic, updatedData });
-        const data = updateData.updatedData;
-
-        if (updateData) {
-            console.log('Success');
-            console.log(updateData);
-
-            const user_data = {
-                ic: IC,
-                phone: updatedData.USER_PHONE_NO,
-                bank_acc: updatedData.USER_BANK_ACC ? updatedData.USER_BANK_ACC : null,
-                bank_name: updatedData.USER_BANK_NAME ? updatedData.USER_BANK_NAME : null,
-                birth_date: updatedData.USER_BIRTH_DATE ? updatedData.USER_BIRTH_DATE : null,
-                birth_place: updatedData.USER_BIRTH_PLACE ? updatedData.USER_BIRTH_PLACE : null,
-                address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
-                partner_ic: updatedData.USER_PARTNER_IC ? updatedData.USER_PARTNER_IC : null,
-                nationality: updatedData.USER_NATIONALITY ? updatedData.USER_NATIONALITY : null,
-                age: updatedData.USER_AGE ? updatedData.USER_AGE : null,
-                address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
-                login: true,
-            };
-
-            dispatch(setUser(user_data));
-        } else {
-            console.log('Error');
-        }
+        dispatch(setUser(user_data));
+      } else {
+        console.log('Error');
+      }
     } catch (error) {
-        console.log('Error:', error);
-  }
+      console.log('Error:', error);
+    }
 
-  //PASANGAN
+    //PASANGAN
     const ic = useSelector((state) => state.user.partner_ic);
 
     const [userIC, setPartnerIC] = useState();
     const [userAddress, setPartnerAddress] = useState();
     const [userPhoneNo, setPartnerPhoneNo] = useState();
-    const [userNationality, setPartnerNationality] = useState();
+    const [userNationality, setUserNationality] = useState();
     const [userBirthDate, setPartnerBirthDate] = useState();
     const [userBirthPlace, setPartnerBirthPlace] = useState();
     const [userAge, setPartnerAge] = useState();
@@ -112,65 +124,57 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
     async function getPartner() {
       console.log("masuk");
       try {
-          const partner = await getUserByIC({ ic });
+        const partner = await getUserByIC({ ic });
 
-          if (partner) {
-              setPartnerIC(partner.USER_IC);
-              setPartnerAddress(partner.USER_ADDRESS);
-              setPartnerPhoneNo(partner.USER_PHONE_NO);
-              setUserNationality(partner.USER_NATIONALITY);
-              setPartnerBirthDate(partner.USER_BIRTH_DATE);
-              setPartnerBirthPlace(partner.USER_BIRTH_PLACE);
-              setPartnerAge(partner.USER_AGE);
-              setPartnerExist(true);
+        if (partner) {
+          setPartnerIC(partner.USER_IC);
+          setPartnerAddress(partner.USER_ADDRESS);
+          setPartnerPhoneNo(partner.USER_PHONE_NO);
+          setUserNationality(partner.USER_NATIONALITY);
+          setPartnerBirthDate(partner.USER_BIRTH_DATE);
+          setPartnerBirthPlace(partner.USER_BIRTH_PLACE);
+          setPartnerAge(partner.USER_AGE);
+          setPartnerExist(true);
 
-              console.log("success");
-              console.log(partner);
-          } else {
-              console.log("error")
-              setPartnerExist(false);
-          }
+          console.log("success");
+          console.log(partner);
+        } else {
+          console.log("error")
+          setPartnerExist(false);
+        }
 
       } catch (err) {
-          console.log(err)
-          setPartnerExist(false);
+        console.log(err)
+        setPartnerExist(false);
       }
-  }
+    }
 
-  useEffect(() => {
+    useEffect(() => {
       console.log("Maklumat Pasangan")
       getPartner();
-  });
+    });
 
-  //RELATIVE
+    //RELATIVE
 
-  const [relativeName, setRelativeName] = useState();
-  const [relativeRelationship, setRelativeRelationship] = useState();
-  const [relativeOccupation, setRelativeOccupation] = useState();
-  const [relativeSalary, setRelativeSalary] = useState();
-  const [relativePhone, setRelativePhone] = useState();
-  const [relativeEmployer, setRelativeEmployer] = useState();
-  const [relativeEmployerAdd, setRelativeEmployerAdd] = useState();
+   
 
-  const data = {
-    "USER_IC": ic,
-    "PARTNER_IC": partner_ic,
-    "RI_NAME": relativeName,
-    "RI_RELATIONSHIP": relativeRelationship,
-    "RI_OCCUPATION": relativeOccupation,
-    "RI_SALARY": relativeSalary,
-    "RI_PHONE": relativePhone,
-    "RI_EMPLOYER_NAME": relativeEmployer,
-    "RI_EMPLOYER_ADDRESS": relativeEmployerAdd,
-}
+    const data = {
+      "USER_IC": ic,
+      "PARTNER_IC": partner_ic,
+      "RI_NAME": relativeName,
+      "RI_RELATIONSHIP": relativeRelationship,
+      "RI_OCCUPATION": relativeOccupation,
+      "RI_SALARY": relativeSalary,
+      "RI_PHONE": relativePhone,
+      "RI_EMPLOYER_NAME": relativeEmployer,
+      "RI_EMPLOYER_ADDRESS": relativeEmployerAdd,
+    }
 
-  const handleJobtypeChange = (event) => {
-    setJobtype(event.target.value);
+    
+
+
+
   };
-
-
-  
-};
 
 
 
@@ -201,7 +205,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
 
       <div role="tabpanel" hidden={value !== index}>
         {value === index && (
-          <Box sx={{ p: 3,  mt: 5}}>
+          <Box sx={{ p: 3, mt: 5 }}>
             <Typography>{children}</Typography>
             {index === 2 && (
               <div>
@@ -240,22 +244,22 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
   };
 
   return (
-    <Paper sx={{ mt: 10, px: 5, py: 5, mx:5, backgroundColor: 'white' }}>
+    <Paper sx={{ mt: 10, px: 5, py: 5, mx: 5, backgroundColor: 'white' }}>
 
-        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
-          {breadcrumbLinks.map((link, index) => {
-            const isLast = index === breadcrumbLinks.length - 1;
-            return isLast ? (
-              <Typography key={index} color="text.primary">
-                {link.label}
-              </Typography>
-            ) : (
-              <Link key={index} color="inherit" href={link.href}>
-                {link.label}
-              </Link>
-            );
-          })}
-        </Breadcrumbs>
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+        {breadcrumbLinks.map((link, index) => {
+          const isLast = index === breadcrumbLinks.length - 1;
+          return isLast ? (
+            <Typography key={index} color="text.primary">
+              {link.label}
+            </Typography>
+          ) : (
+            <Link key={index} color="inherit" href={link.href}>
+              {link.label}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
 
       <Typography variant='h6'>PERMOHONAN INSENTIF KHAS PASANGAN PENGANTIN</Typography>
       <Tabs
@@ -501,7 +505,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
         </Grid>
       </TabPanel>
 
-        {/*WARIS*/}
+      {/*WARIS*/}
       <TabPanel value={value} index={2}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -550,7 +554,7 @@ const ApplyIncentive = ({ initialNationality, initialJobType }) => {
               id="demo-simple-select"
               value={jobtype}
               label="Jenis Pekerjaan"
-              onChange={handleJobtypeChange}
+              onChange={handleJobChange}
               fullWidth
             >
               <MenuItem value="government">Kerajaan</MenuItem>

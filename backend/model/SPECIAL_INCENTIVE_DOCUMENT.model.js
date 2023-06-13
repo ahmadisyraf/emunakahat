@@ -7,23 +7,23 @@ const specialIncentiveDocumentSchema = new mongoose.Schema({
         type: String
       },
     SID_SALARY_SLIP: {
-        required: true,
+        required: false,
         type: Buffer
     },
     SID_RESIDENCY_CONFIRMATION: {
-        required: true,
+        required: false,
         type: Buffer
     },
     SID_IC_COPY: {
-        required: true,
+        required: false,
         type: Buffer
     },
     SID_AKAD_NIKAH_COPY: {
-        required: true,
+        required: false,
         type: Buffer
     },
     SID_BANK_STATEMENT_COPY: {
-        required: true,
+        required: false,
         type: Buffer
     }
 

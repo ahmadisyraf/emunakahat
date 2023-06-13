@@ -243,7 +243,6 @@ const UserProfile = () => {
                             onChange={(e) => setUserEduationalStatus(e.target.value)}
                         /></Item>
                     </Grid>
-
                     {/*<Grid item xs={4}>
                         <Item> <TextField
                             fullWidth

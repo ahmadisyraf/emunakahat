@@ -1,10 +1,4 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,11 +9,9 @@ import Grid from '@mui/material/Grid';
 import { Box, useTheme, Typography, Button, Stack, TextField} from "@mui/material";
 import { useState } from 'react';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
 
-const ApplyCons = () => {
+
+const ConsDetails = () => {
     const [anjuran, setAnjuran] = useState();
 
     const handleChange = (event) => {
@@ -38,8 +30,7 @@ const ApplyCons = () => {
     return (
 
         <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary }}>
-            <Typography variant='h5'>Khidmat Nasihat - Permohonan Konsultasi</Typography>
-            <Button variant="contained" sx={{mt:2}}>Kembali</Button>
+            <Typography variant='h5'>Khidmat Nasihat - Informasi Konsultasi</Typography>
             <Box sx={{ width: "100%", display: 'flex', flexDirection: "row", justifyContent: 'center', mt: 3 }}>
             <Box sx={{ width: "70%" }}>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -64,33 +55,25 @@ const ApplyCons = () => {
             </Grid>
         </Box>
     </Box>
-    <Stack direction="row" spacing={2} sx={{mt:2}} justifyContent={'center'}>
-                    <FormControl size='small' sx={{width:400, mt:2}}>
-                        <InputLabel id="demo-simple-select-label">Tujuan Aduan: </InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={anjuran}
-                            label="Age"
-                            onChange={handleChange}
-                        >
-                            <MenuItem value={10}>Khidmat Nasihat</MenuItem>
-                            <MenuItem value={20}>Perceraian</MenuItem>
-                            <MenuItem value={30}>Hak Anak</MenuItem>
-                            <MenuItem value={30}>Lain-lain</MenuItem>
-                        </Select>
-                    </FormControl>
-                    </Stack>
-                    <Stack direction="row" spacing={2} sx={{mt:3}} justifyContent={'center'}>
-                         <TextField fullWidth id="outlined-size-small" label="Keterangan Aduan: " multiline rows={4} variant="outlined" size='small'/> 
-                         <TextField fullWidth id="outlined-size-small" label="Solusi yang telah dibuat: " multiline rows={4} variant="outlined" size='small' sx={{mt:2}}/> 
-                    </Stack>
+    <Box sx={{display:'flex', justifyContent:'center', mt:3}}>
+    <TextField  id="outlined-size-small" label="Tujuan Aduan: " size='small' variant="outlined" sx={{width:300}}/> 
+    </Box>
+    <Stack direction="row" spacing={2} sx={{mt:3}} justifyContent={'center'}>
+            <TextField fullWidth id="outlined-size-small" label="Keterangan Aduan: " multiline rows={4} variant="outlined" size='small'/> 
+            <TextField fullWidth id="outlined-size-small" label="Solusi yang telah dibuat: " multiline rows={4} variant="outlined" size='small' sx={{mt:2}}/> 
+        </Stack>
+        <Box sx={{display:'flex', justifyContent:'center', mt:3}}>
+            <TextField  id="outlined-size-small" label="Tarikh Konsultasi: " size='small' variant="outlined" sx={{width:300, mr:2}}/> 
+            <TextField  id="outlined-size-small" label="Nama Pegawai Konsultasi: " size='small' variant="outlined" sx={{width:300, mr:2}}/> 
+            <TextField  id="outlined-size-small" label="Cara Perjumpaan: " size='small' variant="outlined" sx={{width:300}}/> 
+        </Box>
             <Stack direction="row" spacing={2} sx={{mt:2}} justifyContent={'center'}>
-                <Button variant="contained">Simpan</Button>
-                <Button variant="contained">Hantar</Button>
+                <Button variant="contained">Kemaskini</Button>
+                <Button variant="contained">Kembali</Button>
             </Stack>
+
         </Paper>
     );
 }
 
-export default ApplyCons;
+export default ConsDetails;

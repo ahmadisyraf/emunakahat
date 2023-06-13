@@ -10,19 +10,20 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import { useRouter } from 'next/router';
 
 function createData(bil, name, tarikh, status) {
   return { bil, name, tarikh, status };
 }
 
 const initialStatusRows = [
-    createData(1, "010322063013\nAli Bin Abu","23-10-2022", "Diterima")
-  ];
+  createData(1, "010322063013\nAli Bin Abu", "23-10-2022", "Diterima"),
+  createData(2, "991206060129\nRaffi Bin Jalal", "2-3-2023", "Diterima"),
+  createData(3, "950120061041\nAkmal Bin Jefri", "5-4-2023", "Ditolak")
+];
 
-/* INCENTIVE STATUS */
-const IncentiveStatus = () => {
+/* INCENTIVE LISTING */
+const IncentiveListing = () => {
   const theme = useTheme();
   const [statusRows, setStatusRows] = useState(initialStatusRows);
 
@@ -32,34 +33,17 @@ const IncentiveStatus = () => {
     setStatusRows(updatedRows);
   };
 
-  // Define breadcrumb links and their corresponding routes
-  const breadcrumbLinks = [
-    { label: 'Semak Kelayakan', href: '/incentive/incentive_khas' },
-    { label: 'Muat Naik Dokumen', href: '/incentive/upload_document' },
-    { label: 'Permohonan Insentif', href: '/incentive/apply_incentive' },
-    { label: 'Status Permohonan', href: '/incentive/incentive_status' },
-  ];
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
 
+  const handleDialogClose = () => {
+    setOpen(false);
+    router.push('/manage_incentive/applicant_info'); // Navigate to the "applicant_info" page
+  };
 
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5 }}>
-
-        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
-          {breadcrumbLinks.map((link, index) => {
-            const isLast = index === breadcrumbLinks.length - 1;
-            return isLast ? (
-              <Typography key={index} color="text.primary">
-                {link.label}
-              </Typography>
-            ) : (
-              <Link key={index} color="inherit" href={link.href}>
-                {link.label}
-              </Link>
-            );
-          })}
-        </Breadcrumbs>
-        
-      <Typography variant='h5'>STATUS PERMOHONAN</Typography>
+      <Typography variant='h5'>SENARAI PERMOHONAN INSENTIF</Typography>
 
       <TableContainer sx={{ mt: 5 }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -67,7 +51,7 @@ const IncentiveStatus = () => {
             <TableRow>
               <TableCell align="left">Bil.</TableCell>
               <TableCell>KP / Nama</TableCell>
-              <TableCell align="right">Tarikh Hantar</TableCell>
+              <TableCell align="right">Tarikh Terima</TableCell>
               <TableCell align="right">Status</TableCell>
               <TableCell align="right" colSpan={2}>Operasi</TableCell>
             </TableRow>
@@ -82,15 +66,15 @@ const IncentiveStatus = () => {
                 <TableCell align="right">{row.tarikh}</TableCell>
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right" style={{ paddingTop: '0.5rem' }}>
-                    <IconButton
-                        aria-label="delete"
-                        onClick={() => handleDeleteApplication(row.name)}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                    <IconButton aria-label="edit">
-                        <EditIcon />
-                    </IconButton>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDeleteApplication(row.name)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                  <IconButton aria-label="edit" onClick={handleDialogClose}>
+                    <EditIcon />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}
@@ -101,4 +85,4 @@ const IncentiveStatus = () => {
   );
 };
 
-export default IncentiveStatus;
+export default IncentiveListing;

@@ -68,9 +68,7 @@ const KursusCheck = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>No. Kad Pengenalan</TableCell>
-                                {/* <TableCell align="right">Nama</TableCell> */}
                                 <TableCell align="right">No. Siri Taklimat</TableCell>
-                                {/* <TableCell align="right">Tarikh Mohon</TableCell> */}
                                 <TableCell align="right">Status</TableCell>
                             </TableRow>
                         </TableHead>
@@ -82,9 +80,7 @@ const KursusCheck = () => {
                                     <TableCell component="th" scope="row">
                                         {result?.MCB_USER_IC}
                                     </TableCell>
-                                    {/* <TableCell align="right">{result?.USER_NAME}</TableCell> */}
                                     <TableCell align="right">{result?._id}</TableCell>
-                                    {/* <TableCell align="right">{result.}</TableCell> */}
                                     <TableCell align="right" sx={{ color: "green" }}>{result?.MCB_STATUS}</TableCell>
                                 </TableRow>
                         </TableBody>

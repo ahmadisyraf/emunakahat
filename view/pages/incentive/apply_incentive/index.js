@@ -15,14 +15,19 @@ import MaklumatPerkahwinan from "./maklumat_pekerjaan";
 import { getUserByIC } from "../../api/user";
 import { useSelector } from "react-redux";
 
+
+//breadcrumbs
 function Bread() {
     return (
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-            <Link underline="hover" color="inherit" href="/kursus_perkahwinan">
-                Mohon Berkahwin
+            <Link underline="hover" color="inherit" href="/incentive/incentive_khas">
+                Semak Kelayakan
             </Link>
-            <Link underline="hover" color="text.primary" href="/kursus_perkahwinan">
-                Maklumat mohon perkahwinan
+            <Link underline="hover" color="inherit" href="/incentive/upload_document">
+                Muat Naik Dokumen
+            </Link>
+            <Link underline="hover" color="text.primary" href="/incentive/apply_incentive">
+                Permohonan Insentif
             </Link>
         </Breadcrumbs>
     );
@@ -83,12 +88,15 @@ const Incentive = () => {
                             <Tab label="Maklumat Pekerjaan dan waris" {...a11yProps(2)} />
                         </Tabs>
                     </Box>
+                    {/*TAB MAKLUMAT PEMOHON */}
                     <TabPanel value={value} index={0}>
                         <MaklumatPemohon />
                     </TabPanel>
+                    {/*TAB MAKLUMAT PASANGAN */}
                     <TabPanel value={value} index={1}>
                         <MaklumatPasangan />
                     </TabPanel>
+                    {/*TAB MAKLUMAT PEKERJAAN */}
                     <TabPanel value={value} index={2}>
                         <MaklumatPerkahwinan />
                     </TabPanel>

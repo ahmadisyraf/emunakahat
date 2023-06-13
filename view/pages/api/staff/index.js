@@ -10,7 +10,7 @@ export async function registerStaff({ staffData }) {
     return res;
 }
 
-export async function getStaff({ email }) {
+export async function getStaffByEmail({ email }) {
     const res = await apiRequest({
         path: `/staffs/getStaffByEmail/${email}`,
         method: "GET",

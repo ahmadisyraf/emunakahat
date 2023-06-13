@@ -3,12 +3,11 @@ import Paper from '@mui/material/Paper';
 import { Grid, MenuItem, FormControl, InputLabel, Select, Box, useTheme, Typography, TextField, Button, useMediaQuery } from "@mui/material";
 import { MuiTelInput } from 'mui-tel-input'
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { registerStaff, } from "../../api/user";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../../components/firebase/firebase";
 
-const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) => {
+const staffRegistration = ({ setShowRegister, setInfo }) => {
 
     const [id, setId] = useState();
     const [name, setName] = useState();
@@ -17,6 +16,7 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
     const [role, setRole] = useState();
     const [gender, setGender] = useState('');
     const [phoneNo, setPhoneNo] = useState('')
+    const [error, setError] = useState('');
     
     const theme = useTheme();
     const mobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -30,7 +30,7 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
     }
 
     const handleShowLogin = () => {
-        setShowRegister(false);
+        setShowRegister(true);
     }
     
     const staffData = {
@@ -45,35 +45,48 @@ const staffRegistration = ({ setShowRegister, info, setInfo, error, setError}) =
 
     const handleStaffRegister = () => {
         if (password !== password) {
-            setError('Password not same')
-        } else {
+            setError('Password not same');
+          } else {
             createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    
-                    sendEmailVerification(staff)
-                        .then(() => {
-                            setInfo("Verification link already sent to your email");
-                        });
-                        async function insertData() {
-                            if (staff) {
-                                const result = await registerStaff({staffData}); 
-                                console.log(result);
-                                console.log("Success to db");
-                                setShowRegister(false);
-                            } else {
-                                console.log("Error to db");
-                            }
-                        }
-        
-                        insertData();
-                    })
-                    .catch((err) => {
-                        const errorCode = err.code.replace(/[-/]/g, " ");
-                        setError("Error: " + errorCode.substr(errorCode.indexOf(" ") + 1));
-                        setShowRegister(false);
-                    });
-            }
+              .then((staffCredential) => {
+                const staff = staffCredential.user;
+                console.log(staff);
+      
+                sendEmailVerification(staff)
+                  .then(() => {
+                    setInfo("Verification link already sent to your email");
+                  });
+      
+                async function insertData() {
+                  if (staff) {
+                    const staffData = {
+                      STAFF_ID: id,
+                      STAFF_NAME: name,
+                      STAFF_GENDER: gender,
+                      STAFF_PHONE_NO: phoneNo,
+                      STAFF_ROLE: role,
+                      STAFF_EMAIL: email,
+                    };
+      
+                    const result = await registerStaff(staffData);
+                    console.log(result);
+                    console.log("Success to db");
+                    setShowRegister(false);
+                  } else {
+                    console.log("Error to db");
+                  }
+                }
+      
+                insertData();
+              })
+              .catch((err) => {
+                const errorCode = err.code.replace(/[-/]/g, " ");
+                setError("Error: " + errorCode.substr(errorCode.indexOf(" ") + 1));
+              });
+          }
+          setShowRegister(false);
         }
+        
 
 
     return (

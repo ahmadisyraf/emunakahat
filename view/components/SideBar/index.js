@@ -107,7 +107,7 @@ const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Incetive Khas Pasangan Pengantin"} disablePadding>
-                        <ListItemButton onClick={() => router.push("/incentive")}>
+                        <ListItemButton onClick={() => router.push("/manage_incentive")}>
                             <ListItemIcon>
                                 <VolunteerActivismIcon />
                             </ListItemIcon>

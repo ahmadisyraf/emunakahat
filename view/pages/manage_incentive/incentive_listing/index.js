@@ -17,9 +17,9 @@ function createData(bil, name, tarikh, status) {
 }
 
 const initialStatusRows = [
-  createData(1, "010322063013\nAli Bin Abu", "23-10-2022", "Diterima"),
-  createData(2, "991206060129\nRaffi Bin Jalal", "2-3-2023", "Diterima"),
-  createData(3, "950120061041\nAkmal Bin Jefri", "5-4-2023", "Ditolak")
+  createData(1, "010728060073\nAHMAD ISYRAF BIN MOHD FAISHAL-ADZHA", "23-10-2022", "Diterima"),
+  createData(2, "991206060129\nRaffi Bin Jalal", "2-03-2023", "Diterima"),
+  createData(3, "950120061041\nAkmal Bin Jefri", "5-04-2023", "Ditolak")
 ];
 
 /* INCENTIVE LISTING */

@@ -9,7 +9,7 @@ const specialIncentiveApplicationSchema = new mongoose.Schema({
     type: String
   },
   USER_IC: {
-    required: false,
+    required: true,
     type: String
   },
   RI_ID: {

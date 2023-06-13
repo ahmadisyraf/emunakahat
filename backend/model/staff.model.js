@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const staffSchema = new mongoose.Schema({
     STAFF_ID: {
-        required: true,
+        required: false,
         type: String
     },
     STAFF_NAME: {
@@ -26,6 +26,6 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
 
-})
+});
 
-module.exports = mongoose.model('Staff', userSchema)
+module.exports = mongoose.model('Staff', staffSchema)

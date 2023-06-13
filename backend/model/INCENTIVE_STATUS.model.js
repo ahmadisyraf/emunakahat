@@ -13,11 +13,11 @@ const incentiveStatusSchema = new mongoose.Schema({
         type: String
     },
     IS_DATE: {
-        required: true,
+        required: false,
         type: String
     },
     IS_STATUS: {
-        required: true,
+        required: false,
         type: String
       },
 

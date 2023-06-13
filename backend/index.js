@@ -40,3 +40,6 @@ app.use("/booking", booking);
 
 const marriageRequest = require("./routes/marriage_request.routes");
 app.use("/marriageRequest", marriageRequest);
+
+const staff = require("./routes/staff.routes");
+app.use("/staff", staff);

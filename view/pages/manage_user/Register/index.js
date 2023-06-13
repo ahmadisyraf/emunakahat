@@ -87,7 +87,7 @@ const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
                         if (user) {
                             const result = await registerUser({ data });
                             console.log(result);
-                            console.log("Succes to db");
+                            console.log("Success to db");
                             setShowRegister(false);
                         } else {
                             console.log("error to db");
@@ -152,8 +152,8 @@ const Register = ({ setShowRegister, info, setInfo, error, setError }) => {
                         onChange={handleChange}
                     >
                         <MenuItem value={""}>None</MenuItem>
-                        <MenuItem value={"Male"}>Male</MenuItem>
-                        <MenuItem value={"Female"}>Female</MenuItem>
+                        <MenuItem value={"Male"}>Lelaki</MenuItem>
+                        <MenuItem value={"Female"}>Perempuan</MenuItem>
                     </Select>
                 </FormControl>
                 <MuiTelInput value={phoneNo} onChange={handlePhoneChange} margin="normal" fullWidth label="Phone No" defaultCountry="MY" sx={{ mt: 1 }}

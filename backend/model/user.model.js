@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
         required: false,
         type: String
     },
+    USER_JOB_SECTOR: {
+        required: false,
+        type: String
+    },
     USER_SALARY: {
         required: false,
         type: String
@@ -57,10 +61,6 @@ const userSchema = new mongoose.Schema({
         required: false,
         type: String
     },
-    USER_NATIONALITY: {
-        required: false,
-        type: String
-    }
 })
 
 module.exports = mongoose.model('User', userSchema)

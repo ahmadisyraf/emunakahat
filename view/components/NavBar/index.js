@@ -8,17 +8,19 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SideBar from '../SideBar';
 import { useRouter } from "next/router";
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
 
     const router = useRouter();
     const pathname = router.pathname;
+    const role = useSelector((state) => state.user? state.user.role : "user");
 
     console.log(pathname);
 
     return (
         <Box>
-            <AppBar position="fixed" sx={{ zIndex: 2000 }}>
+            <AppBar position="fixed"  color={role === "user"? "primary" : "secondary" }sx={{ zIndex: 2000 }}>
                 <Toolbar>
                     <IconButton
                         size="large"

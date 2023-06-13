@@ -19,6 +19,7 @@ import ForgotPassword from "../forgotPassword";
 import Cookies from "js-cookie";
 import { setUser } from "../../../state/action";
 import { useDispatch } from "react-redux";
+import { getAdminByEmail, getStaffByEmail } from "../../api/staff"
 
 function Copyright(props) {
     return (
@@ -40,6 +41,7 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [showForgotPassowrd, setShowForgotPassword] = useState();
+    const [role, setRole] = useState();
     const dispatch = useDispatch();
 
     const handleShowRegister = () => {
@@ -59,38 +61,60 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
         setInfo("");
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                const verify = userCredential.user.emailVerified;
+                console.log(verify)
 
-                if (userCredential.user.emailVerified) {
-                    async function getUserFromDB() {
-                        const user = await getUser({ email });
-                        console.log(user);
+                async function getUserFromDB() {
+                    if (role === "user") {
+                        if (verify === true) {
+                            const user = await getUser({ email });
+                            console.log(user);
 
+                            const user_data = {
+                                ic: user.user.USER_IC,
+                                name: user.user.USER_NAME,
+                                gender: user.user.USER_GENDER,
+                                phone: user.user.USER_PHONE_NO,
+                                email: user.user.USER_EMAIL,
+                                birth_date: user.user.USER_BIRTH_DATE ? user.user.USER_BIRTH_DATE : null,
+                                race: user.user.USER_RACE ? user.user.USER_RACE : null,
+                                address: user.user.USER_ADDRESS ? user.user.USER_ADDRESS : null,
+                                educational_status: user.user.USER_EDUCATIONAL_STATUS ? user.user.USER_EDUCATIONAL_STATUS : null,
+                                employment_position: user.user.USER_EMPLOYMENT_POSITION ? user.user.USER_EMPLOYMENT_POSITION : null,
+                                salary: user.user.USER_SALARY ? user.user.USER_SALARY : null,
+                                marriage_status: user.user.USER_MARRIAGE_STATUS ? user.user.USER_MARRIAGE_STATUS : null,
+                                partner_ic: user.user.USER_PARTNER_IC ? user.user.USER_PARTNER_IC : null,
+                                nationality: user.user.USER_NATIONALITY ? user.user.USER_NATIONALITY : null,
+                                role: "user",
+                            }
+
+                            dispatch(setUser(user_data));
+                            router.push("/profile");
+                        } else {
+                            setInfo("Email not verify please check inbox");
+                        }
+                    } else if (role == "staff") {
+                        const user = await getAdminByEmail({ email });
                         const user_data = {
-                            ic: user.user.USER_IC,
-                            name: user.user.USER_NAME,
-                            gender: user.user.USER_GENDER,
-                            phone: user.user.USER_PHONE_NO,
-                            email: user.user.USER_EMAIL,
-                            birth_date: user.user.USER_BIRTH_DATE? user.user.USER_BIRTH_DATE : null ,
-                            race: user.user.USER_RACE? user.user.USER_RACE : null,
-                            address: user.user.USER_ADDRESS? user.user.USER_ADDRESS : null,
-                            educational_status: user.user.USER_EDUCATIONAL_STATUS? user.user.USER_EDUCATIONAL_STATUS : null,
-                            employment_position: user.user.USER_EMPLOYMENT_POSITION? user.user.USER_EMPLOYMENT_POSITION : null,
-                            salary: user.user.USER_SALARY? user.user.USER_SALARY : null,
-                            marriage_status: user.user.USER_MARRIAGE_STATUS? user.user.USER_MARRIAGE_STATUS : null,
-                            partner_ic: user.user.USER_PARTNER_IC? user.user.USER_PARTNER_IC : null,
-                            nationality: user.user.USER_NATIONALITY? user.user.USER_NATIONALITY : null,
-                            login: true,
+                            id: user._id,
+                            name: user.STAFF_NAME,
+                            gender: user.STAFF_GENDER,
+                            phone: user.STAFF_PHONE_NO,
+                            email: user.STAFF_EMAIL,
+                            role: "staff",
+                            db_role: user.STAFF_ROLE,
                         }
 
-                        dispatch(setUser(user_data));
+                        if (user) {
+                            console.log(user);
+                            dispatch(setUser(user_data));
+                            router.push("/profile")
+                        }
                     }
-
-                    getUserFromDB();
-                    router.push("/profile");
-                } else {
-                    setInfo("Email not verify please check inbox");
                 }
+
+                getUserFromDB();
+
 
             })
             .catch((err) => {
@@ -102,7 +126,7 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
     return (
         <Box>
             {showForgotPassowrd ?
-                <ForgotPassword setShowForgotPassword={setShowForgotPassword}/>
+                <ForgotPassword setShowForgotPassword={setShowForgotPassword} />
                 :
                 <Box
                     sx={{
@@ -141,13 +165,14 @@ const Login = ({ setShowRegister, setShowforgotPassword, info, setInfo, error, s
                         />
 
                         <FormControl fullWidth margin='normal'>
-                            <InputLabel id="demo-simple-select-label">Pengguna*</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Sila pilih jenis pengguna</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
+                                onChange={(e) => setRole(e.target.value)}
                             >
-                                <MenuItem value={"Male"}>Staff/Admin</MenuItem>
-                                <MenuItem value={"Female"}>Applicant</MenuItem>
+                                <MenuItem value={"staff"}>Staff/Admin</MenuItem>
+                                <MenuItem value={"user"}>Applicant</MenuItem>
                             </Select>
                         </FormControl>
 

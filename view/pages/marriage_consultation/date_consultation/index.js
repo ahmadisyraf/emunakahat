@@ -12,17 +12,15 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Box, useTheme, Typography, Button, Stack, TextField} from "@mui/material";
 import { useState } from 'react';
+import { useRouter } from "next/router";
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
 }
 
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData(1,'Ali bin Abu', 'Pejabat Agama Islam Kuantan', '012-24256352'),
+    createData(2, 'Marwan bin Masdo','Pejabat Agama Islam Pekan', '013-58745690')
 ];
 
 const DateCons = () => {
@@ -32,6 +30,7 @@ const DateCons = () => {
         setAnjuran(event.target.value);
     };
 
+    const router = useRouter();
     const theme = useTheme();
     return (
 
@@ -124,7 +123,7 @@ const DateCons = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Button variant="contained">Seterusnya</Button>
+            <Button variant="contained" onClick={() => router.push("/marriage_consultation/check_consultation")}>Seterusnya</Button>
         </Paper>
     );
 }

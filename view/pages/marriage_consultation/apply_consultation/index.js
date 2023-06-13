@@ -76,6 +76,7 @@ const ApplyCons = () => {
 
         if (insert) {
             console.log("Success");
+            router.push("/marriage_consultation/date_consultation")
             console.log(insert);
         } else {
             console.log("None");

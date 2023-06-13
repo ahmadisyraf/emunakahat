@@ -14,7 +14,8 @@ import { useSelector } from 'react-redux';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getConsultationById, getConsultation } from '../../api/consultation';
+import {getConsultation} from '../../api/consultation'
+import { getUserByIC } from '../../api/user';
 import { useRouter } from "next/router";
 
 function Bread() {
@@ -43,7 +44,7 @@ const CheckCons = () => {
         setCheckConsult(event.target.value);
     };
     async function getConsultation() {
-        const res = await getConsultationById(IC);
+        const res = await getUserByIC(IC);
 
         if (res) {
             console.log(res, "..result");

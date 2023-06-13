@@ -13,6 +13,7 @@ import { useState } from 'react';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useRouter } from "next/router";
 
 
 const  AdvView = () => {
@@ -31,6 +32,7 @@ const  AdvView = () => {
     }));
 
     const theme = useTheme();
+    const router = useRouter();
 
     return (
 

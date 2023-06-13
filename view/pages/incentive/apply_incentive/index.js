@@ -18,10 +18,10 @@ import { useSelector } from "react-redux";
 function Bread() {
     return (
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-            <Link underline="hover" color="inherit" href="/kursus_perkahwinan">
+            <Link underline="hover" color="inherit" href="/incentive">
                 Mohon Berkahwin
             </Link>
-            <Link underline="hover" color="text.primary" href="/kursus_perkahwinan">
+            <Link underline="hover" color="text.primary" href="/">
                 Maklumat mohon perkahwinan
             </Link>
         </Breadcrumbs>

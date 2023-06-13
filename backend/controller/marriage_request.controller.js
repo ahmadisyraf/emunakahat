@@ -22,7 +22,19 @@ const getMarriageRequestByIC = asyncHandler(async (req, res) => {
     try {
         const result = await MarriageRequest.find({ "USER_IC": ic });
 
-        if(result) {
+        if (result) {
+            res.status(200).json(result);
+        }
+    } catch (err) {
+        throw new Error(err);
+    }
+});
+
+const getMarriageRequest = asyncHandler(async (req, res) => {
+    try {
+        const result = await MarriageRequest.find();
+
+        if (result) {
             res.status(200).json(result);
         }
     } catch (err) {
@@ -30,4 +42,4 @@ const getMarriageRequestByIC = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { insertMarriageRequest, getMarriageRequestByIC }
+module.exports = { insertMarriageRequest, getMarriageRequestByIC, getMarriageRequest }

@@ -83,6 +83,18 @@ const SideBar = () => {
                         </ListItem>
                     }
                     {role === "user" ?
+                        null
+                        :
+                        <ListItem key={"Mohon Berkahwin"} disablePadding>
+                            <ListItemButton onClick={() => router.push("/Mohon_Berkahwin/Senarai_Pemohon")}>
+                                <ListItemIcon>
+                                    <ApprovalIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Mohon Berkahwin"} />
+                            </ListItemButton>
+                        </ListItem>
+                    }
+                    {role === "user" ?
                         <Box>
                             <ListItem key={"Permohonan Berkahwin"} disablePadding>
                                 <ListItemButton onClick={() => router.push("/Mohon_Berkahwin")}>
@@ -127,7 +139,7 @@ const SideBar = () => {
                         <ListItemButton onClick={
                             () => {
                                 router.push("/");
-                                dispatch(setUser({"role": "user"}));
+                                dispatch(setUser({ "role": "user" }));
 
                             }
                         }>

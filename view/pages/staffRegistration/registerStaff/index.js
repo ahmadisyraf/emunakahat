@@ -10,14 +10,22 @@ import { auth } from "../../../components/firebase/firebase";
 
 const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
 
-    const [id, setId] = useState();
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [role, setRole] = useState();
-    const [gender, setGender] = useState('');
-    const [phoneNo, setPhoneNo] = useState('');
-    const [error, setError] = useState('');
+    const [id, setStaffId] = useState();
+    const [name, setStaffName] = useState();
+    const [email, setStaffEmail] = useState();
+    const [password, setStaffPassword] = useState();
+    const [role, setStaffRole] = useState();
+    const [gender, setStaffGender] = useState('');
+    const [phoneNo, setStaffPhoneNo] = useState('');
+
+    const staffData = {
+        "STAFF_ID": id,
+        "STAFF_NAME": name,
+        "STAFF_GENDER": gender,
+        "STAFF_PHONE_NO": phoneNo,
+        "STAFF_ROLE": role,
+        "STAFF_EMAIL": email,
+    }
 
     
     const theme = useTheme();
@@ -31,15 +39,6 @@ const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
         setPhoneNo(newValue)
     }
     
-    const staffData = {
-        STAFF_ID: id,
-        STAFF_NAME: name,
-        STAFF_GENDER: gender,
-        STAFF_PHONE_NO: phoneNo,
-        STAFF_ROLE: role,
-        STAFF_EMAIL: email,
-    }
-
 
     const handleStaffRegister = () => {
         if (password !== password) {
@@ -88,7 +87,7 @@ const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
                     label="No. Kad Pengenalan"
                     name="Identification"
                     autoComplete="Identification"
-                    onChange={(e) => setId(e.target.value)}
+                    onChange={(e) => setStaffId(e.target.value)}
                 />
                 </Grid>
 
@@ -101,7 +100,7 @@ const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
                     name="Name"
                     autoComplete="Name"
                     margin="normal"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setStaffName(e.target.value)}
                 />
                 </Grid>
 
@@ -135,7 +134,7 @@ const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
                     label="Emel"
                     name="email"
                     autoComplete="email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setStaffEmail(e.target.value)}
                 /></Grid>
 
                 <Grid item xs={6}>
@@ -148,7 +147,7 @@ const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
                     type="role"
                     id="role"
                     autoComplete="role"
-                    onChange={(e) => setRole(e.target.value)}
+                    onChange={(e) => setStaffRole(e.target.value)}
                 /></Grid>
 
                 <Grid item xs={4}>
@@ -161,7 +160,7 @@ const staffRegistration = ({ setShowStaffRegister, info, setInfo}) => {
                     type="password"
                     id="password"
                     autoComplete="password"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setStaffPassword(e.target.value)}
 
                 /></Grid>
             </Grid>

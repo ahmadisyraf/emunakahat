@@ -20,6 +20,8 @@ const UserListing = ({ res }) => {
   const [users, setUsers] = useState([]);
   const router = useRouter();
 
+  const [open, setOpen] = React.useState(false);
+
   console.log(res, "IUIUI");
 
   const theme = useTheme();
@@ -31,9 +33,8 @@ const UserListing = ({ res }) => {
   };
 
   const handleShowStaffRegister = () => {
-    setShowStaffRegister(true);
-    setError("");
-    setInfo("");
+    setOpen(false);
+    router.push('/staffRegistration/registerStaff');
   }
 
   return (
@@ -56,23 +57,43 @@ const UserListing = ({ res }) => {
             <TableRow>
               <TableCell>No. Kad Pengenalan</TableCell>
               <TableCell>Nama</TableCell>
+              <TableCell>Emel</TableCell>
               <TableCell>Operasi</TableCell>
-              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {res.map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  {row.USER_EMAIL}
+                  {row.USER_IC}
                 </TableCell>
-                <TableCell>{row.USER_IC}</TableCell>
                 <TableCell>{row.USER_NAME}</TableCell>
+                <TableCell>{row.USER_EMAIL}</TableCell>
                 <TableCell>
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => handleDeleteUser(user.ic)}
-                  >
+                  <IconButton onClick={() => {
+                    async function deleteData() {
+                      const ic = row.USER_IC;
+
+                      try {
+                        const result = await deleteUser({ ic });
+
+                        if (result) {
+                          console.log(result);
+                          setOpen(true);
+                          setMessage("Success delete data")
+
+                          setTimeout(() => {
+                            router.reload();
+                          }, 2000)
+                        }
+                      } catch (err) {
+                        console.log(err);
+                      }
+                    }
+
+                    deleteData();
+                  }
+                  }>
                     <DeleteIcon />
                   </IconButton>
                   <IconButton aria-label="edit">
@@ -89,7 +110,7 @@ const UserListing = ({ res }) => {
         type="add"
         fullWidth
         variant="contained"
-        onClick={() => handleShowStaffRegister}
+        onClick={handleShowStaffRegister}
         sx={{ mt: 4, mb: 1 }}>
         Tambah Pengguna
       </Button>

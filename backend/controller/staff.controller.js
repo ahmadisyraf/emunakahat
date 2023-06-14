@@ -1,5 +1,5 @@
 const express = require("express");
-const Staff = require("../model/staff.model");
+const Staff = require("../model/STAFF.model");
 const asyncHandler = require("express-async-handler");
 
 const registerStaff = asyncHandler(async (req, res) => {

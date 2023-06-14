@@ -1,5 +1,4 @@
 import apiRequest from "../../../utils/apiRequest";
-export const apiEndpoint = 'http://localhost:3000';
 
 export async function registerUser({ data }) {
     const res = await apiRequest({
@@ -47,3 +46,5 @@ export async function getUsers() {
   
     return res;
   }
+
+  

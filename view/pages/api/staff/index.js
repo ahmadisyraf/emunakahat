@@ -29,17 +29,17 @@ export async function getStaffByEmail({ email }) {
     return res;
 }
 
-export async function updateStaff({ email, updatedData }) {
+export async function updateStaff({ email, updatedStaffData }) {
     const res = await apiRequest({
         path: `/staff/updateStaff/${email}`,
-        body: updatedData,
+        body: updatedStaffData,
         method: "PUT",
     });
 
     return res;
 }
 
-export async function getUserByIC({ ic }) {
+export async function getStaffByIC({ ic }) {
     const res = await apiRequest({
         path: `/staff/getStaffByIC/${ic}`,
         method: "GET",

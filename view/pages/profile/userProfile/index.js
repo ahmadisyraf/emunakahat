@@ -18,6 +18,8 @@ const UserProfile = () => {
     const educational_status = useSelector((state) => state.user.educational_status);
     const salary = useSelector((state) => state.user.salary);
     const race = useSelector((state) => state.user.race);
+    const sector = useSelector((state) => state.user.sector);
+    const nationality = useSelector((state) => state.user.nationality);
     const birth_date = useSelector((state) => state.user.birth_date);
     const partner_ic = useSelector((state) => state.user.partner_ic)
 
@@ -30,8 +32,9 @@ const UserProfile = () => {
     const [userPhoneNo, setUserPhoneNo] = useState(phone);
     const [userEducationalStatus, setUserEduationalStatus] = useState(educational_status);
     const [userSalary, setUserSalary] = useState(salary);
-    const [userNationality, setUserNationality] = useState();
+    const [userNationality, setUserNationality] = useState(nationality);
     const [userRace, setUserRace] = useState(race);
+    const [userSector, setUserSector] = useState(sector);
     const [userBirthDate, setUserBirthDate] = useState(birth_date);
     const [userPartnerIC, setUserPartnerIC] = useState(partner_ic);
     const user = useSelector((state) => state.user);
@@ -55,6 +58,7 @@ const UserProfile = () => {
                 USER_RACE: userRace,
                 USER_NATIONALITY: userNationality,
                 USER_ADDRESS: userAddress,
+                USER_JOB_SECTOR: userSector,
                 USER_EDUCATIONAL_STATUS: userEducationalStatus,
                 USER_SALARY: userSalary,
                 USER_PARTNER_IC: userPartnerIC,
@@ -74,6 +78,7 @@ const UserProfile = () => {
                     email: updatedData.USER_EMAIL,
                     birth_date: updatedData.USER_BIRTH_DATE ? updatedData.USER_BIRTH_DATE : null,
                     race: updatedData.USER_RACE ? updatedData.USER_RACE : null,
+                    sector: updatedData.USER_JOB_SECTOR ? updatedData.USER_JOB_SECTOR : null,
                     address: updatedData.USER_ADDRESS ? updatedData.USER_ADDRESS : null,
                     educational_status: updatedData.USER_EDUCATIONAL_STATUS ? updatedData.USER_EDUCATIONAL_STATUS : null,
                     employment_position: updatedData.USER_EMPLOYMENT_POSITION ? updatedData.USER_EMPLOYMENT_POSITION : null,
@@ -82,6 +87,7 @@ const UserProfile = () => {
                     partner_ic: updatedData.USER_PARTNER_IC ? updatedData.USER_PARTNER_IC : null,
                     nationality: updatedData.USER_NATIONALITY ? updatedData.USER_NATIONALITY : null,
                     login: true,
+                    role: 'user'
                 };
 
                 dispatch(setUser(user_data));
@@ -93,9 +99,6 @@ const UserProfile = () => {
             console.log('Error:', error);
         }
     };
-
-
-
 
     return (
 
@@ -244,7 +247,7 @@ const UserProfile = () => {
                         /></Item>
                     </Grid>
 
-                    {/*<Grid item xs={4}>
+                    <Grid item xs={4}>
                         <Item> <TextField
                             fullWidth
                             id="Sector"
@@ -252,9 +255,11 @@ const UserProfile = () => {
                             name="Sector"
                             autoComplete="Sector"
                             margin="normal"
-                            onChange={(e) => setSector(e.target.value)}
+                            defaultValue={" "}
+                            value={userSector}
+                            onChange={(e) => setUserSector(e.target.value)}
                         /></Item>
-                    </Grid> */} 
+                    </Grid> 
                     
                     <Grid item xs={3.5}>
                         <Item> <TextField
@@ -291,7 +296,7 @@ const UserProfile = () => {
                     variant="contained"
                     onClick={handleUpdateUser}
                     sx={{ mt: 1, mb: 1 }}>
-                    Simpan
+                    Kemaskini
                 </Button>
             </Paper>
         </Zoom>

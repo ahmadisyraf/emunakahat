@@ -4,14 +4,63 @@ import { Grid, Box, useTheme, Typography, TextField, Button, Zoom } from "@mui/m
 import Item from '@mui/material/InputLabel';
 import { useState } from 'react';
 //import { auth } from "../../../components/firebase/firebase";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUser, getUserByIC } from '../../api/user';
+import { setUser } from '../../../state/action';
 
 const StaffProfile = () => {
+
+    const staffID = useSelector((state) => state.user.id);
+    const staffemail = useSelector((state) => state.user.email);
+    const staffphone = useSelector((state) => state.user.phone);
+    const staffgender = useSelector((state) => state.user.gender);
     const [staffProfile, setstaffProfile] = useState();
-    const userName = useSelector((state) => state.user.name);
-    const [name, setName] = useState(userName)
+    const staffname = useSelector((state) => state.user.name);
+
+    const [staffIC, setStaffIC] = useState(staffID);
+    const [staffName, setStaffName] = useState(staffname);
+    const [staffGender, setStaffGender] = useState(staffgender);
+    const [staffEmail, setStaffEmail] = useState(staffemail);
+    const [staffPhoneNo, setStaffPhoneNo] = useState(staffphone);
+    const dispatch = useDispatch();
 
     const theme = useTheme();
+
+    const handleUpdateStaff = async () => {
+        try {
+            const updatedData = {
+                STAFF_ID: staffIC,
+                STAFF_NAME: staffName,
+                STAFF_GENDER: staffGender,
+                STAFF_PHONE_NO: staffPhoneNo,
+                STAFF_EMAIL: staffEmail,
+        };
+
+        const updateData = await updateUser({ email, updatedStaffData });
+
+        if (updateData) {
+            console.log('Success');
+            console.log(updateData);
+
+            const staff_data = {
+                id: ID,
+                name: updatedData.STAFF_NAME ? updatedData.STAFF_NAME : null,
+                gender: updatedData.STAFF_GENDER ? updatedData.STAFF_GENDER : null,
+                phone: updatedData.STAFF_PHONE_NO ? updatedData.STAFF_PHONE_NO : null,
+                email: updatedData.STAFF_EMAIL ? updatedData.STAFF_EMAIL : null,
+                login: true,
+                role: 'admin'
+            };
+
+            dispatch(setUser(staff_data));
+            } else {
+                console.log('Error');
+            }
+        }
+     catch (error) {
+            console.log('Error:', error);
+        }
+    };
 
     return (
 
@@ -28,7 +77,9 @@ const StaffProfile = () => {
                             label="No. Kad Pengenalan"
                             name="Identification"
                             autoComplete="Identification"
-                            onChange={(e) => setIc(e.target.value)}
+                            defaultValue={" "}
+                            value={staffID}
+                            onChange={(e) => setStaffIC(e.target.value)}
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -40,8 +91,8 @@ const StaffProfile = () => {
                             autoComplete="Name"
                             margin="normal"
                             defaultValue={" "}
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={staffName}
+                            onChange={(e) => setStaffName(e.target.value)}
                         /></Item>
                     </Grid>
                     <Grid item xs={4}>
@@ -52,7 +103,9 @@ const StaffProfile = () => {
                             name="Gender"
                             autoComplete="Gender"
                             margin="normal"
-                            onChange={(e) => setGender(e.target.value)}
+                            defaultValue={" "}
+                            value={staffGender}
+                            onChange={(e) => setStaffGender(e.target.value)}
                         /></Item>
                     </Grid>
 
@@ -64,7 +117,9 @@ const StaffProfile = () => {
                             name="phoneNo"
                             autoComplete="phoneNo"
                             margin="normal"
-                            onChange={(e) => setphoneNo(e.target.value)}
+                            defaultValue={" "}
+                            value={staffPhoneNo}
+                            onChange={(e) => setStaffPhoneNo(e.target.value)}
                         /></Item>
                     </Grid>
                     <Grid item xs={4}>
@@ -75,7 +130,9 @@ const StaffProfile = () => {
                             name="email"
                             autoComplete="email"
                             margin="normal"
-                            onChange={(e) => setEmail(e.target.value)}
+                            defaultValue={" "}
+                            value={staffEmail}
+                            onChange={(e) => setStaffEmail(e.target.value)}
                         /></Item>
                     </Grid>
 
@@ -86,6 +143,7 @@ const StaffProfile = () => {
                     color="secondary"
                     fullWidth
                     variant="contained"
+                    onClick={handleUpdateStaff}
                     sx={{ mt: 3, mb: 1 }}>
                     Kemaskini
                 </Button>

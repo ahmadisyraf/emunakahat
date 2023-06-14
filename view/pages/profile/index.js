@@ -10,7 +10,7 @@ export default function Profile() {
 
     return (
         <Box sx={{ px: 5 }}>
-            {role == "user" ? <UserProfile /> : <StaffProfile />}
+            {role === "user" ? <UserProfile /> : <StaffProfile />}
         </Box>
     );
 }

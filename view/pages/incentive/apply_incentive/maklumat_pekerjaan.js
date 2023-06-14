@@ -57,6 +57,7 @@ const MaklumatPekerjaan = () => {
         setJobtype(event.target.value);
     };
 
+    //button "mohon" clicked
     const handleInsert = async () => {
         const data = {
             "SIA_ACCOUNT_BANK_NO": bankNumber,
@@ -71,10 +72,10 @@ const MaklumatPekerjaan = () => {
             if (result && relative) {
                 console.log(result);
                 setOpen(true);
-                setMessage("Permohonan anda berjaya disimpan");
+                setMessage("Permohonan anda berjaya disimpan"); //pop up
 
                 setTimeout(() => {
-                    router.push("/profile");
+                    router.push('/incentive/incentive_status'); // Navigate to the "UploadDocument" page
                 }, 2000)
             }
         } catch (err) {

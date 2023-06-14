@@ -11,6 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useRouter } from 'next/router';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 function createData(bil, name, tarikh, status) {
   return { bil, name, tarikh, status };
@@ -41,8 +43,28 @@ const IncentiveListing = () => {
     router.push('/manage_incentive/applicant_info'); // Navigate to the "applicant_info" page
   };
 
+  // Define breadcrumb links and their corresponding routes
+  const breadcrumbLinks = [
+    { label: 'Senarai permohonan', href: '/manage_incentive/incentive_listing' },
+
+  ];
+
   return (
     <Paper sx={{ mt: 10, px: 5, py: 5, backgroundColor: theme.palette.primary, mx: 5 }}>
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+        {breadcrumbLinks.map((link, index) => {
+          const isLast = index === breadcrumbLinks.length - 1;
+          return isLast ? (
+            <Typography key={index} color="text.primary">
+              {link.label}
+            </Typography>
+          ) : (
+            <Link key={index} color="inherit" href={link.href}>
+              {link.label}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
       <Typography variant='h5'>SENARAI PERMOHONAN INSENTIF</Typography>
 
       <TableContainer sx={{ mt: 5 }}>

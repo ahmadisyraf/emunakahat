@@ -12,13 +12,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
+import { useRouter } from 'next/router';
 
 function createData(bil, name, tarikh, status) {
   return { bil, name, tarikh, status };
 }
 
 const initialStatusRows = [
-    createData(1, "010322063013\nAli Bin Abu","23-10-2022", "Diterima")
+    createData(1, "010728060073","15-06-2023", "Diterima")
   ];
 
 /* INCENTIVE STATUS */
@@ -30,6 +31,16 @@ const IncentiveStatus = () => {
   const handleDeleteApplication = (name) => {
     const updatedRows = statusRows.filter(row => row.name !== name);
     setStatusRows(updatedRows);
+  };
+
+
+  //EDIT APPLICATION
+  const router = useRouter();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(false);
+    router.push('/incentive/apply_incentive'); // Navigate to the "apply incentive" page
   };
 
   // Define breadcrumb links and their corresponding routes
@@ -88,7 +99,7 @@ const IncentiveStatus = () => {
                     >
                         <DeleteIcon />
                     </IconButton>
-                    <IconButton aria-label="edit">
+                    <IconButton aria-label="edit" onClick={handleClickOpen}>
                         <EditIcon />
                     </IconButton>
                 </TableCell>

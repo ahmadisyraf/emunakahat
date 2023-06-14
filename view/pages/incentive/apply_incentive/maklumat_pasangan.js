@@ -1,13 +1,9 @@
 
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
 import { FormControl, InputLabel, Select, Grid, MenuItem, useTheme, Typography, TextField, Button, Box } from "@mui/material";
 import Item from '@mui/material/InputLabel';
 import { useState, useEffect } from 'react';
-import DatePicker from '@mui/lab/DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUser } from '../../api/user';
-import { setUser } from '../../../state/action';
 import { getUserByIC } from '../../api/user';
 
 const MaklumatPasangan = () => {
@@ -35,6 +31,7 @@ const MaklumatPasangan = () => {
         setUserNationality(event.target.value);
     };
 
+    //get partner data
     async function getPartner() {
         console.log("masuk");
         try {
@@ -54,7 +51,7 @@ const MaklumatPasangan = () => {
                 setUserBirthDate(partner.USER_BIRTH_DATE);
                 setPartnerExist(true);
 
-                console.log("jadi oi");
+                console.log("success");
                 console.log(partner);
             } else {
                 console.log("error")
@@ -68,7 +65,7 @@ const MaklumatPasangan = () => {
     }
 
     useEffect(() => {
-        console.log("MAsuk anjir")
+        console.log("masuk")
         getPartner();
     });
 
@@ -249,7 +246,7 @@ const MaklumatPasangan = () => {
                     </Grid>
                 </Box>
                 :
-                <Typography variant={"h4"}>Maaf, pasangan anda tidak dijumpai</Typography>
+                <Typography variant={"h4"}>Maaf, pasangan anda tidak dijumpai</Typography> //if pasangan data is not insert yet
             }
         </Box>
     );

@@ -1,9 +1,17 @@
 import Paper from '@mui/material/Paper';
-import { Typography, Stack, useTheme } from "@mui/material";
+import { Typography, Stack, useTheme, Button } from "@mui/material";
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 //ADMIN VIEW APPLICANT INFO
 const ApplicantInfo = () => {
   const theme = useTheme();
+
+  // Define breadcrumb links and their corresponding routes
+  const breadcrumbLinks = [
+    { label: 'Senarai permohonan', href: '/manage_incentive/incentive_listing' },
+    { label: 'Maklumat pemohon', href: '/manage_incentive/applicant_info' }
+  ];
 
   return (
     <Paper
@@ -15,6 +23,20 @@ const ApplicantInfo = () => {
         mx: 5,
       }}
     >
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
+        {breadcrumbLinks.map((link, index) => {
+          const isLast = index === breadcrumbLinks.length - 1;
+          return isLast ? (
+            <Typography key={index} color="text.primary">
+              {link.label}
+            </Typography>
+          ) : (
+            <Link key={index} color="inherit" href={link.href}>
+              {link.label}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
       <Typography variant="h5" sx={{ mb: 3 }}>
         MAKLUMAT PERMOHONAN
       </Typography>
@@ -160,6 +182,13 @@ const ApplicantInfo = () => {
           <Typography variant="subtitle1">Alamat Majikan:</Typography>
           <Typography variant="subtitle1">SMK Paya Besar, Kuantan</Typography>
         </Stack>
+
+            <Button variant="contained" >
+              Terima
+            </Button>
+            <Button variant="contained" >
+              Tolak
+            </Button>
       </div>
 
 

@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import KursusListing from "./kursus_listing";
 
 function Bread() {
     return (
@@ -48,8 +47,8 @@ export default function KhursusPerkahwinan() {
                         13. Sebarang masalah berkaitan kursus, sila rujuk/maklum kepada urusetia bertugas. Peserta hendaklah mematuhi segala peraturan dan arahan dari semasa ke semasa oleh urusetia.<br />
                     </Typography>
                     <Stack direction={"row"} spacing={2} sx={{ mt: 5 }}>
-                        <Button variant="contained" onClick={() => router.push("/kursus_perkahwinan/kursus_check")}>Semakkan</Button>
-                        <Button variant="contained" onClick={() => router.push("/kursus_perkahwinan/kursus_listing")}>Daftar</Button>
+                        <Button variant="contained" onClick={() => router.push("/Kursus_Perkahwinan/Semak_Kursus")}>Semakkan</Button>
+                        <Button variant="contained" onClick={() => router.push("/Kursus_Perkahwinan/Senarai_Kursus")}>Daftar</Button>
                     </Stack>
                 </Paper>
             </Zoom>

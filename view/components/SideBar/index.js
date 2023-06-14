@@ -63,7 +63,7 @@ const SideBar = () => {
                         </ListItem>
                     }
                     <ListItem key={"Khursus Pra-Perkahwinan"} disablePadding>
-                        <ListItemButton onClick={() => router.push(role === "user" ? "/kursus_perkahwinan" : "/kursus_perkahwinan/maklumat_kursus")}>
+                        <ListItemButton onClick={() => router.push(role === "user" ? "/Kursus_Perkahwinan" : "/Kursus_Perkahwinan/Maklumat_Kursus")}>
                             <ListItemIcon>
                                 <ImportContactsIcon />
                             </ListItemIcon>
@@ -74,7 +74,7 @@ const SideBar = () => {
                         null
                         :
                         <ListItem key={"Senarai Peserta"} disablePadding>
-                            <ListItemButton onClick={() => router.push("/kursus_perkahwinan/senarai_peserta")}>
+                            <ListItemButton onClick={() => router.push("/Kursus_Perkahwinan/Senarai_Peserta")}>
                                 <ListItemIcon>
                                     <Face6Icon />
                                 </ListItemIcon>
@@ -83,9 +83,21 @@ const SideBar = () => {
                         </ListItem>
                     }
                     {role === "user" ?
+                        null
+                        :
+                        <ListItem key={"Mohon Berkahwin"} disablePadding>
+                            <ListItemButton onClick={() => router.push("/Mohon_Berkahwin/Senarai_Pemohon")}>
+                                <ListItemIcon>
+                                    <ApprovalIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Mohon Berkahwin"} />
+                            </ListItemButton>
+                        </ListItem>
+                    }
+                    {role === "user" ?
                         <Box>
                             <ListItem key={"Permohonan Berkahwin"} disablePadding>
-                                <ListItemButton onClick={() => router.push("/mohon_berkahwin")}>
+                                <ListItemButton onClick={() => router.push("/Mohon_Berkahwin")}>
                                     <ListItemIcon>
                                         <ApprovalIcon />
                                     </ListItemIcon>
@@ -127,7 +139,7 @@ const SideBar = () => {
                         <ListItemButton onClick={
                             () => {
                                 router.push("/");
-                                dispatch(setUser({}));
+                                dispatch(setUser({ "role": "user" }));
 
                             }
                         }>

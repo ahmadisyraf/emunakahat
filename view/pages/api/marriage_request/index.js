@@ -18,3 +18,12 @@ export async function getMarriageRequest({ ic }) {
 
     return res;
 }
+
+export async function getAllMarriageRequest() {
+    const res = apiRequest({
+        path: "/marriageRequest/getMarriageRequest",
+        method: "GET"
+    });
+
+    return res;
+}

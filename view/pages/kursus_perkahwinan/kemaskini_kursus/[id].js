@@ -113,7 +113,7 @@ const KemaskiniKursus = () => {
                 setOpen(true)
 
                 setTimeout(() => {
-                    router.push("/kursus_perkahwinan/maklumat_kursus");
+                    router.push("/Kursus_Perkahwinan/Maklumat_Kursus");
                 }, 2000);
             }
         } catch (err) {

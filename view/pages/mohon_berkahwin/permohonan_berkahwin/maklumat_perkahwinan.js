@@ -84,7 +84,7 @@ const MaklumatPerkahwinan = () => {
                 console.log(insert);
 
                 setTimeout(() => {
-                    router.push("/mohon_berkahwin/semakkan_permohonan");
+                    router.push("/Mohon_Berkahwin/Semakkan_Permohonan");
                 }, 2000);
             }
         } catch (err) {
